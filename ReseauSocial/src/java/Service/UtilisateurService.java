@@ -8,7 +8,7 @@ package Service;
 
 /**
  *
- * @author CTam
+ * @author ctran
  */
 public interface UtilisateurService {
     public void inscrire(String login, String pwd);

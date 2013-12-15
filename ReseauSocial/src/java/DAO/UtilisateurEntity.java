@@ -151,7 +151,7 @@ public class UtilisateurEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "DAO.NewEntity[ id=" + login + " ]";
+        return "DAO.UtilisateurEntity[ id=" + login + " ]";
     }
     
 }

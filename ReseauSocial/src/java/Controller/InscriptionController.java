@@ -13,7 +13,6 @@ package Controller;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import Service.HelloService;
 import Service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,16 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/index.htm")
-public class HelloController{
-   /*
+public class InscriptionController{
     @Autowired
-    HelloService
     UtilisateurService s;
-    */
-    @Autowired
-    HelloService s;
     
-        public HelloController() {
+        public InscriptionController() {
     }
     
     @RequestMapping(method=RequestMethod.GET)

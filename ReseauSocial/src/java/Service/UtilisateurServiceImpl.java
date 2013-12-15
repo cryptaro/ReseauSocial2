@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author CTam
+ * @author ctran
  */
 @Service("UtilisateurService")
-public class UtilisateurServiceImpl {
+public class UtilisateurServiceImpl  implements UtilisateurService {
     @Autowired
     private UtilisateurDAO u_dao; 
     

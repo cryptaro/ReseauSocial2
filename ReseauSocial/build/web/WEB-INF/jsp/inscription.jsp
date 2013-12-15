@@ -5,13 +5,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
+        <title>Inscription</title>
     </head>
 
     <body>
-        <FORM method="POST" ACTION="">
-            Entrer votre login : <INPUT Type=text Name=login>
-            Entrer votre password : <INPUT Type=password Name=pwd>
+        <h1>INSCRIPTION</h1>
+        <FORM method="POST" ACTION="">            
+            login : <INPUT Type=text value="${default_log}" Name=log></br>
+            mot de passe : <INPUT Type=password value="${default_pwd}" Name=pwd></br>
             <INPUT Type=submit VALUE="OK">
         </FORM>
     </body>

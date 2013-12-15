@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/index.htm")
+@RequestMapping("/inscription.htm")
 public class InscriptionController{
     @Autowired
     UtilisateurService s;
@@ -32,9 +32,8 @@ public class InscriptionController{
     }
     
     @RequestMapping(method=RequestMethod.GET)
-    public String init()
-    {
-        return "index";
+    public String init() {
+        return "inscription";
     }
     
     @RequestMapping(method=RequestMethod.POST)

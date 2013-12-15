@@ -18,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -27,7 +29,14 @@ import javax.persistence.Temporal;
  */
 @Entity(name="UtilisateurEntity")
 @Table(name="Utilisateur")
+/*@NamedQueries({
+    @NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM Utilisateur u"),
+    @NamedQuery(name = "Utilisateur.findByLogin", query = "SELECT u FROM Utilisateur u WHERE u.login = :login"),
+    @NamedQuery(name = "Utilisateur.findByLogAndPwd", query = "SELECT u FROM Utilisateur WHERE u.login = :login and u.pwd = :pwd"),
+    })*/
 public class UtilisateurEntity implements Serializable {
+    public static String nameInSession = "utilisateur";
+    
     private static final long serialVersionUID = 1L;
     @Id
     private String login;

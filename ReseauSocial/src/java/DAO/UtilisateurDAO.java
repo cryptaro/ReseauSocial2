@@ -15,4 +15,5 @@ public interface UtilisateurDAO {
     public void retrieve(String log);
     public void update(UtilisateurEntity e);
     public void delete(UtilisateurEntity e);
+    public UtilisateurEntity getUser(String log, String pwd);
 }

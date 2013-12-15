@@ -26,4 +26,10 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
        u.setPwd(pwd);
        u_dao.save(u);
     }
+
+    @Override
+    public UtilisateurEntity getUser(String login, String pwd) {
+         UtilisateurEntity u = u_dao.getUser(login, pwd);
+         return u;
+    }
 }

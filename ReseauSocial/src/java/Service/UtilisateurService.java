@@ -6,10 +6,13 @@
 
 package Service;
 
+import DAO.UtilisateurEntity;
+
 /**
  *
  * @author ctran
  */
 public interface UtilisateurService {
     public void inscrire(String login, String pwd);
+    public UtilisateurEntity getUser(String login, String pwd);
 }

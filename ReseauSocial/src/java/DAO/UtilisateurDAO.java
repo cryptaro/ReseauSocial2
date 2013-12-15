@@ -11,8 +11,8 @@ package DAO;
  * @author CTam
  */
 public interface UtilisateurDAO {
-    public void save(InfoEntity e);
-    public void retrieve(int id);
-    public void update(InfoEntity e);
-    public void delete(InfoEntity e);
+    public void save(UtilisateurEntity e);
+    public void retrieve(String log);
+    public void update(UtilisateurEntity e);
+    public void delete(UtilisateurEntity e);
 }

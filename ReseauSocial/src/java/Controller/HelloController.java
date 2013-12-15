@@ -14,6 +14,7 @@ package Controller;
  * and open the template in the editor.
  */
 import Service.HelloService;
+//import Service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class HelloController{
     @Autowired
     HelloService s;
     
+   /* @Autowired
+    UtilisateurService s;
+    */
         public HelloController() {
     }
     
@@ -48,6 +52,7 @@ public class HelloController{
         String nom = request.getParameter("nom");
         String result = "Bonjour " + nom;
         s.saveHello(nom);
+        //s.inscrire(nom);
         mv.addObject("wellcomeMessage", result);
         
         return mv;

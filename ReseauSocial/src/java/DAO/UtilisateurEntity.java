@@ -28,7 +28,6 @@ import javax.persistence.Temporal;
 public class UtilisateurEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String login;
     
     @Column
@@ -50,13 +49,13 @@ public class UtilisateurEntity implements Serializable {
     @Column
     private String description;    
     
-    @JoinTable(
+   /* @JoinTable(
             name="Contact_user",
             joinColumns=@JoinColumn(name="login_UtilisateurEntity"),
             inverseJoinColumns = @JoinColumn(name="id_contact"))
     @ManyToMany
     private List<UtilisateurEntity> amiList = new ArrayList<UtilisateurEntity>();
-    
+    */
     public UtilisateurEntity(){ }
     
     public UtilisateurEntity(String _log, String _pwd){
@@ -111,7 +110,7 @@ public class UtilisateurEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
+/*
     public List<UtilisateurEntity> getAmiList() {
         return amiList;
     }
@@ -119,7 +118,7 @@ public class UtilisateurEntity implements Serializable {
     public void setAmiList(List<UtilisateurEntity> amiList) {
         this.amiList = amiList;
     }   
-
+*/
     public String getLogin() {
         return login;
     }

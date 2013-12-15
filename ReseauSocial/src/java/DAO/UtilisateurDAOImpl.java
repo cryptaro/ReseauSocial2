@@ -16,31 +16,31 @@ import org.springframework.transaction.annotation.Transactional;
  * @author CTam
  */
 @Repository("UtilisateurDAO")
-public class UtilisateurDAOImpl implements InfoDAO{
+public class UtilisateurDAOImpl implements UtilisateurDAO{
     @PersistenceContext(unitName="ReseauSocialPU")
     private EntityManager em;
     
     @Transactional
     @Override
-    public void save(InfoEntity e){
+    public void save(UtilisateurEntity e){
         em.persist(e);
     }
 
     @Transactional
     @Override
-    public void retrieve(int id) {
-        em.find(InfoEntity.class, id);
+    public void retrieve(String log) {
+        em.find(InfoEntity.class, log);
     }
 
     @Transactional
     @Override
-    public void update(InfoEntity e) {
+    public void update(UtilisateurEntity e) {
         em.merge(e);
     }
 
     @Transactional
     @Override
-    public void delete(InfoEntity e) {
+    public void delete(UtilisateurEntity e) {
         e = em.merge(e);
         em.remove(e);
     }

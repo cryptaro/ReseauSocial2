@@ -10,7 +10,9 @@
 
     <body>
         <FORM method="POST" ACTION="">
-            Entrer votre nom : <INPUT Type=text Name=nom>
+            <h1>INSCRIPTION</h1>
+            login : <INPUT Type=text Name=log>
+            mot de passe : <INPUT Type=text Name=pwd>
             <INPUT Type=submit VALUE="OK">
         </FORM>
     </body>

@@ -18,13 +18,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
  *
  * @author Cryptaro
  */
-@Entity
+@Entity(name="UtilisateurEntity")
+@Table(name="Utilisateur")
 public class UtilisateurEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

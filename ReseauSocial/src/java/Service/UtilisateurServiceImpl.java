@@ -6,8 +6,6 @@
 
 package Service;
 
-import DAO.InfoDAO;
-import DAO.InfoEntity;
 import DAO.UtilisateurDAO;
 import DAO.UtilisateurEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author ctran
+ * @author CTam
  */
-@Service("HelloService")
-public class HelloServiceImpl implements HelloService {
+@Service("UtilisateurService")
+public class UtilisateurServiceImpl {
     @Autowired
     private UtilisateurDAO u_dao; 
     
@@ -28,15 +26,4 @@ public class HelloServiceImpl implements HelloService {
        u.setPwd(pwd);
        u_dao.save(u);
     }
-    
-    /*@Autowired
-    private InfoDAO u_dao; 
-    
-    public void saveHello(String name){
-       InfoEntity u = new InfoEntity();
-       u.setNom(name);
-       u_dao.save(u);
-    }
-    */
-    
 }

@@ -14,7 +14,7 @@ package Controller;
  * and open the template in the editor.
  */
 import Service.HelloService;
-//import Service.UtilisateurService;
+import Service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +26,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/index.htm")
 public class HelloController{
-    
+   /*
+    @Autowired
+    HelloService
+    UtilisateurService s;
+    */
     @Autowired
     HelloService s;
     
-   /* @Autowired
-    UtilisateurService s;
-    */
         public HelloController() {
     }
     
@@ -49,10 +50,11 @@ public class HelloController{
         
          
         ModelAndView mv = new ModelAndView("wellcome"); // va chercher page wellcome.jsp 
-        String nom = request.getParameter("nom");
-        String result = "Bonjour " + nom;
-        s.saveHello(nom);
-        //s.inscrire(nom);
+        String pwd = request.getParameter("pwd");
+        String log = request.getParameter("log");
+        String result = "Vous avez ete inscrit " + log;
+        //s.saveHello(nom);
+        s.inscrire(log, pwd);
         mv.addObject("wellcomeMessage", result);
         
         return mv;

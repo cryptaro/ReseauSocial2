@@ -7,6 +7,7 @@
 package Service;
 
 import DAO.UtilisateurEntity;
+import java.util.Date;
 
 /**
  *
@@ -15,4 +16,6 @@ import DAO.UtilisateurEntity;
 public interface UtilisateurService {
     public void inscrire(String login, String pwd);
     public UtilisateurEntity getUser(String login, String pwd);
+    public boolean setUser(String login, String pwd, String newpwd, String nom,
+            String prenom, Date naissance, boolean sexe, String description);
 }

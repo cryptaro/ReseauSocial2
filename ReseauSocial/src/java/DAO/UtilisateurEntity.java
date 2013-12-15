@@ -42,13 +42,13 @@ public class UtilisateurEntity implements Serializable {
     private String login;
     
     @Column
-    private String nom;
+    private String nom="";
     
     @Column
-    private String prenom;
+    private String prenom="";
     
     @Column
-    private String pwd;
+    private String pwd="";
     
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -57,8 +57,11 @@ public class UtilisateurEntity implements Serializable {
     @Column
     private boolean sexe;
     
+    public static boolean female = true;
+    public static boolean male = !female;
+    
     @Column
-    private String description;    
+    private String description="";    
     
    /* @JoinTable(
             name="Contact_user",

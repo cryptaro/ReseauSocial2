@@ -1,6 +1,6 @@
 <%-- 
-    Document   : accueilConnecte
-    Created on : 15 déc. 2013, 18:14:34
+    Document   : deconnexion
+    Created on : 15 déc. 2013, 20:17:53
     Author     : Cryptaro
 --%>
 
@@ -9,12 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Social Network</title>
+        <title>Deconnexion</title>
     </head>
     <body>
         <%@ include file="entetePage.jsp" %>
         
-        <h1>Vous êtes connecté ${userName}</h1>
+        <p>
+            Souhaitez vous vraiment vous déconnecter?
+            <FORM method="POST" ACTION="">            
+                <INPUT Type=submit VALUE="déconnexion">
+            </FORM>
+        </p>
         
         <%@ include file="piedPage.jsp" %>
     </body>

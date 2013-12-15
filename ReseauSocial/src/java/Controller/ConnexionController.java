@@ -39,8 +39,8 @@ public class ConnexionController {
     protected ModelAndView handleRequestInternal(
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
- 
+        HttpSession session = request.getSession(false);
+        
         if(session!=null){
             ModelAndView mv = new ModelAndView("accueilConnecte"); // va chercher page wellcome.jsp 
             String pwd = request.getParameter("pwd");
@@ -53,7 +53,9 @@ public class ConnexionController {
                 return mv;
             }
             
-        } 
-        return new ModelAndView("accueil");        
+        }
+        ModelAndView mv = new ModelAndView("connexion");
+        mv.addObject("errorMsg", "Erreur de login ou mot de passe");
+        return mv;        
     }
 }

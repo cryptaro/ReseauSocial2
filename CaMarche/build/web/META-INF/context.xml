@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/CaMarche"/>
+<Context antiJARLocking="true" path="/CaMarche">
+  <Resource auth="Container" driverClassName="org.apache.derby.jdbc.ClientDriver" maxActive="20" maxIdle="10" maxWait="-1" name="HelloJNDI" password="moi" type="javax.sql.DataSource" url="jdbc:derby://localhost:1527/Hello" username="moi"/>
+</Context>

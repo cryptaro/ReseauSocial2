@@ -4,8 +4,6 @@
  */
 package DAO;
 
-import org.springframework.stereotype.Repository;
-
 /**
  *
  * @author ctran

@@ -49,7 +49,7 @@
                 <OPTION value="0" <%= !user.getSexe() ? "selected":"" %> >male</option>
                 <OPTION value="1" <%= user.getSexe() ? "selected":"" %>>female</option>
             </SELECT>${msg_sexe}</style></br>
-            <label>description : </label><INPUT Type=textarea rows="4" cols="100" value="<%= user.toString() %>" Name=description>
+            <label>description : </label><INPUT Type=textarea rows="4" cols="100" value="<%= (descriptionValue =="") ? user.getDescription() : descriptionValue %>" Name=description>
                 <style class="error">${msg_decription}</style></br>
 
             <INPUT Type=submit VALUE="OK">

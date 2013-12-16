@@ -67,7 +67,7 @@ public class EditerProfilController {
             if(prenom.replaceAll(" ", "").compareTo("") == 0 ) prenom = user.getPrenom();
             
             boolean sexe = request.getParameter("sexe").compareTo("1") == 0 ? true : false;
-            
+  
             mv.addObject("default_prenom", prenom);
             mv.addObject("default_nom", nom);
             mv.addObject("default_date", naissance);

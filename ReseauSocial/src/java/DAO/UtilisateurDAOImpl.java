@@ -60,7 +60,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
         try {
             UtilisateurEntity user = (UtilisateurEntity) em.createQuery("SELECT util FROM UtilisateurEntity util WHERE"
                 + " util.login = :login and util.pwd = :pwd").setParameter("login", log)
-                .setParameter("pwd", pwd).getResultList().get(0); 
+                .setParameter("pwd", pwd).getResultList().get(0);
             return user;
         } catch (Exception e){
             // to catch the exception of no user found
@@ -79,7 +79,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
             String description) {
         //try {
             return em.createQuery("UPDATE UtilisateurEntity u SET u.nom='"+nom+"', u.prenom='"+prenom+"',"
-                    + "u.sexe="+(sexe?1:0)+", u.description='"+description+"',"
+                    + "u.sexe="+(sexe)+", u.description='"+description+"',"
                     + "u.pwd='"+newpwd+"', u.naissance='"+naissance+"'"
                     + " WHERE u.login = '"+log+"' and u.pwd = '"+pwd+"'").executeUpdate() == 1; 
         /*} catch (Exception e){

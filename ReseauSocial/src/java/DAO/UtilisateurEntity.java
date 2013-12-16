@@ -85,6 +85,7 @@ public class UtilisateurEntity implements Serializable {
         nom = user.nom;
         description = user.description;
         naissance = user.naissance;
+        sexe = user.sexe;
     }
     
     public String getNom() {
@@ -173,7 +174,7 @@ public class UtilisateurEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "DAO.UtilisateurEntity[ id=" + login + " sexe = "+ sexe + "description = "+ description +"]";
+        return "DAO.UtilisateurEntity[ id=" + login + " sexe = "+ sexe + " description = "+ description +"]";
     }
     
 }

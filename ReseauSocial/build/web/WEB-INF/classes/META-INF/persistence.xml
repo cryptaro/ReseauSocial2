@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>DAO.InfoEntity</class>
     <class>DAO.UtilisateurEntity</class>
+    <class>DAO.ConversationEntity</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ReseauSocialDB"/>

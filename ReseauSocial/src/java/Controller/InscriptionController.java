@@ -28,7 +28,7 @@ public class InscriptionController{
     @Autowired
     UtilisateurService s;
     
-        public InscriptionController() {
+    public InscriptionController() {
     }
     
     @RequestMapping(method=RequestMethod.GET)
@@ -46,7 +46,7 @@ public class InscriptionController{
         String pwd = request.getParameter("pwd");
         String log = request.getParameter("log");
 
-        if(!s.inscrire(log, pwd)){
+        if(s.getUserByLogin(log)!=null || !s.inscrire(log, pwd)){
             mv = new ModelAndView("inscription");
             mv.addObject("errorMsg", "Ce login existe déja");
         } else{

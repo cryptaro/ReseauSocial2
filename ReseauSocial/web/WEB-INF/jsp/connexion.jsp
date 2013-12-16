@@ -17,8 +17,8 @@
         
         <h1>Please connect</h1>
         <FORM method="POST" ACTION="">            
-            login : <INPUT Type=text Name=log></br>
-            mot de passe : <INPUT Type=password Name=pwd></br>
+            login : <INPUT Type=text Name=log placeholder="login" ></br>
+            mot de passe : <INPUT Type=password Name=pwd placeholder="password"></br>
             <INPUT Type=submit VALUE="OK">
         </FORM>
         

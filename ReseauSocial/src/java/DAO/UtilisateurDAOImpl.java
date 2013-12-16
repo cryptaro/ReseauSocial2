@@ -37,8 +37,14 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
     @Transactional
     @Override
-    public void retrieve(String log) {
-        em.find(InfoEntity.class, log);
+    public UtilisateurEntity retrieve(String log) {
+        UtilisateurEntity u;
+        try {
+            u = (UtilisateurEntity)em.find(UtilisateurEntity.class, log);
+        }catch(Exception e){
+            return null;
+        }
+        return u;
     }
 
     @Transactional
@@ -77,13 +83,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
     public boolean setUser(String log, String pwd, String newpwd, 
             String nom, String prenom, String naissance, boolean sexe,
             String description) {
-        //try {
+        try {
             return em.createQuery("UPDATE UtilisateurEntity u SET u.nom='"+nom+"', u.prenom='"+prenom+"',"
                     + "u.sexe="+(sexe)+", u.description='"+description+"',"
                     + "u.pwd='"+newpwd+"', u.naissance='"+naissance+"'"
                     + " WHERE u.login = '"+log+"' and u.pwd = '"+pwd+"'").executeUpdate() == 1; 
-        /*} catch (Exception e){
+        } catch (Exception e){
             return false;
-        }*/
+        }
     }
 }

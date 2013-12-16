@@ -49,7 +49,7 @@ public class EditerProfilController {
             if(pwd_new1.replaceAll(" ", "").compareTo("") == 0){
                 pwd_new1 = user.getPwd();
             }
-            if( pwd_new1 != pwd_new2) {
+            if( pwd_new1.compareTo(pwd_new2)!=0) {
                 mv.addObject("msg_pwd_new", "error recopie password");
                 pwd_new1 = user.getPwd();
             }

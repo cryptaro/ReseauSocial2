@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public interface UtilisateurDAO {
     public boolean save(UtilisateurEntity e);
-    public void retrieve(String log);
+    public UtilisateurEntity retrieve(String log);
     public void update(UtilisateurEntity e);
     public void delete(UtilisateurEntity e);
     public UtilisateurEntity getUser(String log, String pwd);

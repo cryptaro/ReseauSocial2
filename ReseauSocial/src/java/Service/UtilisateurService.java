@@ -18,4 +18,6 @@ public interface UtilisateurService {
     public UtilisateurEntity getUser(String login, String pwd);
     public boolean setUser(String login, String pwd, String newpwd, String nom,
             String prenom, String naissance, boolean sexe, String description);
+    public void removeUser(UtilisateurEntity u);
+    public UtilisateurEntity getUserByLogin(String login);
 }

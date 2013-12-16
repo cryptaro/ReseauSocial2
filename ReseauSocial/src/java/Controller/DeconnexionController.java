@@ -27,7 +27,7 @@ public class DeconnexionController {
     
     @RequestMapping(method=RequestMethod.GET)
     public String init(){
-        return "deconnexion";
+        return "supprimerCompte";
     }
     
     @RequestMapping(method=RequestMethod.POST)

@@ -128,7 +128,7 @@ public class UtilisateurEntity implements Serializable {
         this.naissance = naissance;
     }
 
-    public boolean isSexe() {
+    public boolean getSexe() {
         return sexe;
     }
 
@@ -182,7 +182,7 @@ public class UtilisateurEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "DAO.UtilisateurEntity[ id=" + login + " ]";
+        return "DAO.UtilisateurEntity[ id=" + login + " sexe = "+ sexe + "description = "+ description +"]";
     }
     
 }

@@ -15,7 +15,6 @@
 
     String nomValue = request.getParameter("default_nom") == null ? "" : request.getParameter("default_nom");
     String prenomValue = request.getParameter("default_prenom")==null ? "":request.getParameter("default_prenom");
-    Integer sexeValue = new Integer(request.getParameter("default_sexe")==null ? "0" : request.getParameter("default_sexe"));
     String descriptionValue = request.getParameter("default_description") == null ? "": request.getParameter("default_description");
     String naissanceValue = request.getParameter("default_naissance") == null ? "": request.getParameter("default_naissance");
     
@@ -46,11 +45,11 @@
                 <style class="error">${msg_prenom}</style></br>
             <label>naissance : </label><INPUT Type=date size="30"  value="<%= naissanceValue %>" Name=naissance>
                 <style class="error">${msg_naissance}</style></br>
-            <label>sexe : </label><SELECT name="sexe" size=<%= sexeValue %> >
-                <OPTION>male
-                <OPTION>female
+            <label>sexe : </label><SELECT name="sexe">
+                <OPTION value="0" <%= !user.getSexe() ? "selected":"" %> >male</option>
+                <OPTION value="1" <%= user.getSexe() ? "selected":"" %>>female</option>
             </SELECT>${msg_sexe}</style></br>
-            <label>description : </label><INPUT Type=textarea rows="4" cols="100" value="<%= (descriptionValue =="") ? user.getDescription() : descriptionValue %>" Name=description>
+            <label>description : </label><INPUT Type=textarea rows="4" cols="100" value="<%= user.toString() %>" Name=description>
                 <style class="error">${msg_decription}</style></br>
 
             <INPUT Type=submit VALUE="OK">

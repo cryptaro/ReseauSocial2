@@ -43,7 +43,7 @@ public class UtilisateurEntity implements Serializable {
     
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date naissance;
+    private Date naissance = new Date();
     
     @Column
     private boolean sexe;

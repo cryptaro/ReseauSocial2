@@ -120,8 +120,78 @@ public class MessageEntity implements Serializable {
         return msg;
     }
     
-    public String toHTML() {
-        return msg; // mettre le code html pour "machin a dit que :" + msg
+    /*
+     * Les ajout pour le code HTTP 
+     */
+    
+    public void addImg(String path, String alt){
+        msg += "<img src="+path+" alt="+alt+" >";
+    }
+    
+    public void addImg(String path, String alt, int width, int height){
+        msg += "<img src="+path+" width="+width+" height="+height+" alt="+alt+" >";
+    }
+    
+    /**
+     * Ajoute une video dans le message
+     * @param width     lageur
+     * @param height    hauteur
+     * @param src_mp4   lien vers video en *.mp4 (si necessaire, "" sinon)
+     * @param src_webm  lien vers video en *.webm (si necessaire, "" sinon)
+     * @param src_avi   lien vers video en *.avi (si necessaire, "" sinon)
+     * @param src_flv   lien vers video en *.flv (si necessaire, "" sinon)
+     * @param src_mkv   lien vers video en *.mkv (si necessaire, "" sinon)
+     * @param src_wmv   lien vers video en *.wmv (si necessaire, "" sinon)
+     * @param msg_alt   message si la video n'est pas affichable
+     * @param posterImg image de poster de la video
+     */
+    public void addVideo(int width, int height, String src_mp4, String src_webm,
+        String src_avi, String src_flv, String src_mkv, String src_wmv, 
+        String msg_alt, String posterImg){
+        // /!\ tester si il faut bien ajouter les \" autour des src_* !!
+        
+        msg += "<video width="+width+" height="+height+" controls=\"controls\" poster=\""+posterImg+"\">";
+        
+        if(src_mp4.replaceAll(" ", "").compareTo("")!=0)    
+            // le mp4 en premier pour etre sur d'etre lu sur tablette / smartphone
+            msg += " <source src=\""+src_mp4+"\" type=\"video/mp4\" />";
+        if(src_webm.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_webm+"\" type=\"video/webm\" />";
+        if(src_avi.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_avi+"\" type=\"video/avi\" />";
+        if(src_flv.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_flv+"\" type=\"video/flv\" />";
+        if(src_mkv.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_mkv+"\" type=\"video/mkv\" />";
+        if(src_wmv.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_wmv+"\" type=\"video/wmv\" />";
+        msg += msg_alt;
+        msg += "</video>";
+    }
+    
+    
+    public void addVideo(String src_mp4, String src_webm,
+        String src_avi, String src_flv, String src_mkv, String src_wmv, 
+        String msg_alt, String posterImg){
+        // /!\ tester si il faut bien ajouter les \" autour des src_* !!
+        
+        msg += "<video controls=\"controls\" poster=\""+posterImg+"\">";
+        
+        if(src_mp4.replaceAll(" ", "").compareTo("")!=0)    
+            // le mp4 en premier pour etre sur d'etre lu sur tablette / smartphone
+            msg += " <source src=\""+src_mp4+"\" type=\"video/mp4\" />";
+        if(src_webm.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_webm+"\" type=\"video/webm\" />";
+        if(src_avi.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_avi+"\" type=\"video/avi\" />";
+        if(src_flv.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_flv+"\" type=\"video/flv\" />";
+        if(src_mkv.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_mkv+"\" type=\"video/mkv\" />";
+        if(src_wmv.replaceAll(" ", "").compareTo("")!=0)
+            msg += " <source src=\""+src_wmv+"\" type=\"video/wmv\" />";
+        msg += msg_alt;
+        msg += "</video>";
     }
     
 }

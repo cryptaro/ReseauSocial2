@@ -12,10 +12,10 @@
         <title>Social Network</title>
     </head>
     <body>
-        <%@ include file="entetePage.jsp" %>
+        <%@ include file="inclusions/entetePage.jsp" %>
         
         <h1>Vous êtes connecté ${userName}</h1>
         
-        <%@ include file="piedPage.jsp" %>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

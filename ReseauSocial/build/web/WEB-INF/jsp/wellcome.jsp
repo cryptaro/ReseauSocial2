@@ -6,19 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <%@ include file="entetePage.jsp" %>
-    
+<html>    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Wellcome</title>
     </head>
     <body>
-        <%@ include file="entetePage.jsp" %>
+        <%@ include file="inclusions/entetePage.jsp" %>
         
         <h1>Wellcome ${wellcomeMessage}</h1>
         
-        <%@ include file="piedPage.jsp" %>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>
 

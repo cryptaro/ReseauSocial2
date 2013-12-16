@@ -14,8 +14,8 @@ import java.util.Date;
  * @author ctran
  */
 public interface UtilisateurService {
-    public void inscrire(String login, String pwd);
+    public boolean inscrire(String login, String pwd);
     public UtilisateurEntity getUser(String login, String pwd);
     public boolean setUser(String login, String pwd, String newpwd, String nom,
-            String prenom, Date naissance, boolean sexe, String description);
+            String prenom, String naissance, boolean sexe, String description);
 }

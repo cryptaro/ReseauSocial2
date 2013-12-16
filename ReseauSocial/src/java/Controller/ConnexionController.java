@@ -48,7 +48,7 @@ public class ConnexionController {
             UtilisateurEntity u = service.getUser(log, pwd);
             
             if(u!= null){
-                session.setAttribute(UtilisateurEntity.nameInSession, u);
+                session.setAttribute(UtilisateurEntity.nameInSession, new UtilisateurEntity(u));
                 mv.addObject("userName", log);
                 return mv;
             }

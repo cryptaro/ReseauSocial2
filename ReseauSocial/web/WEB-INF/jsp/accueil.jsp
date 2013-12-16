@@ -19,7 +19,7 @@
         <title>Accueil</title>
     </head>
     <body>
-        <%@ include file="entetePage.jsp" %>
+        <%@ include file="inclusions/entetePage.jsp" %>
         
         <h1> Bienvenue sur nôtre réseau social</h1>
         <% if(user==null) {%>
@@ -33,6 +33,6 @@
         </p>
         <% }%>
         
-        <%@ include file="piedPage.jsp" %>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

@@ -13,7 +13,7 @@
         <title>Connexion</title>
     </head>
     <body>
-        <%@ include file="entetePage.jsp" %>
+        <%@ include file="inclusions/entetePage.jsp" %>
         
         <h1>Please connect</h1>
         <FORM method="POST" ACTION="">            
@@ -26,6 +26,6 @@
             ${errorMsg}
         </p>
         
-        <%@ include file="piedPage.jsp" %>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

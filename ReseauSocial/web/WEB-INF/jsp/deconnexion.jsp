@@ -12,7 +12,7 @@
         <title>Deconnexion</title>
     </head>
     <body>
-        <%@ include file="entetePage.jsp" %>
+        <%@ include file="inclusions/entetePage.jsp" %>
         
         <p>
             Souhaitez vous vraiment vous déconnecter?
@@ -21,6 +21,6 @@
             </FORM>
         </p>
         
-        <%@ include file="piedPage.jsp" %>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

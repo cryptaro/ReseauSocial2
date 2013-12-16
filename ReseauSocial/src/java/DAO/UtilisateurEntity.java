@@ -77,6 +77,25 @@ public class UtilisateurEntity implements Serializable {
         pwd = _pwd;
     }
     
+    public UtilisateurEntity(String _log, String _pwd, String _nom,
+          String _prenom, Date _naissance, boolean _sexe, String _description){
+        login = _log;
+        pwd = _pwd;
+        prenom = _prenom;
+        nom = _nom;
+        description = _description;
+        naissance = _naissance;
+    }
+    
+    public UtilisateurEntity(UtilisateurEntity user){
+        login = user.login;
+        pwd = user.pwd;
+        prenom = user.prenom;
+        nom = user.nom;
+        description = user.description;
+        naissance = user.naissance;
+    }
+    
     public String getNom() {
         return nom;
     }

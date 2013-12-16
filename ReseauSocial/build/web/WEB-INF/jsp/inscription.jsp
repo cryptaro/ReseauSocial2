@@ -8,7 +8,7 @@
         <title>Inscription</title>
     </head>
     <body>
-        <%@ include file="entetePage.jsp" %>
+        <%@ include file="inclusions/entetePage.jsp" %>
         
         <h1>INSCRIPTION</h1>
         <FORM method="POST" ACTION="">            
@@ -16,6 +16,10 @@
             mot de passe : <INPUT Type=password value="${default_pwd}" Name=pwd></br>
             <INPUT Type=submit VALUE="OK">
         </FORM>
-        <%@ include file="piedPage.jsp" %>
+            
+        <p>
+            ${errorMsg}
+        </p>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

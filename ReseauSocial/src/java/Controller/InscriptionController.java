@@ -42,13 +42,17 @@ public class InscriptionController{
             HttpServletResponse response) throws Exception {
         
          
-        ModelAndView mv = new ModelAndView("wellcome"); // va chercher page wellcome.jsp 
+        ModelAndView mv;
         String pwd = request.getParameter("pwd");
         String log = request.getParameter("log");
-        String result = "Vous avez ete inscrit " + log;
-        //s.saveHello(nom);
-        s.inscrire(log, pwd);
-        mv.addObject("wellcomeMessage", result);
+
+        if(!s.inscrire(log, pwd)){
+            mv = new ModelAndView("inscription");
+            mv.addObject("errorMsg", "Ce login existe déja");
+        } else{
+            mv = new ModelAndView("wellcome"); // va chercher page wellcome.jsp 
+            mv.addObject("wellcomeMessage", "Vous avez ete inscrit " + log);
+        }
         
         return mv;
     }

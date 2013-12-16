@@ -26,8 +26,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
     
     @Transactional
     @Override
-    public void save(UtilisateurEntity e){
-        em.persist(e);
+    public boolean save(UtilisateurEntity e){
+        try {
+            em.persist(e);
+        } catch(Exception except){
+            return false;
+        }
+        return true;
     }
 
     @Transactional
@@ -49,6 +54,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
         em.remove(e);
     }
 
+    @Transactional
     @Override
     public UtilisateurEntity getUser(String log, String pwd) {
         try {
@@ -62,25 +68,22 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
         return null;
     }
     
+    @Transactional
     @Override
     /**
      * @return false si pas d'utilisateur correspondant, true si la modification
      *      a réussi.
      */
     public boolean setUser(String log, String pwd, String newpwd, 
-            String nom, String prenom, Date naissance, boolean sexe,
+            String nom, String prenom, String naissance, boolean sexe,
             String description) {
         //try {
-            em.createQuery("UPDATE UtilisateurEntity u SET u.nom=:nom, u.prenom=:prenom,"
-                    + "u.naissance=:naissance, u.sexe=:sexe, u.description=:description,"
-                    + "u.pwd=:newpwd"
-                    + " WHERE u.login = :login and u.pwd = :pwd").setParameter("login", log)
-                .setParameter("pwd", pwd).setParameter("newpwd", newpwd).setParameter("nom", nom)
-                    .setParameter("prenom", prenom).setParameter("description", description)
-                    .setParameter("naissance", naissance); 
-       /* } catch (Exception e){
+            return em.createQuery("UPDATE UtilisateurEntity u SET u.nom='"+nom+"', u.prenom='"+prenom+"',"
+                    + "u.sexe="+(sexe?1:0)+", u.description='"+description+"',"
+                    + "u.pwd='"+newpwd+"', u.naissance='"+naissance+"'"
+                    + " WHERE u.login = '"+log+"' and u.pwd = '"+pwd+"'").executeUpdate() == 1; 
+        /*} catch (Exception e){
             return false;
         }*/
-        return true;
     }
 }

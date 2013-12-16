@@ -21,11 +21,11 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     @Autowired
     private UtilisateurDAO u_dao; 
     
-    public void inscrire(String login, String pwd){
+    public boolean inscrire(String login, String pwd){
        UtilisateurEntity u = new UtilisateurEntity();
        u.setLogin(login);
        u.setPwd(pwd);
-       u_dao.save(u);
+       return u_dao.save(u);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     
     @Override
     public boolean setUser(String login, String pwd, String newpwd, String nom,
-            String prenom, Date naissance, boolean sexe, String description) {
+            String prenom, String naissance, boolean sexe, String description) {
          return u_dao.setUser(login, pwd, newpwd, nom, prenom, naissance, sexe, description);
     }
 }

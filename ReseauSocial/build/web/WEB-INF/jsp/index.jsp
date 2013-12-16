@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-    <%@ include file="entetePage.jsp" %>
+    <%@ include file="inclusions/entetePage.jsp" %>
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,6 +17,6 @@
     <body>
         <h1>Hello World!</h1>
         
-        <%@ include file="piedPage.jsp" %>
+        <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

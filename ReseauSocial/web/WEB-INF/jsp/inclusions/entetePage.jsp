@@ -12,7 +12,7 @@
 %>
     <div id="entete" class="container">
         
-        <FORM method="GET" ACTION="coucou">
+        <FORM method="GET" ACTION="afficherRecherche.htm">
             <div class="ensembleRecherche">
                 <INPUT id="enteteRechercheChamp" Type=text Name=search placeholder="Rechercher">
                 <INPUT id="enteteRechercheButton" Type=submit VALUE="" >

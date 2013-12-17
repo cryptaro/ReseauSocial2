@@ -7,6 +7,7 @@
 package DAO;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -21,4 +22,6 @@ public interface UtilisateurDAO {
     public boolean setUser(String log, String pwd, String newpwd, 
             String nom, String prenom, String naissance, boolean sexe,
             String description);
+    public List<UtilisateurEntity> getAllUser();
+    public List<UtilisateurEntity> search(String s);
 }

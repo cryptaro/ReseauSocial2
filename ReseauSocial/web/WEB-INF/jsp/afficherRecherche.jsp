@@ -4,6 +4,23 @@
     Author     : ctran
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%
+    UtilisateurEntity user = (UtilisateurEntity) session.getAttribute(UtilisateurEntity.nameInSession); 
+    
+    if(user==null){
+     session.invalidate();
+%>
+    <jsp:forward page="accueil.htm"/>
+<%
+    }
+    List<UtilisateurEntity> resultList = (List < UtilisateurEntity > )request.getAttribute("resultatRecherche");
+    if(resultList==null){
+        resultList = new ArrayList<UtilisateurEntity>();
+    }
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>    
@@ -18,10 +35,33 @@
         <div class="content">
             <h1>Résultat </h1>
             
-            <div>
-                ${resultatRecherche}
+            <% 
+                if(resultList.size()>0) {
+                    for(UtilisateurEntity u: resultList) {
+                        if(u.getLogin().compareTo(user.getLogin())!=0) {
+            %>
+                        <div class="utilisateurEntity">
+                            <div class="utilisateurEntity_Info">
+                                <%=u.getLogin() %>
+                            </div>
+                            <div class="utilisateurEntity_Info">
+                                <%=u.getNom() %>
+                            </div>
+                            <div class="utilisateurEntity_Info">
+                                <%=u.getPrenom() %>
+                            </div>
+                            <div class="utilisateurEntity_Info">
+                                <%= (u.getSexe()?"femme":"homme") %>
+                            </div>
+                        </div></br>
+            <%          }
+                    }
+                } else {
+            %>  
+            <div class="utilisateurEntity">
+                No user Founded.
             </div>
-            
+            <%  }%> 
         </div>
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>

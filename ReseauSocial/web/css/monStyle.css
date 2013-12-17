@@ -104,6 +104,15 @@ body {
     background-image: linear-gradient(rgb(45, 153, 220), rgb(2, 113, 190));
 }
 
+.utilisateurEntity_Info {
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+}
+
+.utilisateurEntity{
+    
+}
 
 a {
     text-decoration: none;

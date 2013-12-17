@@ -7,6 +7,8 @@
 package DAO;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -90,6 +92,29 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
                     + " WHERE u.login = '"+log+"' and u.pwd = '"+pwd+"'").executeUpdate() == 1; 
         } catch (Exception e){
             return false;
+        }
+    }
+    
+    @Transactional
+    @Override
+    public List<UtilisateurEntity> getAllUser(){
+        try {
+            return em.createQuery("SELECT u FROM UtilisateurEntity u").getResultList(); 
+        } catch (Exception e){
+            return new LinkedList<UtilisateurEntity>();
+        }
+    }
+    
+    @Transactional
+    @Override
+    public List<UtilisateurEntity> search(String s){
+        try {
+            return em.createQuery("SELECT u FROM UtilisateurEntity u "
+                    + "where UPPER(u.login) like UPPER('%"+s+"%') "
+                    + "   or UPPER(u.nom) like UPPER('%"+s+"%') "
+                    + "   or UPPER(u.prenom) like UPPER('%"+s+"%') ").getResultList(); 
+        } catch (Exception e){
+            return new LinkedList<UtilisateurEntity>();
         }
     }
 }

@@ -9,6 +9,7 @@ package Service;
 import DAO.UtilisateurDAO;
 import DAO.UtilisateurEntity;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,11 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     }
     
     @Override
+    public List<UtilisateurEntity> getAllUser() {
+         return u_dao.getAllUser();
+    }
+    
+    @Override
     public boolean setUser(String login, String pwd, String newpwd, String nom,
             String prenom, String naissance, boolean sexe, String description) {
          return u_dao.setUser(login, pwd, newpwd, nom, prenom, naissance, sexe, description);
@@ -46,5 +52,10 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     @Override
     public UtilisateurEntity getUserByLogin(String login) {
         return u_dao.retrieve(login);
+    }
+    
+    @Override
+    public List<UtilisateurEntity> search(String s){
+        return u_dao.search(s);
     }
 }

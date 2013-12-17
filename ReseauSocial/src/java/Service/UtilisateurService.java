@@ -8,6 +8,7 @@ package Service;
 
 import DAO.UtilisateurEntity;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,4 +21,6 @@ public interface UtilisateurService {
             String prenom, String naissance, boolean sexe, String description);
     public void removeUser(UtilisateurEntity u);
     public UtilisateurEntity getUserByLogin(String login);
+    public List<UtilisateurEntity> getAllUser();
+    public List<UtilisateurEntity> search(String s);
 }

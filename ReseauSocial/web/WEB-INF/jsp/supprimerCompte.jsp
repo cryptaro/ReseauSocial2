@@ -10,18 +10,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Supression Compte</title>
+        <link rel="stylesheet" href="css/monStyle.css">
     </head>
     <body>
         <%@ include file="inclusions/entetePage.jsp" %>
         
-        <p>
-            Souhaitez vous vraiment Supprimer votre compte ?
-            <FORM method="POST" ACTION="">
-                <INPUT Type=password placeholder="mot de passe" name="pwd">*</br>
-                <INPUT Type=submit VALUE="suppression">
-            </FORM>
-            ${errorMsg}
-        </p>
+        <div class="content" id="supprUser">
+            <p>
+                Souhaitez vous vraiment Supprimer votre compte ?
+                <FORM method="POST" ACTION="">
+                    <INPUT Type=password placeholder="mot de passe" name="pwd">*</br>
+                    <INPUT Type=submit class="bouton" VALUE="suppression">
+                </FORM>
+                ${errorMsg}
+            </p>
+        </div>
         
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>

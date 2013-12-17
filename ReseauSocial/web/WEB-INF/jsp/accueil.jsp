@@ -17,21 +17,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accueil</title>
+        <link rel="stylesheet" href="css/monStyle.css">
     </head>
     <body>
         <%@ include file="inclusions/entetePage.jsp" %>
         
-        <h1> Bienvenue sur nôtre réseau social</h1>
-        <% if(user==null) {%>
-        <p>
-            <a href="inscription.htm">inscription</a></br>
-            <a href="connexion.htm">connexion</a>
-        </p>
-        <% } else {%>
-        <p>
-            Bienvenue sur votre mur !!
-        </p>
-        <% }%>
+        <div class="content" id="accueil">
+            <h1> Bienvenue sur nôtre réseau social</h1>
+            <% if(user==null) {%>
+            <p>
+                <a href="inscription.htm">inscription</a></br>
+            </p>
+            <% } else {%>
+            <p>
+                Bienvenue sur votre mur !!
+            </p>
+            <% }%>
+        </div>
         
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>

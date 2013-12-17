@@ -10,12 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Social Network</title>
+        <link rel="stylesheet" href="css/monStyle.css">
     </head>
     <body>
         <%@ include file="inclusions/entetePage.jsp" %>
-        
-        <h1>Vous êtes connecté ${userName}</h1>
-        
+        <div class="content">
+            <h1>Vous êtes connecté ${userName}</h1>
+        </div>
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

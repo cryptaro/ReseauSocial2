@@ -10,17 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Deconnexion</title>
+        <link rel="stylesheet" href="css/monStyle.css">
     </head>
     <body>
         <%@ include file="inclusions/entetePage.jsp" %>
-        
-        <p>
-            Souhaitez vous vraiment vous déconnecter?
-            <FORM method="POST" ACTION="">            
-                <INPUT Type=submit VALUE="déconnexion">
-            </FORM>
-        </p>
-        
+        <div class="content" id="deconnexion">
+            <p>
+                Souhaitez vous vraiment vous déconnecter?
+                <FORM method="POST" ACTION="">            
+                    <INPUT class="bouton" Type=submit VALUE="Déconnexion" >
+                </FORM>
+            </p>
+        </div>
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

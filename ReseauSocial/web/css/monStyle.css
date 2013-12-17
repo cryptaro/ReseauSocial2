@@ -1,0 +1,115 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 déc. 2013, 23:58:59
+    Author     : Cryptaro
+*/
+
+body {
+    margin: auto;
+}
+#entete{
+    font-family: serif;
+    color: aliceblue;
+    position: fixed;
+    top:0px;
+    height:40px;
+    width:100%;
+    background:url(images/stork_bg.png) repeat;
+    padding-right: 20px;
+    vertical-align: central;
+}
+
+
+
+#entete form{
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    margin-top: 5px;
+    height: 30px;
+}
+
+#entete form input{
+    text-decoration: none;
+    margin: 0px;
+    border: inherit;
+}
+#enteteRechercheChamp{
+    width : 180px;
+    height: 90%;
+}
+#enteteRechercheButton{
+    border: inherit;
+    background-image: url(images/twitter_web_sprite_icons.png);
+    background-repeat: no-repeat;
+    background-position: -20px -710px;
+    width: 12px;
+    height: 14px;
+}
+.ensembleRecherche{
+    display: inline-block;
+    background-color: white;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 10px;
+    height: 100%;
+}
+
+#login, #login a {
+    position: fixed;
+    right: 20px;
+    font-size: 25px;
+    text-align: right;
+}
+
+
+.content {
+    padding: 20px;
+}
+
+#connexion label{
+    visibility: hidden;
+    display: none;
+}
+
+#connexion form{
+    width: 100%;
+    text-align: center;
+}
+#connexion h1{
+    width: 100%;
+    text-align: center;
+    font-size: 50px; 
+}
+
+#connexion input{
+    width: 200px; 
+}
+
+.bouton {
+    color: white;
+    width: 100px;
+    box-shadow: 0px 1px 0px rgb(255, 255, 255);
+    background-color: rgb(2, 113, 191);
+    background-repeat: repeat-x;
+    background-image: linear-gradient(rgb(45, 153, 220), rgb(2, 60, 110));
+    border-color: rgb(9, 110, 179);
+}
+
+.bouton:hover {
+    background-image: linear-gradient(rgb(45, 153, 220), rgb(2, 113, 190));
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+input{
+    margin: 2px;
+}

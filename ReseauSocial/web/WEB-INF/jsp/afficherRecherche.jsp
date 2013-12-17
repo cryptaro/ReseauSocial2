@@ -9,14 +9,19 @@
 <html>    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Wellcome</title>
+        <title>Resultat Recherche</title>
         <link rel="stylesheet" href="css/monStyle.css">
     </head>
     <body>
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content">
-            <h1>Wellcome ${wellcomeMessage}</h1>
+            <h1>Résultat </h1>
+            
+            <div>
+                ${resultatRecherche}
+            </div>
+            
         </div>
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>

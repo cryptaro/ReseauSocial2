@@ -36,7 +36,9 @@
             <h1>Résultat </h1>
             
             <% 
-                if(resultList.size()>0) {
+                if( resultList.size()>0 
+                    && !(resultList.size()==1 && resultList.get(0).getLogin().compareTo(user.getLogin())==0)
+                   ) {
                     for(UtilisateurEntity u: resultList) {
                         if(u.getLogin().compareTo(user.getLogin())!=0) {
             %>

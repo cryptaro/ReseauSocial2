@@ -68,7 +68,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
         try {
             UtilisateurEntity user = (UtilisateurEntity) em.createQuery("SELECT util FROM UtilisateurEntity util WHERE"
                 + " util.login = :login and util.pwd = :pwd").setParameter("login", log)
-                .setParameter("pwd", pwd).getResultList().get(0);
+                .setParameter("pwd", pwd).getSingleResult();
             return user;
         } catch (Exception e){
             // to catch the exception of no user found

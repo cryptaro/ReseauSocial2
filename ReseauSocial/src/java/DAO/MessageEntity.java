@@ -8,19 +8,16 @@ package DAO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  * @author Valentin GAUTHIER
@@ -29,37 +26,41 @@ import javax.persistence.OneToMany;
 public class MessageEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column
     String msg; // peut contenir des balises img et videos
     
-    
     @Column
-    UtilisateurEntity owner;
-    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date date;
 
-    //@ManyToOne
+    @ManyToOne
     //@JoinColumn(name="idOwner", referencedColumnName="messages")
     ConversationEntity conversation;
     
-    /*@Column
-    @JoinTable(
-            name="likers",
-            joinColumns=@JoinColumn(name="id_message"),
-            inverseJoinColumns = @JoinColumn(name="login_UtilisateurEntity"))
+    @ManyToOne
+    UtilisateurEntity owner;
+    
     @ManyToMany
     private List<UtilisateurEntity> likers = new ArrayList<UtilisateurEntity>();
     
-    @Column
-    @JoinTable(
-            name="haters",
-            joinColumns=@JoinColumn(name="id_message"),
-            inverseJoinColumns = @JoinColumn(name="login_UtilisateurEntity"))
     @ManyToMany
     private List<UtilisateurEntity> haters = new ArrayList<UtilisateurEntity>();
-    */
 
+    public MessageEntity() {
+        date = new Date();
+        msg = "";
+    }
+
+    public MessageEntity(String msg, UtilisateurEntity owner, Date date, ConversationEntity conversation) {
+        this.msg = msg;
+        this.owner = owner;
+        this.date = date;
+        this.conversation = conversation;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -80,11 +81,27 @@ public class MessageEntity implements Serializable {
         return owner;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public ConversationEntity getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(ConversationEntity conversation) {
+        this.conversation = conversation;
+    }
+
     public void setOwner(UtilisateurEntity owner) {
         this.owner = owner;
     }
 
- /*   public List<UtilisateurEntity> getLikers() {
+    public List<UtilisateurEntity> getLikers() {
         return likers;
     }
 
@@ -98,7 +115,7 @@ public class MessageEntity implements Serializable {
 
     public void setHaters(List<UtilisateurEntity> haters) {
         this.haters = haters;
-    }*/
+    }
 
     @Override
     public int hashCode() {

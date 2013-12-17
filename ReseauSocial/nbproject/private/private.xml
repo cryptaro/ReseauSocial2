@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/src/java/Controller/InscriptionController.java</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/src/java/Service/UtilisateurServiceImpl.java</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/src/java/Service/UtilisateurService.java</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/src/java/DAO/UtilisateurDAOImpl.java</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/src/java/DAO/UtilisateurDAO.java</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/inscription.jsp</file>
-            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial/ReseauSocial/src/java/DAO/UtilisateurEntity.java</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/supprimerCompte.jsp</file>
         </group>
     </open-files>
 </project-private>

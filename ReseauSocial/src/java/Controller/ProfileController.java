@@ -70,7 +70,7 @@ public class ProfileController {
            UtilisateurEntity u = service.getUserByLogin(request.getCookies()[i].getValue());
            service.demanderContact(user, u);
            mv.addObject("msg", "demande de contact envoyée");
-           mv.addObject("profile", u.getLogin());
+           mv.addObject("profile", u);
            mv.addObject("deja_en_contact", service.peutDemanderContact(user, u));
            return mv;
         } else {

@@ -90,6 +90,7 @@ public class ConversationViewController {
         }
         ModelAndView mv = new ModelAndView("conversationView");
         if(selectedConversation==null || selectedConversation == ""){
+            modifyMv("", mv, request, user);
             return mv;
         }
         user = serviceUser.getUserByLogin(user.getLogin());
@@ -119,8 +120,8 @@ public class ConversationViewController {
         }
        
         mv.addObject("conversations", serviceConvers.getVisibleConversation(user));
-        mv.addObject("errorConversation","taille des conversation trouvée: " + serviceConvers.getVisibleConversation(user).size()+"</br>"
-                + "USER EST:" + user);
+        /*mv.addObject("errorConversation","taille des conversation trouvée: " + serviceConvers.getVisibleConversation(user).size()+"</br>"
+                + "USER EST:" + user);*/
         try {
             ConversationEntity selectedConversationEntity = serviceConvers.getConversationById(conversSelectedId);
             mv.addObject("selectedConversation", selectedConversationEntity);

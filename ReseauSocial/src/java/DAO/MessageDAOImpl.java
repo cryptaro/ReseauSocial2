@@ -44,7 +44,7 @@ public class MessageDAOImpl implements MessageDAO{
     @Override
     public List<MessageEntity> getMsgByConversation(ConversationEntity c) {
         return (List<MessageEntity>) em.createQuery("SELECT m FROM MessageEntity m WHERE"
-                + " m.conversation.id = :convers").setParameter("convers", c).getResultList();
+                + " m.conversation = :convers").setParameter("convers", c).getResultList();
     }
 
     @Transactional

@@ -43,7 +43,7 @@
 <SCRIPT LANGUAGE="JavaScript">
     function valideMessage(){   
             if(window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
-                  //document.ajoutMsg.newMsg.value="coucou";
+                  document.formulaire.action.value="ajouter_Message";
                   document.formulaire.ajoutNewMsgButton.click() ;
             }
     }
@@ -66,7 +66,8 @@
                     
                      
                     <div id="conversationList">
-                        <INPUT class="bouton" name="action" Type=submit VALUE="Ajouter_Conversation">   
+                        <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
+                        <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter_Conversation">
                         <% if(conversations.size()==0){ %>
                             <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
                         <% } else { 
@@ -96,7 +97,6 @@
                                 <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
                                        readonly="readonly" value="<%= m.getMsg() %>">
                             </li>
-                            <input type="text" id="newMsg" onkeydown="valideMessage();" class="messagesInConversation"  placeholder="votre message">
                          <% } %>
                          </ul>
                          <% } else {%>
@@ -104,7 +104,7 @@
                          <% } %>
                          <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >
                          <input type="text" id="newMsg" name="valueNewMessage" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message">
-                         <INPUT id="ajoutNewMsgButton" class="bouton" name="action" Type=submit VALUE="ajouter_Message">
+                         <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" Type=submit VALUE="ajouter_Message">
                     </div>
                          
                 </form>

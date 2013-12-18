@@ -55,22 +55,22 @@
             </p>
             <% }%>
             <div id="mur">
-                <% //for(ConversationEntity c:conversations){ %>
+                <% for(ConversationEntity c:conversations){ %>
                 <div class="conversationAffiche">
-                    <% //for(MessageEntity m: c.get){ %>
-                    <% // if(numMesage==0) {%>
-                    <div class="post">
-                        
-                    </div>
-                    <%  //} else(numMesage>0) { %>
-                    <div class="comment">
-                        
-                    </div>
-                    <%  //}
-                      //}
-                    %>
+                    <% if(c.getListMessage().size()>0) {%>
+                        <div class="post">
+                            <%= c.getListMessage().get(0).getMsg() %>
+                        </div>
+                    <ul>
+                    <% }
+                       for(MessageEntity m: c.getListMessage().subList(1, c.getListMessage().size()-1)){ %>
+                        <div class="comment">
+                            <li><%= c.getListMessage().get(0).getMsg() %></li>
+                        </div>
+                    <% } %>
+                    </ul>
                 </div>
-                <% //} %>
+                <% } %>
             </div>
             <p>${msg}</p>
         </div>

@@ -84,4 +84,10 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
         u2.getListeContact().add(u1);
         u_dao.update(u2);
     }
+    
+    @Override
+    public boolean peutDemanderContact(UtilisateurEntity u1, UtilisateurEntity u2){
+        return u1.getDemandesContact().contains(u2) || u1.getListeContact().contains(u2);
+    }
+            
 }

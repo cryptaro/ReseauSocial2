@@ -1,6 +1,6 @@
 <%-- 
-    Document   : demandeContactEnvoye
-    Created on : 17 déc. 2013, 19:41:05
+    Document   : AmiView
+    Created on : 18 déc. 2013, 18:41:50
     Author     : CTam
 --%>
 
@@ -24,27 +24,21 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <h1> Demande de contact en cours&nbsp:</h1>
+            <h1> Vos contacts&nbsp:</h1>
             <% if(user!=null){ 
-                  if(user.getDemandesContact() != null && user.getDemandesContact().size() != 0) {%>
+                  if(user.getListeContact() != null && user.getListeContact().size() != 0) {%>
                    <FORM name="formulaire" method="POST" ACTION=""> 
-                       <TABLE>
             <%         int cpt = 0;
-                       Iterator i = user.getDemandesContact().iterator();
+                       Iterator i = user.getListeContact().iterator();
                        UtilisateurEntity u;
                        while(i.hasNext()){
-                           u = (UtilisateurEntity) i.next();          %>
-                           <TR>
-                               <TD><label for="login_new_demande <%=cpt%>" > <%=u.getLogin()%> </label> </TD>
-                               <TD><INPUT type="checkbox" name="choix<%=cpt%>" value="<%=u.getLogin()%>"></TD>
-                           </TR>
+                           u = (UtilisateurEntity) i.next();        %>
+                           <a href="profileView.htm?profile=<%= u.getLogin()%>"><%= u.getLogin()%></a>
             <%             cpt++;
                        } %>
-                       </TABLE>
-                       <INPUT class="bouton" Type=submit VALUE="Annuler demande de contact">
                      </FORM>  
             <%    }else{%>
-                  <p>Aucune demande en cours</p>   
+                  <p>Vous n'avez pas de contacts</p>   
             <%     }%>
             <p> ${msg} </p>
             <%

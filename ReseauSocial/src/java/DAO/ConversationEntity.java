@@ -57,6 +57,12 @@ public class ConversationEntity implements Serializable {
         visibility = VisibilityEnum.Public;
     }
     
+    public ConversationEntity(UtilisateurEntity user) {
+        date = new Date();
+        visibility = VisibilityEnum.Public;
+        owner = user;
+    }
+    
     public Long getId() {
         return id;
     }

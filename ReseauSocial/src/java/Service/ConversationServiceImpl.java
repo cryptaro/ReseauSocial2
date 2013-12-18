@@ -8,6 +8,7 @@ package Service;
 
 import DAO.ConversationDAO;
 import DAO.ConversationEntity;
+import DAO.UtilisateurEntity;
 import DAO.VisibilityEnum;
 import java.util.Date;
 import java.util.List;
@@ -59,8 +60,13 @@ public class ConversationServiceImpl implements ConversationService{
     }
 
     @Override
-    public List<ConversationEntity> getVisibleConversation(String login) {
-        return c_dao.getVisibleConversation(login);
+    public List<ConversationEntity> getVisibleConversation(UtilisateurEntity u) {
+        return c_dao.getVisibleConversation(u);
+    }
+    
+    @Override
+    public boolean isVisibleConversation(UtilisateurEntity u) {
+        return c_dao.isVisibleConversation(u);
     }
     
 }

@@ -21,8 +21,8 @@
         </FORM>
         
         <div id="menuLogEntete">
-            <a id="messagesEntete" href="conversationView.htm"></a>        
-            <div id="login">Bonjour <%=_user.getLogin()%></div>    
+            <a id="messagesEntete" href="conversationView.htm"></a> 
+            <a href="accueil.htm" id="login">Bonjour <%=_user.getLogin()%></a>        
         </div>
     </div>
     

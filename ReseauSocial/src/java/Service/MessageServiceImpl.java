@@ -6,6 +6,7 @@
 
 package Service;
 
+import DAO.ConversationEntity;
 import DAO.MessageDAO;
 import DAO.MessageEntity;
 import DAO.UtilisateurDAO;
@@ -39,8 +40,8 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public List<MessageEntity> getMsgByConversation(Long id) {
-        return m_dao.getMsgByConversation(id);
+    public List<MessageEntity> getMsgByConversation(ConversationEntity c) {
+        return m_dao.getMsgByConversation(c);
     }
 
     @Override

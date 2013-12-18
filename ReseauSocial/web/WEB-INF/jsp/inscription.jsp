@@ -12,11 +12,15 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="inscription">
-            <h1>INSCRIPTION</h1>
-            <FORM method="POST" ACTION="">            
-                login : <INPUT Type=text value="${default_log}" Name=log></br>
-                mot de passe : <INPUT Type=password value="${default_pwd}" Name=pwd></br>
-                <INPUT Type=submit VALUE="OK">
+            <h1>INSCRIPTION</h1>                
+                <FORM method="POST" ACTION="">            
+                <label for="log"> login :</label> 
+                <INPUT Type=text Name=log placeholder="login" ></br>
+                
+                <label for="pwd">mot de passe : </label>
+                <INPUT Type=password Name=pwd placeholder="password"></br>
+                
+                <INPUT class=bouton Type=submit VALUE="OK">
             </FORM>
 
             <p>

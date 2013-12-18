@@ -44,8 +44,7 @@
     function valideMessage(){   
             if(window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
                   //document.ajoutMsg.newMsg.value="coucou";
-                  document.action.value = "ajouter_Message";
-                  //document.action.click() ;
+                  document.formulaire.ajoutNewMsgButton.click() ;
             }
     }
 </SCRIPT>
@@ -63,13 +62,11 @@
         <div class="content">
             <h1>Conversations</h1>
             <div id="conversationView">
-                <FORM name="formulaire" id="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
+                <FORM name="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
                     
                      
                     <div id="conversationList">
-                        
-                        <INPUT type="submit" id="action" name="action"  VALUE="Ajouter_Conversation">
-                        <INPUT class="bouton" name="action2" Type=button onclick="(document.action.value='Ajouter_Conversation');document.formulaire.submit();" VALUE="Ajouter_Conversation"> 
+                        <INPUT class="bouton" name="action" Type=submit VALUE="Ajouter_Conversation">   
                         <% if(conversations.size()==0){ %>
                             <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
                         <% } else { 
@@ -107,7 +104,7 @@
                          <% } %>
                          <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >
                          <input type="text" id="newMsg" name="valueNewMessage" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message">
-                         <!--<INPUT id="ajoutNewMsgButton" class="bouton" name="action" Type=submit VALUE="ajouter_Message">-->
+                         <INPUT id="ajoutNewMsgButton" class="bouton" name="action" Type=submit VALUE="ajouter_Message">
                     </div>
                          
                 </form>

@@ -24,8 +24,6 @@ body {
     vertical-align: central;
 }
 
-
-
 #entete form{
     width: 100%;
     position: fixed;
@@ -72,20 +70,20 @@ body {
     right: 15px;
     position: fixed;
 }
-#menuLogEntete #login, #connexionEntente{
+#menuLogEntete #login{
     padding-right: 70px;
     display: inline-block;
 }
 #menuLogEntete, #connexionEntente {
     right: 20px;
     font-size: 25px;
-    text-align: right;
-    
+    text-align: right;    
 }
 
 
 .content {
     padding: 20px;
+    height: 80%;
 }
 
 #connexion label{
@@ -131,19 +129,22 @@ body {
     
 }
 
+#conversationView {
+    width: 100%;
+    text-align: center;
+    height: 80%;
+}
 #conversationList{
     width : 30%;
-    height: 80%;
     border: 1px;
     margin: 2px;
-    position: float;
+    display: inline-block;
 }
 #messageInConversationList{
-    width : 60%;
-    height: 80%;
+    width : 100%;
     border: 1px;
     margin: 2px;
-    position: float;
+    display: inline-block;
 }
 .messagesInConversation_owner {
     text-align: right;
@@ -156,17 +157,17 @@ body {
 
 #conversationList {
     overflow:scroll;
-    width:200px;
-    height:400px;
+    width:20%;
+    height:80%;
 }
 
 #messageInConversationList{
     overflow:scroll;
-    width:200px;
-    height:400px;
+    width:70%;
+    height:80%;
 }
 
-a {
+#entete a {
     text-decoration: none;
     color: inherit;
 }

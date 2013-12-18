@@ -43,37 +43,39 @@
         
         <div class="content">
             <h1>Wellcome</h1>
-            <div id="conversationList">
-                <% if(conversations.size()==0){ %>
-                    <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
-                <% } else { 
-                        for(ConversationEntity c: conversations) {
-                %>
-                        <ul>
-                            <li><a href="conversationView.htm?conversation<%= c.getId() %>">
-                                    <input type="text" value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %>
-                                           <%= u.getLogin() + " ;" %>
-                                    <% } %>" class="conversationTitle" readonly="readonly" >
-                                    
-                                </a>
-                            </li>
-                        </ul>
-                <%      }
-                    } %>
-            </div>
-                
-            <div id="messageInConversationList">
-                <% if(conversations.size()>0) { %>
-                <ul>
-                <% for(MessageEntity m: messagesSelectedConversation) { %>
-                    <li> 
-                        <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
-                        <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
-                               readonly="readonly" value="<%= m.getMsg() %>">
-                    </li>
-                 <% } %>
-                 </ul>
-                 <% } %>
+            <div id="conversationView">
+                <div id="conversationList">
+                    <% if(conversations.size()==0){ %>
+                        <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
+                    <% } else { 
+                            for(ConversationEntity c: conversations) {
+                    %>
+                            <ul>
+                                <li><a href="conversationView.htm?conversation<%= c.getId() %>">
+                                        <input type="text" value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %>
+                                               <%= u.getLogin() + " ;" %>
+                                        <% } %>" class="conversationTitle" readonly="readonly" >
+
+                                    </a>
+                                </li>
+                            </ul>
+                    <%      }
+                        } %>
+                </div>
+
+                <div id="messageInConversationList">
+                    <% if(conversations.size()>0) { %>
+                    <ul>
+                    <% for(MessageEntity m: messagesSelectedConversation) { %>
+                        <li> 
+                            <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
+                            <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
+                                   readonly="readonly" value="<%= m.getMsg() %>">
+                        </li>
+                     <% } %>
+                     </ul>
+                     <% } %>
+                </div>
             </div>
             <div class="error">${errorConversation}</div>
         </div>

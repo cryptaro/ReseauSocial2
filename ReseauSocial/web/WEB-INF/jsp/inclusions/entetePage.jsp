@@ -4,6 +4,7 @@
     Author     : Cryptaro
 --%>
 
+<%@page import="Service.ConversationService"%>
 <%@page import="DAO.UtilisateurEntity"%>
 
 <% 
@@ -27,6 +28,8 @@
     
 <%} else {%>
     <div id="entete" class="container">
-        <div id="connexionEntente"><a href="connexion.htm">Connexion</a></div>
+        <div id="menuLogEntete">
+            <a id="login" href="connexion.htm">Connexion</a> 
+        </div>
     </div>
 <%}%>

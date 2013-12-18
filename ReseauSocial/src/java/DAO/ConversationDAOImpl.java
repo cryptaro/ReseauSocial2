@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Cryptaro
  */
 @Repository("ConversationDAO")
@@ -75,7 +74,7 @@ public class ConversationDAOImpl implements ConversationDAO {
         return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c where"
                 + " c.owner = '" + login + "'"
                 + " OR  c.visibility = '" + VisibilityEnum.Public + "'"
-                + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p from c.participants p) )").getResultList();
+                + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p.login from c.participants p) )").getResultList();
         // il manque le test de savoir si visible par les amis
     }
 
@@ -84,7 +83,7 @@ public class ConversationDAOImpl implements ConversationDAO {
         return ((List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c where"
                 + " c.owner = '" + login + "' AND ("
                     + " c.visibility = '" + VisibilityEnum.Public + "'"
-                    + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p from c.participants p)"
+                    + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p.login from c.participants p)"
                 + ")").getResultList()).size()==1;
     }
     

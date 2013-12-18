@@ -6,10 +6,12 @@
 
 package Controller;
 
+import DAO.ConversationEntity;
 import DAO.UtilisateurEntity;
 import Service.ConversationService;
 import Service.MessageService;
 import Service.UtilisateurService;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -48,7 +50,20 @@ public class ConversationViewController {
             return new ModelAndView("accueil");
         }
         ModelAndView mv = new ModelAndView("conversationView");
-        Long conversSelectedId = new Long(selectedConversation);
+        Long conversSelectedId;
+        try {
+            conversSelectedId = new Long(selectedConversation);
+        } catch (Exception e){
+            List<ConversationEntity> visibleConvers = serviceConvers.getVisibleConversation(user.getLogin());
+            
+            if(visibleConvers.size()>0) {
+                mv.addObject("conversations", visibleConvers);
+                mv.addObject("selectedConversation", serviceConvers.getConversationById(visibleConvers.get(0).getId()));
+                mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(visibleConvers.get(0).getId()));
+            }
+            return mv;
+        }
+        
         mv.addObject("conversations", serviceConvers.getVisibleConversation(user.getLogin()));
         mv.addObject("selectedConversation", serviceConvers.getConversationById(conversSelectedId));
         mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(conversSelectedId));

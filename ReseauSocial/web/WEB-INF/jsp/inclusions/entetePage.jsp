@@ -19,11 +19,14 @@
             </div>
         </FORM>
         
-        <div id="login">Bonjour <%=_user.getLogin()%></div>        
+        <div id="menuLogEntete">
+            <a id="messagesEntete" href="conversationView.htm"></a>        
+            <div id="login">Bonjour <%=_user.getLogin()%></div>    
+        </div>
     </div>
     
 <%} else {%>
     <div id="entete" class="container">
-        <div id="login"><a href="connexion.htm">Connexion</a></div>
+        <div id="connexionEntente"><a href="connexion.htm">Connexion</a></div>
     </div>
 <%}%>

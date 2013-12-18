@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/afficherRecherche.jsp</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/DAO/UtilisateurDAOImpl.java</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/accueil.jsp</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/editerProfil.jsp</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/supprimerCompte.jsp</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/Controller/ConnexionController.java</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/Controller/AfficherRechercheController.java</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/Controller/EditerProfilController.java</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/Controller/ConversationViewController.java</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/DAO/ConversationDAOImpl.java</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/css/monStyle.css</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/conversationView.jsp</file>
+            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/inclusions/entetePage.jsp</file>
         </group>
     </open-files>
 </project-private>

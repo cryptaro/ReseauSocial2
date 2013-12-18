@@ -7,6 +7,7 @@
 package Service;
 
 import DAO.ConversationEntity;
+import DAO.VisibilityEnum;
 import java.util.Date;
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ConversationService {
     public List<ConversationEntity> getConversationByDate(Date d);
     public void removeConversation(ConversationEntity conversation);
     public List<ConversationEntity> getAllConversation();
+    public List<ConversationEntity> getConversationByVisibility(VisibilityEnum e);
+    public List<ConversationEntity> getVisibleConversation(String login);
 }

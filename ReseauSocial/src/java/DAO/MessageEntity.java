@@ -37,8 +37,8 @@ public class MessageEntity implements Serializable {
     Date date;
 
     @ManyToOne
-    //@JoinColumn(name="idOwner", referencedColumnName="messages")
     ConversationEntity conversation;
+    
     
     @ManyToOne
     UtilisateurEntity owner;

@@ -10,12 +10,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -35,15 +37,24 @@ public class ConversationEntity implements Serializable {
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
     Date date;
+    
+    @Column
+    VisibilityEnum visibility;
 
     @ManyToOne
     UtilisateurEntity owner;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "conversationParticipants", 
+            joinColumns = { @JoinColumn(name = "participants")}, 
+            inverseJoinColumns={@JoinColumn(name="convers")})  
     List<UtilisateurEntity> participants = new ArrayList<UtilisateurEntity>();
+    
+    
     
     public ConversationEntity() {
         date = new Date();
+        visibility = VisibilityEnum.Public;
     }
     
     public Long getId() {
@@ -54,11 +65,43 @@ public class ConversationEntity implements Serializable {
         this.id = id;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public VisibilityEnum getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(VisibilityEnum visibility) {
+        this.visibility = visibility;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+
+    public UtilisateurEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UtilisateurEntity owner) {
+        this.owner = owner;
+    }
+
+    public List<UtilisateurEntity> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<UtilisateurEntity> participants) {
+        this.participants = participants;
     }
 
     @Override

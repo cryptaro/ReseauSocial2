@@ -8,13 +8,10 @@ package Service;
 
 import DAO.ConversationDAO;
 import DAO.ConversationEntity;
-import DAO.UtilisateurDAO;
-import DAO.UtilisateurEntity;
+import DAO.VisibilityEnum;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -54,6 +51,16 @@ public class ConversationServiceImpl implements ConversationService{
     @Override
     public List<ConversationEntity> getAllConversation() {
         return c_dao.getAllConversation();
+    }
+    
+    @Override
+    public List<ConversationEntity> getConversationByVisibility(VisibilityEnum e){
+        return c_dao.getConversationByVisibility(e);
+    }
+
+    @Override
+    public List<ConversationEntity> getVisibleConversation(String login) {
+        return c_dao.getVisibleConversation(login);
     }
     
 }

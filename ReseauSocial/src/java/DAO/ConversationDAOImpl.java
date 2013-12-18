@@ -62,4 +62,30 @@ public class ConversationDAOImpl implements ConversationDAO {
         return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c ").getResultList();
     }
     
+    @Transactional
+    @Override
+    public List<ConversationEntity> getConversationByVisibility(VisibilityEnum e){
+        return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c where"
+                + " c.visibility = '" + e + "'").getResultList();
+    }
+    
+    @Transactional
+    @Override
+    public List<ConversationEntity> getVisibleConversation(String login){
+        return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c where"
+                + " c.owner = '" + login + "'"
+                + " OR  c.visibility = '" + VisibilityEnum.Public + "'"
+                + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p from c.participants p) )").getResultList();
+        // il manque le test de savoir si visible par les amis
+    }
+
+    @Override
+    public boolean isVisibleConversation(String login) {
+        return ((List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c where"
+                + " c.owner = '" + login + "' AND ("
+                    + " c.visibility = '" + VisibilityEnum.Public + "'"
+                    + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p from c.participants p)"
+                + ")").getResultList()).size()==1;
+    }
+    
 }

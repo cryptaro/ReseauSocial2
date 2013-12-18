@@ -20,4 +20,7 @@ public interface ConversationDAO {
     public List<ConversationEntity> getConversationByDate(Date d);
     public void removeConversation(ConversationEntity conversation);
     public List<ConversationEntity> getAllConversation();
+    public List<ConversationEntity> getConversationByVisibility(VisibilityEnum e);
+    public List<ConversationEntity> getVisibleConversation(String login);
+    public boolean isVisibleConversation(String login);
 }

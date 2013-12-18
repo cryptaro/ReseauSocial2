@@ -7,10 +7,12 @@
 package Controller;
 
 import DAO.ConversationEntity;
+import DAO.MessageEntity;
 import DAO.UtilisateurEntity;
 import Service.ConversationService;
 import Service.MessageService;
 import Service.UtilisateurService;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +43,41 @@ public class ConversationViewController {
    
     
     @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView init(@RequestParam("conversation") String selectedConversation,HttpServletRequest request,
+    public ModelAndView initAjoutConversation(HttpServletRequest request, HttpServletResponse response){
+        UtilisateurEntity user=null;
+        HttpSession session = request.getSession(false);
+        if(session==null || (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession)) == null) {
+            session.invalidate();
+            return new ModelAndView("accueil");
+        }
+        String selectedConvers = request.getParameter("id_convers");
+        ModelAndView mv = new ModelAndView("conversationView");
+        
+        
+        Long conversSelectedId;
+        try {
+            conversSelectedId = new Long(selectedConvers);
+        } catch (Exception e){
+           return mv;
+        }
+        
+        String action = request.getParameter("action");
+        if(action.compareToIgnoreCase("ajouter_Message")==0){
+            String newMsg = request.getParameter("valueNewMessage");
+            if(newMsg.replaceAll(" ", "").length()!=0){
+                MessageEntity message = new MessageEntity(newMsg, user, new Date(), serviceConvers.getConversationById(conversSelectedId));
+                serviceMsg.ecrire(message);
+            }            
+        } else if(action.compareToIgnoreCase("Ajouter_Conversation")==0){
+            ConversationEntity convers = new ConversationEntity(user);
+            serviceConvers.create(convers);
+        }
+        modifyMv(selectedConvers, mv, request, user);
+        return mv;
+    }
+    
+    @RequestMapping(method=RequestMethod.GET)
+    public ModelAndView init(@RequestParam(value="conversation", required = false) String selectedConversation,HttpServletRequest request,
             HttpServletResponse response){
         UtilisateurEntity user=null;
         HttpSession session = request.getSession(false);
@@ -50,47 +86,44 @@ public class ConversationViewController {
             return new ModelAndView("accueil");
         }
         ModelAndView mv = new ModelAndView("conversationView");
-        Long conversSelectedId;
-        try {
-            conversSelectedId = new Long(selectedConversation);
-        } catch (Exception e){
-            List<ConversationEntity> visibleConvers = serviceConvers.getVisibleConversation(user.getLogin());
-            
-            if(visibleConvers.size()>0) {
-                mv.addObject("conversations", visibleConvers);
-                mv.addObject("selectedConversation", serviceConvers.getConversationById(visibleConvers.get(0).getId()));
-                mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(visibleConvers.get(0).getId()));
-            }
+        if(selectedConversation==null || selectedConversation == ""){
             return mv;
         }
-        
-        mv.addObject("conversations", serviceConvers.getVisibleConversation(user.getLogin()));
-        mv.addObject("selectedConversation", serviceConvers.getConversationById(conversSelectedId));
-        mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(conversSelectedId));
-        
+ 
+        modifyMv(request.getParameter("id_convers"), mv, request, user);
         return mv;
     }
     
     
-    @RequestMapping(method=RequestMethod.GET)
-    protected ModelAndView handleRequestInternal(
-            HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        
-        UtilisateurEntity user=null;
-        HttpSession session = request.getSession(false);
-        if(session==null || (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession)) == null) {
-            session.invalidate();
-            return new ModelAndView("accueil");
-        }
-        ModelAndView mv = new ModelAndView("conversationView");
+    private void modifyMv(String selectedConvers, ModelAndView mv, HttpServletRequest request, UtilisateurEntity user){
+        Long conversSelectedId;
         try {
-            mv.addObject("conversations", serviceConvers.getVisibleConversation(user.getLogin()));
+            conversSelectedId = new Long(selectedConvers);
         } catch (Exception e){
-            mv.addObject("errorConversation",e.toString());
-            mv.addObject("conversations", null);
-        }       
+            List<ConversationEntity> visibleConvers = serviceConvers.getVisibleConversation(user);
+            
+            if(visibleConvers.size()>0) {
+                mv.addObject("conversations", visibleConvers);
+                if(visibleConvers.size()>0){
+                    mv.addObject("selectedConversation", serviceConvers.getConversationById(visibleConvers.get(0).getId()));
+                    mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(visibleConvers.get(0)));
+                } else {
+                    mv.addObject("selectedConversation", null);
+                    mv.addObject("messagesSelectedConversation", null);
+                }
+            }
+            return;
+        }
         
-        return mv;
+        mv.addObject("conversations", serviceConvers.getVisibleConversation(user));       
+        try {
+            ConversationEntity selectedConversationEntity = serviceConvers.getConversationById(conversSelectedId);
+            mv.addObject("selectedConversation", selectedConversationEntity);
+            mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(selectedConversationEntity));
+        } catch(Exception e){   // conversation non trouvée
+             mv.addObject("selectedConversation", null);
+             mv.addObject("messagesSelectedConversation", null);
+        }
+       
     }
 }

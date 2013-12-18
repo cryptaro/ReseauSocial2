@@ -30,13 +30,21 @@
     if(messagesSelectedConversation==null){
         messagesSelectedConversation = new ArrayList<MessageEntity>();
     }
+    
+    Long selectedConversationId;
+    if(selectedConversation!=null){
+        selectedConversationId = selectedConversation.getId();
+    } else {
+        selectedConversationId =  new Long(0);
+    }
+    
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
     function valideMessage(){   
             if(window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
                   //document.ajoutMsg.newMsg.value="coucou";
-                  document.ajoutMsg.submit();
+                  document.formulaire.ajoutNewMsgButton.click() ;
             }
     }
 </SCRIPT>
@@ -54,48 +62,52 @@
         <div class="content">
             <h1>Conversations</h1>
             <div id="conversationView">
-                
-                <div id="conversationList">
-                    <FORM name="ajoutConvers" method="POST" ACTION="" > 
-                    <% if(conversations.size()==0){ %>
-                        <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
-                    <% } else { 
-                            for(ConversationEntity c: conversations) {
-                    %>
-                            <ul>
-                                <li><a href="conversationView.htm?conversation<%= c.getId() %>">
-                                        <input type="text" value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %>
-                                               <%= u.getLogin() + " ;" %>
-                                        <% } %>" class="conversationTitle" readonly="readonly" >
+                <FORM name="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
+                    
+                           
+                    <div id="conversationList">
 
-                                    </a>
-                                </li>
-                            </ul>
-                    <%      }
-                        } %>
-                        <INPUT class="bouton" Type=submit VALUE="+">
-                    </form>
-                </div>
+                        <% if(conversations.size()==0){ %>
+                            <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
+                        <% } else { 
+                                for(ConversationEntity c: conversations) {
+                        %>
+                                <ul>
+                                    <li><a href="conversationView.htm?conversation=<%= c.getId() %>">
+                                            <input type="text" value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %>
+                                                   <%= u.getLogin() + " ;" %>
+                                            <% } %>" class="conversationTitle" readonly="readonly" >
 
-                <div id="messageInConversationList">
-                    <FORM name="ajoutMsg" method="POST" ACTION="" onSubmit="return valideMessage(this.form);"> 
-                    <% if(conversations.size()>0) { %>
-                    <ul>
-                    <% for(MessageEntity m: messagesSelectedConversation) { %>
-                        <li> 
-                            <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
-                            <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
-                                   readonly="readonly" value="<%= m.getMsg() %>">
-                        </li>
-                        <input type="text" id="newMsg" onkeydown="valideMessage();"class="messagesInConversation"  placeholder="votre message">
-                     <% } %>
-                     </ul>
-                     <% } else {%>
-                        <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
-                     <% } %>
-                     <input type="text" id="newMsg" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message">
-                    </form>
-                </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                        <%      }
+                            } %>
+                                <INPUT class="bouton" name="action" Type=submit VALUE="Ajouter_Conversation">
+                               
+                    </div>
+
+                    <div id="messageInConversationList">
+                        <% if(conversations.size()>0) { %>
+                        <ul>
+                        <% for(MessageEntity m: messagesSelectedConversation) { %>
+                            <li> 
+                                <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
+                                <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
+                                       readonly="readonly" value="<%= m.getMsg() %>">
+                            </li>
+                            <input type="text" id="newMsg" onkeydown="valideMessage();" class="messagesInConversation"  placeholder="votre message">
+                         <% } %>
+                         </ul>
+                         <% } else {%>
+                            <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
+                         <% } %>
+                         <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >
+                         <input type="text" id="newMsg" name="valueNewMessage" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message">
+                         <INPUT id="ajoutNewMsgButton" class="bouton" name="action" Type=submit VALUE="ajouter_Message">
+                    </div>
+                         
+                </form>
             </div>
             <div class="error">${errorConversation}</div>
         </div>

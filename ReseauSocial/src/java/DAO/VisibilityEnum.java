@@ -11,5 +11,5 @@ package DAO;
  * @author Cryptaro
  */
 public enum VisibilityEnum {
-    Friends, Public, Private;
+    Friends, Public, Private, Chat;
 }

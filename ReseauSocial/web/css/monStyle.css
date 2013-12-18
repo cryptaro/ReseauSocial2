@@ -184,6 +184,10 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=1 );
 }
 
+#ajoutNewMsgButton {
+    visibility: hidden;
+}
+
 #entete a {
     text-decoration: none;
     color: inherit;

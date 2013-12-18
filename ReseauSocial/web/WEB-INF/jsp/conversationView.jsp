@@ -31,6 +31,16 @@
         messagesSelectedConversation = new ArrayList<MessageEntity>();
     }
 %>
+
+<SCRIPT LANGUAGE="JavaScript">
+    function valideMessage(){   
+            if(window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+                  //document.ajoutMsg.newMsg.value="coucou";
+                  document.ajoutMsg.submit();
+            }
+    }
+</SCRIPT>
+
 <!DOCTYPE html>
 <html>    
     <head>
@@ -42,9 +52,11 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content">
-            <h1>Wellcome</h1>
+            <h1>Conversations</h1>
             <div id="conversationView">
+                
                 <div id="conversationList">
+                    <FORM name="ajoutConvers" method="POST" ACTION="" > 
                     <% if(conversations.size()==0){ %>
                         <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
                     <% } else { 
@@ -61,9 +73,12 @@
                             </ul>
                     <%      }
                         } %>
+                        <INPUT class="bouton" Type=submit VALUE="+">
+                    </form>
                 </div>
 
                 <div id="messageInConversationList">
+                    <FORM name="ajoutMsg" method="POST" ACTION="" onSubmit="return valideMessage(this.form);"> 
                     <% if(conversations.size()>0) { %>
                     <ul>
                     <% for(MessageEntity m: messagesSelectedConversation) { %>
@@ -72,9 +87,14 @@
                             <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
                                    readonly="readonly" value="<%= m.getMsg() %>">
                         </li>
+                        <input type="text" id="newMsg" onkeydown="valideMessage();"class="messagesInConversation"  placeholder="votre message">
                      <% } %>
                      </ul>
+                     <% } else {%>
+                        <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
                      <% } %>
+                     <input type="text" id="newMsg" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message">
+                    </form>
                 </div>
             </div>
             <div class="error">${errorConversation}</div>

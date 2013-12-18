@@ -117,4 +117,15 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
             return new LinkedList<UtilisateurEntity>();
         }
     }
+    
+    @Override
+    public List<UtilisateurEntity> getDemandeursDeContactUser(UtilisateurEntity e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u) {
+        return em.createQuery("SELECT util FROM UtilisateurEntity util WHERE"
+                + " util.demandes_contact = :user").setParameter("user", u).getResultList();
+    }
 }

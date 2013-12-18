@@ -58,4 +58,21 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     public List<UtilisateurEntity> search(String s){
         return u_dao.search(s);
     }
+    
+    @Override
+    public void demanderContact(UtilisateurEntity demandeur, UtilisateurEntity contact_demande) {
+        demandeur.getDemandesContact().add(contact_demande);
+        u_dao.update(demandeur);
+    }
+
+    @Override
+    public void annulerDemandesContact(UtilisateurEntity u, UtilisateurEntity contact_demande_annule) {
+        u.getDemandesContact().remove(contact_demande_annule);
+        u_dao.update(u);
+    }
+
+    @Override
+    public List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u) {
+        return u_dao.getDemandesContactVersUser(u);
+    }
 }

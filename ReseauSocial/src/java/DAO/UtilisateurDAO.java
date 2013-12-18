@@ -24,4 +24,6 @@ public interface UtilisateurDAO {
             String description);
     public List<UtilisateurEntity> getAllUser();
     public List<UtilisateurEntity> search(String s);
+    public List<UtilisateurEntity> getDemandeursDeContactUser(UtilisateurEntity e);
+    public List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u);
 }

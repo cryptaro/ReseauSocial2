@@ -33,6 +33,13 @@
                 Bienvenue sur votre mur !!
             </p>
             <% }%>
+            <p>
+                <FORM name="formulaire" method="POST" ACTION=""> 
+                    <label for="login_new_demande"> login de votre peut-être futur ami : </label>
+                <<INPUT Type=date size="30" Name=login_new_demande id=login_new_demande>
+                 <INPUT class="bouton" Type=submit VALUE="Valider">
+                </FORM>
+            </p>
         </div>
         
         <%@ include file="inclusions/piedPage.jsp" %>

@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/Controller/EditerProfilController.java</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/Controller/ConversationViewController.java</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/src/java/DAO/ConversationDAOImpl.java</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/css/monStyle.css</file>
-            <file>file:/C:/Users/Cryptaro/Documents/NetBeansProjects/ReseauSocial/ReseauSocial/web/WEB-INF/jsp/conversationView.jsp</file>
+            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial2/ReseauSocial/src/java/DAO/UtilisateurDAO.java</file>
+            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial2/ReseauSocial/src/java/DAO/UtilisateurEntity.java</file>
+            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial2/ReseauSocial/src/java/Service/UtilisateurServiceImpl.java</file>
+            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial2/ReseauSocial/src/java/Controller/AccueilController.java</file>
+            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial2/ReseauSocial/src/java/Service/UtilisateurService.java</file>
+            <file>file:/C:/Users/CTam/Documents/GitHub/ReseauSocial2/ReseauSocial/src/java/DAO/UtilisateurDAOImpl.java</file>
         </group>
     </open-files>
 </project-private>

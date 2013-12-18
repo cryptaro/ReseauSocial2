@@ -87,7 +87,8 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     
     @Override
     public boolean peutDemanderContact(UtilisateurEntity u1, UtilisateurEntity u2){
-        return u1.getDemandesContact().contains(u2) || u1.getListeContact().contains(u2);
+        return u1.getDemandesContact().contains(u2) || u1.getListeContact().contains(u2) 
+                || u2.getDemandesContact().contains(u1);
     }
             
 }

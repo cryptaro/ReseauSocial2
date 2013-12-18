@@ -28,15 +28,20 @@
             <% if(user!=null){ 
                   if(user.getListeContact() != null && user.getListeContact().size() != 0) {%>
                    <FORM name="formulaire" method="POST" ACTION=""> 
+                       <TABLE>
             <%         int cpt = 0;
                        Iterator i = user.getListeContact().iterator();
                        UtilisateurEntity u;
                        while(i.hasNext()){
                            u = (UtilisateurEntity) i.next();        %>
-                           <a href="profileView.htm?profile=<%= u.getLogin()%>"><%= u.getLogin()%></a>
+                           <TR>
+                               <TD><a href="profileView.htm?profile=<%= u.getLogin()%>"><%= u.getLogin()%></a></TD>
+                               <TD><INPUT type="checkbox" name="choix<%=cpt%>" value="<%=u.getLogin()%>"></TD>
+                           </TR>
             <%             cpt++;
                        } %>
-                     </FORM>  
+                       </TABLE>
+                   </FORM>  
             <%    }else{%>
                   <p>Vous n'avez pas de contacts</p>   
             <%     }%>

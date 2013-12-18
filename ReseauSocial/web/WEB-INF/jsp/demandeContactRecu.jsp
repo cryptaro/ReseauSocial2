@@ -1,14 +1,18 @@
 <%-- 
-    Document   : demandeContactEnvoye
-    Created on : 17 déc. 2013, 19:41:05
+    Document   : demandeContactReçu
+    Created on : 17 déc. 2013, 19:41:21
     Author     : CTam
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="DAO.UtilisateurEntity"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    UtilisateurEntity user = (UtilisateurEntity) session.getAttribute(UtilisateurEntity.nameInSession); 
+     UtilisateurEntity user = (UtilisateurEntity) session.getAttribute(UtilisateurEntity.nameInSession);
+     List<UtilisateurEntity> contacts_possible = null;
+     if(user != null)
+        contacts_possible = (List<UtilisateurEntity>)request.getAttribute("contacts_possible");
  %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -24,24 +28,31 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <h1> Demande de contact en cours&nbsp:</h1>
+            <h1> Les demandes de personnes voulant être en contact avec moi&nbsp:</h1>
+            
+            <FORM>
+
+</FORM>
+            
             <% if(user!=null){ 
-                  if(user.getDemandesContact() != null && user.getDemandesContact().size() != 0) {%>
+                  if(contacts_possible!= null && contacts_possible.size() != 0) {%>
                    <FORM name="formulaire" method="POST" ACTION=""> 
                        <TABLE>
             <%         int cpt = 0;
-                       Iterator i = user.getDemandesContact().iterator();
+                       Iterator i = contacts_possible.iterator();
                        UtilisateurEntity u;
                        while(i.hasNext()){
                            u = (UtilisateurEntity) i.next();          %>
                            <TR>
-                               <TD><label for="login_new_demande <%=cpt%>" > <%=u.getLogin()%> </label> </TD>
-                               <TD><INPUT type="checkbox" name="choix<%=cpt%>" value="<%=u.getLogin()%>"></TD>
+                               <TD><label for="login_new_demande" <%=cpt%> > <%=u.getLogin()%> </label> </TD>
+                               <TD><INPUT type= "radio" name="contact<%=cpt%>" value="accepter"> accepter</TD>
+                               <TD><INPUT type= "radio" name="contact<%=cpt%>" value="decliner"> decliner</TD>
+                               <TD><INPUT type= "radio" name="contact<%=cpt%>" value="voir_plus_tard" checked>voir plus tard</TD>
                            </TR>
             <%             cpt++;
                        } %>
                        </TABLE>
-                       <INPUT class="bouton" Type=submit VALUE="Annuler demande de contact"  style="width:230px">
+                       <INPUT class="bouton" Type=submit VALUE="Valider">
                      </FORM>  
             <%    }else{%>
                   <p>Aucune demande en cours</p>   

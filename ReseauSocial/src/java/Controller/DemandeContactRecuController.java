@@ -13,6 +13,8 @@ package Controller;
 
 import DAO.UtilisateurEntity;
 import Service.UtilisateurService;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,32 +36,19 @@ public class DemandeContactRecuController {
     
     public DemandeContactRecuController() {
     }
-    /*
-     @RequestMapping(method=RequestMethod.GET)
-    protected ModelAndView handleRequestInternal(
+    
+    @RequestMapping(method=RequestMethod.GET)
+    protected ModelAndView init(
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+        ModelAndView mv = new ModelAndView("demandeContactRecu"); 
         UtilisateurEntity user=null;
         HttpSession session = request.getSession(false);
-        if(session==null || (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession)) == null) {
+        if(session==null || (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession)) == null)
             session.invalidate();
-            return new ModelAndView("accueil");
-        }
-        ModelAndView mv = new ModelAndView("conversationView");
-        try {
-            mv.addObject("conversations", serviceConvers.getVisibleConversation(user.getLogin()));
-        } catch (Exception e){
-            mv.addObject("errorConversation",e.toString());
-            mv.addObject("conversations", null);
-        }       
-        
+        else
+            mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
         return mv;
-    }*/
-    @RequestMapping(method=RequestMethod.GET)
-    public String init(){
-        service.getDemandesContactVersUser(null);
-        return "demandeContactRecu";
     }
     
     @RequestMapping(method=RequestMethod.POST)
@@ -68,18 +57,31 @@ public class DemandeContactRecuController {
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
         UtilisateurEntity user;
+        
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
             ModelAndView mv = new ModelAndView("demandeContactRecu"); 
-            String nom_contact_a_annule;
-            String nom_check_box;
-            int i;
-            for(i = 0; i<=user.getDemandesContact().size(); ++i){
-                nom_check_box = "choix" + i;
-                nom_contact_a_annule = request.getParameter(nom_check_box);
-                if(nom_contact_a_annule != null)
-                   service.annulerDemandesContact(user, service.getUserByLogin(nom_contact_a_annule));
+            String nom_contact_a_traiter;
+            String nom_radio_button;
+            String msg = "";
+            int i = 0;
+            List<UtilisateurEntity> contacts_possible = service.getDemandesContactVersUser(user);
+            Iterator it = contacts_possible.iterator();
+            UtilisateurEntity contact_possible;
+            while(it.hasNext()){
+                contact_possible = (UtilisateurEntity) it.next();
+                nom_radio_button = "contact" + i;
+                nom_contact_a_traiter = request.getParameter(nom_radio_button);
+                if("accepter".equals(nom_contact_a_traiter)){
+                    msg += " accepter " + contact_possible.getLogin() + " ";
+                   //service.annulerDemandesContact(user, service.getUserByLogin(nom_contact_a_traiter));
+                   //msg = "votre requête a été traiter";
+                }else if("decliner".equals(nom_contact_a_traiter)){
+                    service.annulerDemandesContact(contact_possible, user);
+                }
+                ++i;
             }
-            mv.addObject("msg", "demande(s) annulée(s)");
+            mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
+            mv.addObject("msg", "requête traitée");
             return mv;
         } else {
             session.setAttribute(UtilisateurEntity.nameInSession, null);

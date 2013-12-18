@@ -26,4 +26,5 @@ public interface UtilisateurService {
     public void demanderContact(UtilisateurEntity demandeur, UtilisateurEntity contact_demande);
     public void annulerDemandesContact(UtilisateurEntity u, UtilisateurEntity contact_demande_annule);
     public  List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u);
+    public  void accepterContact(UtilisateurEntity u1, UtilisateurEntity u2);
 }

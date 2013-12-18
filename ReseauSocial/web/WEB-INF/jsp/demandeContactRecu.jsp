@@ -44,7 +44,7 @@
                        while(i.hasNext()){
                            u = (UtilisateurEntity) i.next();          %>
                            <TR>
-                               <TD><label for="login_new_demande" <%=cpt%> > <%=u.getLogin()%> </label> </TD>
+                               <TD><label for="login_new_demande" <%=cpt%> > <%=u.getLogin()%> voudrait entrer en contact avec vous : </label> </TD>
                                <TD><INPUT type= "radio" name="contact<%=cpt%>" value="accepter"> accepter</TD>
                                <TD><INPUT type= "radio" name="contact<%=cpt%>" value="decliner"> decliner</TD>
                                <TD><INPUT type= "radio" name="contact<%=cpt%>" value="voir_plus_tard" checked>voir plus tard</TD>

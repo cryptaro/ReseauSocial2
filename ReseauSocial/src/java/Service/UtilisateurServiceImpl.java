@@ -75,4 +75,13 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     public List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u) {
         return u_dao.getDemandesContactVersUser(u);
     }
+    
+    @Override
+    public  void accepterContact(UtilisateurEntity u1, UtilisateurEntity u2){
+        u2.getDemandesContact().remove(u1);
+        u1.getListeContact().add(u2);
+        u_dao.update(u1);
+        u2.getListeContact().add(u1);
+        u_dao.update(u2);
+    }
 }

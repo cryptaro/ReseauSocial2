@@ -10,9 +10,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -58,9 +61,15 @@ public class UtilisateurEntity implements Serializable {
     @Column
     private String description="";    
     
-    @ManyToMany
+    @ManyToMany()
     private List<UtilisateurEntity> demandes_contact = new ArrayList<UtilisateurEntity>();
-   
+    
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "USER_CONTACT", 
+            joinColumns = { @JoinColumn(name = "user_id")}, 
+            inverseJoinColumns={@JoinColumn(name="liste_contact_id")})  
+    private List<UtilisateurEntity> liste_contact = new ArrayList<UtilisateurEntity>();
+  
     public UtilisateurEntity(){ }
     
     public UtilisateurEntity(String _log, String _pwd){
@@ -87,6 +96,7 @@ public class UtilisateurEntity implements Serializable {
         naissance = user.naissance;
         sexe = user.sexe;
         demandes_contact = user.demandes_contact;
+        liste_contact = user.liste_contact;
     }
     
     public String getNom() {
@@ -143,7 +153,15 @@ public class UtilisateurEntity implements Serializable {
 
     public void setDemandesContact(List<UtilisateurEntity> d_contact) {
         this.demandes_contact = d_contact;
-    }  
+    }
+    
+    public List<UtilisateurEntity> getListeContact() {
+        return liste_contact;
+    }
+
+    public void setListeContact(List<UtilisateurEntity> liste_contact) {
+        this.liste_contact = liste_contact;
+    }
     
     public String getLogin() {
         return login;

@@ -60,28 +60,26 @@ public class DemandeContactRecuController {
         
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
             ModelAndView mv = new ModelAndView("demandeContactRecu"); 
-            String nom_contact_a_traiter;
+            String choix;
             String nom_radio_button;
-            String msg = "";
             int i = 0;
             List<UtilisateurEntity> contacts_possible = service.getDemandesContactVersUser(user);
             Iterator it = contacts_possible.iterator();
             UtilisateurEntity contact_possible;
+            String msg = "";
             while(it.hasNext()){
                 contact_possible = (UtilisateurEntity) it.next();
                 nom_radio_button = "contact" + i;
-                nom_contact_a_traiter = request.getParameter(nom_radio_button);
-                if("accepter".equals(nom_contact_a_traiter)){
-                    msg += " accepter " + contact_possible.getLogin() + " ";
-                   //service.annulerDemandesContact(user, service.getUserByLogin(nom_contact_a_traiter));
-                   //msg = "votre requête a été traiter";
-                }else if("decliner".equals(nom_contact_a_traiter)){
+                choix = request.getParameter(nom_radio_button);
+                if("accepter".equals(choix)){
+                    service.accepterContact(user, contact_possible);
+                }else if("decliner".equals(choix)){
                     service.annulerDemandesContact(contact_possible, user);
                 }
                 ++i;
             }
             mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
-            mv.addObject("msg", "requête traitée");
+            mv.addObject("msg", msg );//"requête traitée");
             return mv;
         } else {
             session.setAttribute(UtilisateurEntity.nameInSession, null);

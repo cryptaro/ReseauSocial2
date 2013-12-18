@@ -8,6 +8,7 @@ package Service;
 
 import DAO.ConversationDAO;
 import DAO.ConversationEntity;
+import DAO.UtilisateurDAO;
 import DAO.UtilisateurEntity;
 import DAO.VisibilityEnum;
 import java.util.Date;
@@ -23,10 +24,17 @@ import org.springframework.stereotype.Service;
 public class ConversationServiceImpl implements ConversationService{
     @Autowired
     private ConversationDAO c_dao;
+    
+    @Autowired
+    private UtilisateurDAO u_dao;
 
     @Override
     public void create(ConversationEntity conv) {
+        conv.getParticipants().add(conv.getOwner());
         c_dao.create(conv);
+        conv.getOwner().getListeConversations().add(conv);
+        u_dao.update(conv.getOwner());
+        
     }
 
     @Override

@@ -117,7 +117,7 @@ public class ConversationViewController {
             }
             return;
         }
-        
+       
         mv.addObject("conversations", serviceConvers.getVisibleConversation(user));
         mv.addObject("errorConversation","taille des conversation trouvée: " + serviceConvers.getVisibleConversation(user).size()+"</br>"
                 + "USER EST:" + user);

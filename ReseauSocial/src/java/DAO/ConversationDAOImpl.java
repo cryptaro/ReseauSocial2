@@ -71,17 +71,13 @@ public class ConversationDAOImpl implements ConversationDAO {
     @Transactional
     @Override
     public List<ConversationEntity> getVisibleConversation(UtilisateurEntity u){
-        /*return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c where"
-                + " c.owner = '" + login + "'"
-                + " OR  c.visibility = '" + VisibilityEnum.Public + "'"
-                + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p.login from c.participants p) )").getResultList();
-        */
-        // il manque le test de savoir si visible par les amis
-        return em.createQuery("SELECT c FROM ConversationEntity c where c.owner = :user OR  c.visibility = :public "
-                + " OR (c.visibility = :private AND c.participants = :user)").setParameter("public", VisibilityEnum.Public)
-                .setParameter("private", VisibilityEnum.Private).setParameter("user", u).getResultList();
+        return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c WHERE"
+                + " c.owner = :user OR" 
+                + " c.visibility = :visibilitePublic OR" 
+                + " (c.visibility = :visibilitePrivate AND c.participants = :user)"
+        ).setParameter("user", u).setParameter("visibilitePublic", VisibilityEnum.Public).setParameter("visibilitePrivate", VisibilityEnum.Private).getResultList();
     }
-
+    
     @Override
     public boolean isVisibleConversation(UtilisateurEntity u, Long id) {
         return em.createQuery("SELECT c FROM ConversationEntity c where c.id = :id AND (c.owner = :user OR  c.visibility = :public "

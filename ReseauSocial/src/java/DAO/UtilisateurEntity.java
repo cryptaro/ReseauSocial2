@@ -70,6 +70,9 @@ public class UtilisateurEntity implements Serializable {
             inverseJoinColumns={@JoinColumn(name="liste_contact_id")})  
     private List<UtilisateurEntity> liste_contact = new ArrayList<UtilisateurEntity>();
   
+    @OneToMany(mappedBy="owner") 
+    private List<ConversationEntity> liste_conversations = new ArrayList<ConversationEntity>();    
+    
     public UtilisateurEntity(){ }
     
     public UtilisateurEntity(String _log, String _pwd){
@@ -169,6 +172,14 @@ public class UtilisateurEntity implements Serializable {
 
     public void setLogin(String id) {
         this.login = id;
+    }
+    
+    public List<ConversationEntity> getListeConversations() {
+        return liste_conversations;
+    }
+
+    public void setListeConversations(List<ConversationEntity> liste_conversations) {
+        this.liste_conversations = liste_conversations;
     }
     
     @Override

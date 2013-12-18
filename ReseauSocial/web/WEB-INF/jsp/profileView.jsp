@@ -55,7 +55,7 @@
             </p>
             <% }%>
             <div id="mur">
-                <% for(ConversationEntity c:conversations){ %>
+                <% //for(ConversationEntity c:conversations){ %>
                 <div class="conversationAffiche">
                     <% //for(MessageEntity m: c.get){ %>
                     <% // if(numMesage==0) {%>
@@ -70,7 +70,7 @@
                       //}
                     %>
                 </div>
-                <% } %>
+                <% //} %>
             </div>
             <p>${msg}</p>
         </div>

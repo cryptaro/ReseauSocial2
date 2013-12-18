@@ -7,10 +7,14 @@
 package DAO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -54,13 +58,9 @@ public class UtilisateurEntity implements Serializable {
     @Column
     private String description="";    
     
-   /* @JoinTable(
-            name="Contact_user",
-            joinColumns=@JoinColumn(name="login_UtilisateurEntity"),
-            inverseJoinColumns = @JoinColumn(name="id_contact"))
     @ManyToMany
-    private List<UtilisateurEntity> amiList = new ArrayList<UtilisateurEntity>();
-    */
+    private List<UtilisateurEntity> demandes_contact = new ArrayList<UtilisateurEntity>();
+   
     public UtilisateurEntity(){ }
     
     public UtilisateurEntity(String _log, String _pwd){
@@ -86,6 +86,7 @@ public class UtilisateurEntity implements Serializable {
         description = user.description;
         naissance = user.naissance;
         sexe = user.sexe;
+        demandes_contact = user.demandes_contact;
     }
     
     public String getNom() {
@@ -135,15 +136,15 @@ public class UtilisateurEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-/*
-    public List<UtilisateurEntity> getAmiList() {
-        return amiList;
+    
+    public List<UtilisateurEntity> getDemandesContact() {
+        return demandes_contact;
     }
 
-    public void setAmiList(List<UtilisateurEntity> amiList) {
-        this.amiList = amiList;
-    }   
-*/
+    public void setDemandesContact(List<UtilisateurEntity> d_contact) {
+        this.demandes_contact = d_contact;
+    }  
+    
     public String getLogin() {
         return login;
     }

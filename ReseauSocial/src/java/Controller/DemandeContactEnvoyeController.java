@@ -16,33 +16,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 /**
  *
- * @author Cryptaro
+ * @author CTam
  */
+
 @Controller
-@RequestMapping("/accueil.htm")
-public class AccueilController {
-    public AccueilController() {
+@RequestMapping("/demandeContactEnvoye.htm")
+public class DemandeContactEnvoyeController {
+    @Autowired
+    UtilisateurService service;
+    
+    public DemandeContactEnvoyeController() {
     }
     
     @RequestMapping(method=RequestMethod.GET)
     public String init(){
-        return "accueil";
+        return "demandeContactEnvoye";
     }
-    
-    /*
-    @RequestMapping(method=RequestMethod.POST)
-    protected String handleRequestInternal(
-            HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        return "accueil";
-    }
-*/    
-    // TEST 
-    @Autowired
-    UtilisateurService service;
     
     @RequestMapping(method=RequestMethod.POST)
     protected ModelAndView handleRequestInternal(
@@ -51,15 +42,22 @@ public class AccueilController {
         HttpSession session = request.getSession(false);
         UtilisateurEntity user;
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
-           ModelAndView mv = new ModelAndView("accueil"); // va chercher page wellcome.jsp 
-           String login_new_demande = request.getParameter("login_new_demande");
-           UtilisateurEntity u = service.getUserByLogin(login_new_demande);
-           service.demanderContact(user, u);
-           return mv;
+            ModelAndView mv = new ModelAndView("demandeContactEnvoye"); 
+            String nom_contact_a_annule;
+            String nom_check_box;
+            int i;
+            for(i = 0; i<=user.getDemandesContact().size(); ++i){
+                nom_check_box = "choix" + i;
+                nom_contact_a_annule = request.getParameter(nom_check_box);
+                if(nom_contact_a_annule != null)
+                   service.annulerDemandesContact(user, service.getUserByLogin(nom_contact_a_annule));
+            }
+            mv.addObject("msg", "demande(s) annulée(s)");
+            return mv;
         } else {
             session.setAttribute(UtilisateurEntity.nameInSession, null);
             session.invalidate();
-            return new ModelAndView("login_new_demande");
+            return new ModelAndView("demandeContactEnvoye");
         }
         
     }

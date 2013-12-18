@@ -50,7 +50,8 @@ public class ConversationEntity implements Serializable {
             inverseJoinColumns={@JoinColumn(name="convers")})  
     List<UtilisateurEntity> participants = new ArrayList<UtilisateurEntity>();
     
-    
+    @OneToMany(mappedBy = "conversation")
+    private List<MessageEntity> list_message;  
     
     public ConversationEntity() {
         date = new Date();
@@ -102,6 +103,16 @@ public class ConversationEntity implements Serializable {
         this.owner = owner;
     }
 
+    public List<MessageEntity> getListMessage() {
+        return list_message;
+    }
+
+    public void setListMessage(List<MessageEntity> list_message) {
+        this.list_message = list_message;
+    }
+
+    
+    
     public List<UtilisateurEntity> getParticipants() {
         return participants;
     }

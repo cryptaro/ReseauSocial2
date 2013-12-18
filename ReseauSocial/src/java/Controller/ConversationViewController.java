@@ -38,6 +38,9 @@ public class ConversationViewController {
     @Autowired
     MessageService serviceMsg;
     
+    @Autowired
+    UtilisateurService serviceUser;
+    
     public ConversationViewController() {
     }
    
@@ -53,6 +56,7 @@ public class ConversationViewController {
         String selectedConvers = request.getParameter("id_convers");
         ModelAndView mv = new ModelAndView("conversationView");
         
+        user = serviceUser.getUserByLogin(user.getLogin());
         
         Long conversSelectedId;
         try {
@@ -77,8 +81,8 @@ public class ConversationViewController {
     }
     
     @RequestMapping(method=RequestMethod.GET)
-    public ModelAndView init(@RequestParam(value="conversation", required = false) String selectedConversation,HttpServletRequest request,
-            HttpServletResponse response){
+    public ModelAndView init(@RequestParam(value="conversation", required = false) String selectedConversation,
+            HttpServletRequest request, HttpServletResponse response){
         UtilisateurEntity user=null;
         HttpSession session = request.getSession(false);
         if(session==null || (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession)) == null) {
@@ -89,7 +93,7 @@ public class ConversationViewController {
         if(selectedConversation==null || selectedConversation == ""){
             return mv;
         }
- 
+        user = serviceUser.getUserByLogin(user.getLogin());
         modifyMv(request.getParameter("id_convers"), mv, request, user);
         return mv;
     }
@@ -115,7 +119,9 @@ public class ConversationViewController {
             return;
         }
         
-        mv.addObject("conversations", serviceConvers.getVisibleConversation(user));       
+        mv.addObject("conversations", serviceConvers.getVisibleConversation(user));
+        mv.addObject("errorConversation","taille des conversation trouvée: " + serviceConvers.getVisibleConversation(user).size()+"</br>"
+                + "USER EST:" + user);
         try {
             ConversationEntity selectedConversationEntity = serviceConvers.getConversationById(conversSelectedId);
             mv.addObject("selectedConversation", selectedConversationEntity);

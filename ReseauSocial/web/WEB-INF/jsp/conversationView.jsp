@@ -64,9 +64,9 @@
             <div id="conversationView">
                 <FORM name="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
                     
-                           
+                     
                     <div id="conversationList">
-
+                        <INPUT class="bouton" name="action" Type=submit VALUE="Ajouter_Conversation">   
                         <% if(conversations.size()==0){ %>
                             <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
                         <% } else { 
@@ -83,7 +83,7 @@
                                 </ul>
                         <%      }
                             } %>
-                                <INPUT class="bouton" name="action" Type=submit VALUE="Ajouter_Conversation">
+                                
                                
                     </div>
 

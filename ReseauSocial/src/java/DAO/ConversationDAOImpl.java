@@ -77,15 +77,15 @@ public class ConversationDAOImpl implements ConversationDAO {
                 + " OR (c.visibility = '" + VisibilityEnum.Private + "' AND '"+login+"' in  (select p.login from c.participants p) )").getResultList();
         */
         // il manque le test de savoir si visible par les amis
-        return em.createQuery("SELECT c FROM ConversationEntity c where c.owner = :user OR  c.visibility = :public "
+        return em.createQuery("SELECT c FROM ConversationEntity c where c.owner.login like :userlogin OR  c.visibility = :public "
                 + " OR (c.visibility = :private AND c.participants = :user)").setParameter("public", VisibilityEnum.Public)
-                .setParameter("private", VisibilityEnum.Private).setParameter("user", u).getResultList();
+                .setParameter("private", VisibilityEnum.Private).setParameter("user", u).setParameter("userlogin", u.getLogin()).getResultList();
     }
 
     @Override
     public boolean isVisibleConversation(UtilisateurEntity u) {
-        return em.createQuery("SELECT c FROM ConversationEntity c where c.owner = :user OR ( c.visibility = :public "
-                + " OR (c.visibility = :private AND c.participants = :user))")
+        return em.createQuery("SELECT c FROM ConversationEntity c where c.owner = :user OR  c.visibility = :public "
+                + " OR (c.visibility = :private AND c.participants = :user)")
                 .setParameter("public", VisibilityEnum.Public).setParameter("private", VisibilityEnum.Private).setParameter("user", u).getResultList().size()==1;       
 
     }

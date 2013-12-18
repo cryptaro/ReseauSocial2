@@ -23,7 +23,10 @@ body {
     padding-right: 20px;
     vertical-align: central;
 }
-
+#menuLogEntete a {
+    text-decoration: none;
+    color: inherit;
+}
 #entete form{
     width: 100%;
     position: fixed;
@@ -31,7 +34,6 @@ body {
     margin-top: 5px;
     height: 30px;
 }
-
 #entete form input{
     text-decoration: none;
     margin: 0px;
@@ -58,7 +60,7 @@ body {
     height: 100%;
 }
 
-#menuLogEntete #messagesEntete{
+#messagesEntete{
     border: inherit;
     background-image: url(images/twitter_web_sprite_icons.png);
     background-repeat: no-repeat;
@@ -70,14 +72,15 @@ body {
     right: 15px;
     position: fixed;
 }
-#menuLogEntete #login{
-    padding-right: 70px;
+#login{
+    padding-right: 50px;
     display: inline-block;
 }
 #menuLogEntete, #connexionEntente {
     right: 20px;
     font-size: 25px;
-    text-align: right;    
+    text-align: right;
+    position: fixed;
 }
 
 
@@ -86,28 +89,27 @@ body {
     height: 80%;
 }
 
-#connexion label{
+#connexion label, #inscription label{
     visibility: hidden;
     display: none;
 }
 
-#connexion form{
+#connexion form, #inscription form{
     width: 100%;
     text-align: center;
 }
-#connexion h1{
+#connexion h1, #inscription h1{
     width: 100%;
     text-align: center;
     font-size: 50px; 
 }
 
-#connexion input{
+#connexion input, #inscription input{
     width: 200px; 
 }
 
 .bouton {
     color: white;
-    width: 100px;
     box-shadow: 0px 1px 0px rgb(255, 255, 255);
     background-color: rgb(2, 113, 191);
     background-repeat: repeat-x;
@@ -186,11 +188,6 @@ body {
 
 #ajoutNewMsgButton {
     visibility: hidden;
-}
-
-#entete a {
-    text-decoration: none;
-    color: inherit;
 }
 
 input{

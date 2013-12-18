@@ -49,7 +49,7 @@
                 <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
                 <% } %>
             </FORM> 
-            <% }else{%>
+            <% } else{ %>
             <p>
                 <a href="inscription.htm">inscription</a>
             </p>

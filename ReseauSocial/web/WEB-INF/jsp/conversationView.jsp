@@ -66,7 +66,9 @@
                     
                      
                     <div id="conversationList">
-                        <INPUT class="bouton" name="action" Type=submit VALUE="Ajouter_Conversation">   
+                        <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter_Conversation">
+                        <INPUT type="hidden" id="action" name="action" Type=submit VALUE="Ajouter_Conversation">
+                        <INPUT class="bouton" name="action2" Type=button onclick="(document.action.value='Ajouter_Conversation');document.formulaire.submit();" VALUE="Ajouter_Conversation">
                         <% if(conversations.size()==0){ %>
                             <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
                         <% } else { 

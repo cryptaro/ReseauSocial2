@@ -44,7 +44,7 @@
             %>
                         <div class="utilisateurEntity">
                             <div class="utilisateurEntity_Info">
-                                <%=u.getLogin() %>
+                                <a href="profileView.htm?profile=<%=u.getLogin()%>"><%=u.getLogin()%></a>
                             </div>
                             <div class="utilisateurEntity_Info">
                                 <%=u.getNom() %>

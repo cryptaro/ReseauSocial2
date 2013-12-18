@@ -16,8 +16,9 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="supprUser">
+            <h1>Souhaitez vous vraiment Supprimer votre compte ?</h1>
             <p>
-                Souhaitez vous vraiment Supprimer votre compte ?
+                
                 <FORM method="POST" ACTION="">
                     <INPUT Type=password placeholder="mot de passe" name="pwd">*</br>
                     <INPUT Type=submit class="bouton" VALUE="suppression">

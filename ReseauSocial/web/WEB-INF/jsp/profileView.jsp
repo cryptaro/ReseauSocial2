@@ -6,6 +6,9 @@
 
 
 
+<%@page import="DAO.MessageEntity"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.ConversationEntity"%>
 <%@page import="org.springframework.web.bind.annotation.RequestParam"%>
 <%@page import="DAO.UtilisateurEntity"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,9 +17,16 @@
     UtilisateurEntity user_profile = (UtilisateurEntity)request.getAttribute("profile");
     UtilisateurEntity user = (UtilisateurEntity) session.getAttribute(UtilisateurEntity.nameInSession);
     Boolean deja_en_contact = (Boolean)request.getAttribute("deja_en_contact");
-    Cookie cook = new Cookie ("user_profile", user_profile.getLogin());
-    cook.setMaxAge(3600);
-    response.addCookie(cook);
+    if(user_profile != null) {
+        Cookie cook = new Cookie ("user_profile", user_profile.getLogin());
+        cook.setMaxAge(3600);
+        response.addCookie(cook);
+    } else {
+        user_profile = user;
+    }
+    
+    List<ConversationEntity> conversations = (List<ConversationEntity>)request.getAttribute("conversationsMur");
+    
  %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -35,13 +45,33 @@
             <h1> Profile de <%=user_profile.getLogin()%>&nbsp:</h1>
             <% if(user!=null){ %>
             <FORM name="formulaire" method="POST" ACTION=""> 
+                <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
                 <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
+                <% } %>
             </FORM> 
             <% }else{%>
             <p>
                 <a href="inscription.htm">inscription</a>
             </p>
             <% }%>
+            <div id="mur">
+                <% for(ConversationEntity c:conversations){ %>
+                <div class="conversationAffiche">
+                    <% //for(MessageEntity m: c.get){ %>
+                    <% // if(numMesage==0) {%>
+                    <div class="post">
+                        
+                    </div>
+                    <%  //} else(numMesage>0) { %>
+                    <div class="comment">
+                        
+                    </div>
+                    <%  //}
+                      //}
+                    %>
+                </div>
+                <% } %>
+            </div>
             <p>${msg}</p>
         </div>
         

@@ -65,8 +65,8 @@ public class ConversationServiceImpl implements ConversationService{
     }
     
     @Override
-    public boolean isVisibleConversation(UtilisateurEntity u) {
-        return c_dao.isVisibleConversation(u);
+    public boolean isVisibleConversation(UtilisateurEntity u, Long id) {
+        return c_dao.isVisibleConversation(u,id);
     }
     
 }

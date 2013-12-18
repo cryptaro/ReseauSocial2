@@ -35,16 +35,22 @@ public class ProfileController {
     
     @RequestMapping(method=RequestMethod.GET)
     protected ModelAndView init(
-            @RequestParam("profile") String profile,
+            @RequestParam(value="profile", required = false) String profile,
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
         ModelAndView mv = new ModelAndView("profileView");
         UtilisateurEntity user = null;
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
-            UtilisateurEntity user_profil = service.getUserByLogin(profile);
-            mv.addObject("profile", user_profil);
-            mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
+            if(profile==null || profile.length()==0){
+                UtilisateurEntity user_profil = service.getUserByLogin(user.getLogin());
+                mv.addObject("profile", user_profil);
+                mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
+            } else {
+                UtilisateurEntity user_profil = service.getUserByLogin(profile);
+                mv.addObject("profile", user_profil);
+                mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
+            }
         }
         return mv;
     }

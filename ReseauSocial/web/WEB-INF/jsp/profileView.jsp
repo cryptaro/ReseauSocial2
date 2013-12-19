@@ -137,7 +137,7 @@
                     <ul><br/>
                     <% }
                     if(c.getListMessage().size()>1){
-                       for(MessageEntity m: c.getListMessage().subList(1, c.getListMessage().size()-1)){ %>
+                       for(MessageEntity m: c.getListMessage().subList(1, c.getListMessage().size())){ %>
                         <div class="comment">
                             <li><div class='messageOwner'><%= m.getOwner().getLogin() %> :</div>
                                 <div class='messageMsg'><%= m.getMsg() %></div>

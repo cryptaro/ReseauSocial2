@@ -114,4 +114,9 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
     public UtilisateurEntity maj(UtilisateurEntity u){
         return u_dao.retrieve(u.getLogin());
     }
+    
+    @Override
+    public void update(UtilisateurEntity e){
+        u_dao.update(e);
+    }
 }

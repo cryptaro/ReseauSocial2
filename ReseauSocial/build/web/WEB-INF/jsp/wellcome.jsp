@@ -10,12 +10,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Wellcome</title>
+        <link rel="stylesheet" href="css/monStyle.css">
     </head>
     <body>
         <%@ include file="inclusions/entetePage.jsp" %>
         
-        <h1>Wellcome ${wellcomeMessage}</h1>
-        
+        <div class="content">
+            <h1>Wellcome ${wellcomeMessage}</h1>
+        </div>
         <%@ include file="inclusions/piedPage.jsp" %>
     </body>
 </html>

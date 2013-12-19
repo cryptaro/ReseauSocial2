@@ -30,6 +30,7 @@
 
             <p class="error">
                 ${errorMsg}
+                <a href="inscription.htm">inscription</a></br>
             </p>
         </div>
         

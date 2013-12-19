@@ -30,4 +30,6 @@ public interface UtilisateurService {
     public void supprimerContact(UtilisateurEntity u1, UtilisateurEntity u2);
     public void denotifyDemandesContact(UtilisateurEntity u1);
     public UtilisateurEntity maj(UtilisateurEntity u);
+    
+    public void update(UtilisateurEntity e);
 }

@@ -64,6 +64,8 @@ public class HtmlUtils {
                     sb.append("&iuml;");
                 else if (c == 'î')
                     sb.append("&icirc;");
+                else if (c == 'ç')
+                    sb.append("&ccedil;");
                 /*else if (c == '\n')
                     // Handle Newline
                     sb.append("&lt;br/&gt;");*/

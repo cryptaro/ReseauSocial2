@@ -77,8 +77,6 @@ public class ConversationViewController {
                 if(conv!=null) {
                     MessageEntity message = new MessageEntity(newMsg, user, new Date(), conv);
                     serviceMsg.ecrire(message);
-                    message.getConversation().getListMessage().add(message);
-                    serviceConvers.update(conv);
                 }
                  mv.addObject("selectedConversation", conv);
             }

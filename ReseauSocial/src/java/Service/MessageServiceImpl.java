@@ -26,10 +26,14 @@ public class MessageServiceImpl implements MessageService{
     
     @Autowired
     private UtilisateurDAO u_dao;
+    @Autowired
+    private ConversationService c_dao;
 
     @Override
     public void ecrire(MessageEntity msg) {
         m_dao.ecrire(msg);
+        msg.getConversation().getListMessage().add(msg);
+        c_dao.update(msg.getConversation());
         msg.getOwner().getListMessage().add(msg);
         u_dao.update(msg.getOwner());
     }

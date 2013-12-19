@@ -11,6 +11,7 @@ import DAO.MessageEntity;
 import DAO.UtilisateurEntity;
 import DAO.VisibilityEnum;
 import Service.ConversationService;
+import Service.HtmlUtils;
 import Service.MessageService;
 import Service.UtilisateurService;
 import java.util.Date;
@@ -89,7 +90,7 @@ public class ProfileController {
             }
             UtilisateurEntity u = serviceUser.getUserByLogin(request.getCookies()[i].getValue());;
             
-            if(action.compareToIgnoreCase("Ajouter en contact")==0){
+            if(action.compareToIgnoreCase("ajout_contact")==0){
                 serviceUser.demanderContact(user, u);
                 session.setAttribute(UtilisateurEntity.nameInSession, user);
                 
@@ -108,7 +109,7 @@ public class ProfileController {
                     mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
                     return mv;
                 }
-                String comment = request.getParameter("valueComment"+idConversString);
+                String comment = HtmlUtils.toHtml(request.getParameter("valueComment"+idConversString));
                 ConversationEntity conversation = serviceConversation.getConversationById(idConvers);
                 if(conversation==null){
                     mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
@@ -117,11 +118,8 @@ public class ProfileController {
                 
                 MessageEntity mesg = new MessageEntity(comment, user, new Date(), conversation);
                 serviceMsg.ecrire(mesg);
-                mesg.getConversation().getListMessage().add(mesg);
-                serviceConversation.update(mesg.getConversation());
-                
                 mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
-                mv.addObject("msg", "message : " + comment + " ## convers : "+idConvers);
+                //mv.addObject("msg", "message : " + comment + " ## convers : "+idConvers);
                 
                 
             } else if(action.compareToIgnoreCase("nouveauPost")==0){
@@ -135,12 +133,10 @@ public class ProfileController {
                     serviceConversation.create(conversation);
                     MessageEntity mesg = new MessageEntity(comment, user, new Date(), conversation);
                     serviceMsg.ecrire(mesg);
-                    mesg.getConversation().getListMessage().add(mesg);
-                    serviceConversation.update(mesg.getConversation());
                     
 
                     mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
-                    mv.addObject("msg", "message : " + comment + " ## convers : "+conversation.getId());
+                    //mv.addObject("msg", "message : " + comment + " ## convers : "+conversation.getId());
                 }
             }
             return mv;

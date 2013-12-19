@@ -12,12 +12,6 @@
     if(_user !=null) {
 %>
     <div id="entete" class="container">
-        <div id="menuAmiEntete" class="container">
-             <a  href="demandeContactEnvoye.htm" id="lienAmi1" >Mes demandes ami</a>
-             <a  href="demandeContactRecu.htm" id="lienAmi2" >Demande ami</a>
-             <a  href="contactView.htm" id="lienAmi3">Amis</a>
-        </div>
-        
         <FORM method="GET" ACTION="afficherRecherche.htm">
             
             <div class="ensembleRecherche">
@@ -30,6 +24,9 @@
         </FORM>
         
         <div id="menuLogEntete">
+            <a  href="demandeContactEnvoye.htm" id="lienAmi1" >Mes demandes ami</a>
+            <a  href="demandeContactRecu.htm" id="lienAmi2" >Demande ami</a>
+             <a  href="contactView.htm" id="lienAmi3">Amis</a>
             <a id="deconnexionEntete" alt="deconnexion" title="deconnexion" href="deconnexion.htm"></a>
             <a id="messagesEntete" href="conversationView.htm" title="messages"></a> 
             <a href="profileView.htm" id="login">Bonjour <%=_user.getLogin()%></a>

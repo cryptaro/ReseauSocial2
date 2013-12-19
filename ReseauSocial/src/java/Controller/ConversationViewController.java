@@ -74,6 +74,16 @@ public class ConversationViewController {
         } else if(action.compareToIgnoreCase("Ajouter_Conversation")==0){
             ConversationEntity convers = new ConversationEntity(user);
             serviceConvers.create(convers);
+        } else if(action.compareToIgnoreCase("ajouter_Participants")==0){
+            String newParticipants = request.getParameter("joutParticipants");
+            UtilisateurEntity tmpuser = null;
+            for(String s: newParticipants.split(";")){
+                tmpuser = serviceUser.getUserByLogin(s.replaceAll(" ",""));
+                if(tmpuser!=null){
+                    //serviceConvers.
+                }
+                tmpuser = null;
+            }
         }
         modifyMv(selectedConvers, mv, request, user);
         return mv;

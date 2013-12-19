@@ -42,9 +42,9 @@
 <SCRIPT LANGUAGE="JavaScript">
     var isShiftdown = 0!=0;
     
-    function valideMessage(){
+    function valide(typeEnvoi){
             if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
-                  document.formulaire.action.value="ajouter_Message";
+                  document.formulaire.action.value=typeEnvoi+"";
                   document.formulaire.ajoutNewMsgButton.click() ;
             }
     }
@@ -77,7 +77,6 @@
             <div id="conversationView">
                 <FORM name="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
                     
-                     
                     <div id="conversationList">
                         <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
                         <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter_Conversation">
@@ -88,9 +87,9 @@
                         %>
                                 <ul>
                                     <li><a href="conversationView.htm?conversation=<%= c.getId() %>">
-                                            <input type="text" value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %>
-                                                   <%= u.getLogin() + " ;" %>
-                                            <% } %>" class="conversationTitle" readonly="readonly" >
+                                            <input type="text" 
+                                                   value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %>"
+                                                   class="conversationTitle" readonly="readonly" >
 
                                         </a>
                                     </li>
@@ -101,6 +100,8 @@
                                
                     </div>
                     <div id="messageInConversationListGlobal">
+                        <INPUT name="joutParticipants" onkeypress="valide('ajouter_Participants')" id="ajoutParticipants" Type=text VALUE=""
+                               placeholder="ajoutez des participants ex: 'user1;user2 ; user3'">
                         <div id="messageInConversationList">
                             <% if(conversations.size()>0) { %>
                             <ul>
@@ -116,7 +117,7 @@
                                 <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
                              <% } %>
                         </div></br>
-                        <TEXTAREA type="text" id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message"></TEXTAREA>
+                        <TEXTAREA  id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="valide('ajouter_Message');" class="newMessagesInConversation"  placeholder="votre message"></TEXTAREA>
                         <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" Type=submit VALUE="ajouter_Message">
                     </div>
                     <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >

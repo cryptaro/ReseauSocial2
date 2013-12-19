@@ -69,6 +69,12 @@ public class UtilisateurEntity implements Serializable {
             joinColumns = { @JoinColumn(name = "user_id")}, 
             inverseJoinColumns={@JoinColumn(name="liste_contact_id")})  
     private List<UtilisateurEntity> liste_contact = new ArrayList<UtilisateurEntity>();
+    
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "USER_DEMANDE_CONTACT_UNCHECKED", 
+            joinColumns = { @JoinColumn(name = "user_id")}, 
+            inverseJoinColumns={@JoinColumn(name="liste_contact_id")})  
+    private List<UtilisateurEntity> demandes_contact_unchecked = new ArrayList<UtilisateurEntity>();
   
     @OneToMany(mappedBy="owner") 
     private List<ConversationEntity> liste_conversations = new ArrayList<ConversationEntity>();    
@@ -100,6 +106,8 @@ public class UtilisateurEntity implements Serializable {
         sexe = user.sexe;
         demandes_contact = user.demandes_contact;
         liste_contact = user.liste_contact;
+        liste_conversations = user.liste_conversations;
+        demandes_contact_unchecked = user.demandes_contact_unchecked;
     }
     
     public String getNom() {
@@ -180,6 +188,14 @@ public class UtilisateurEntity implements Serializable {
 
     public void setListeConversations(List<ConversationEntity> liste_conversations) {
         this.liste_conversations = liste_conversations;
+    }
+
+    public List<UtilisateurEntity> getDemandesContactUnchecked() {
+        return demandes_contact_unchecked;
+    }
+
+    public void setDemandesContactUnchecked(List<UtilisateurEntity> demandes_contact_unchecked) {
+        this.demandes_contact_unchecked = demandes_contact_unchecked;
     }
     
     @Override

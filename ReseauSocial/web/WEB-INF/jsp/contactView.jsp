@@ -41,6 +41,7 @@
             <%             cpt++;
                        } %>
                        </TABLE>
+                       <INPUT class="bouton" Type=submit VALUE="Supprimer contact">
                    </FORM>  
             <%    }else{%>
                   <p>Vous n'avez pas de contacts</p>   

@@ -28,4 +28,6 @@ public interface UtilisateurService {
     public  List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u);
     public  void accepterContact(UtilisateurEntity u1, UtilisateurEntity u2);
     public boolean peutDemanderContact(UtilisateurEntity u1, UtilisateurEntity u2);
+    public void supprimerContact(UtilisateurEntity u1, UtilisateurEntity u2);
+     public void denotifyDemandesContact(UtilisateurEntity u1);
 }

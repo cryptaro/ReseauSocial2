@@ -46,8 +46,10 @@ public class DemandeContactRecuController {
         HttpSession session = request.getSession(false);
         if(session==null || (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession)) == null)
             session.invalidate();
-        else
+        else{
+            service.denotifyDemandesContact(user);
             mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
+        }
         return mv;
     }
     

@@ -89,10 +89,12 @@
                         <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter_Conversation">
                         <% if(conversations.size()==0){ %>
                             <input type="text" value="No Conversation here" id="conversationTitle_empty" readonly="readonly" >
-                        <% } else { 
+                        <% } else { %>
+                        <ul>
+                         <%
                                 for(ConversationEntity c: conversations) {
                         %>
-                                <ul>
+                                
                                     <li><a href="conversationView.htm?conversation=<%= c.getId() %>">
                                             <input type="text" 
                                                    value="<% for(UtilisateurEntity u: c.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %>"
@@ -100,9 +102,10 @@
 
                                         </a>
                                     </li>
-                                </ul>
-                        <%      }
-                            } %>
+                                
+                        <%      }%>
+                        </ul>
+                         <%   } %>
                                 
                                
                     </div>

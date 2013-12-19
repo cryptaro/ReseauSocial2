@@ -55,6 +55,8 @@ public class ConversationServiceImpl implements ConversationService{
     @Override
     public void removeConversation(ConversationEntity conversation) {
         c_dao.removeConversation(conversation);
+        conversation.getOwner().getListeConversations().remove(conversation);
+        u_dao.update(conversation.getOwner());
     }
 
     @Override

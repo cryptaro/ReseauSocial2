@@ -39,7 +39,6 @@ public class MessageEntity implements Serializable {
     @ManyToOne
     ConversationEntity conversation;
     
-    
     @ManyToOne
     UtilisateurEntity owner;
     

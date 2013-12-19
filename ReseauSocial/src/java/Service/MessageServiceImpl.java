@@ -23,10 +23,15 @@ import org.springframework.stereotype.Service;
 public class MessageServiceImpl implements MessageService{
     @Autowired
     private MessageDAO m_dao;
+    
+    @Autowired
+    private UtilisateurDAO u_dao;
 
     @Override
     public void ecrire(MessageEntity msg) {
         m_dao.ecrire(msg);
+        msg.getOwner().getListMessage().add(msg);
+        u_dao.update(msg.getOwner());
     }
 
     @Override
@@ -51,6 +56,8 @@ public class MessageServiceImpl implements MessageService{
 
     @Override
     public void removeMsg(MessageEntity msg) {
+        msg.getOwner().getListMessage().remove(msg);
+        u_dao.update(msg.getOwner());
         m_dao.removeMsg(msg);
     }
 

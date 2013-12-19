@@ -31,11 +31,10 @@ public class DeconnexionController {
     
     @RequestMapping(method=RequestMethod.GET)
     public String init(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession(false);
+            HttpServletResponse response){
         request.getSession().setAttribute(UtilisateurEntity.nameInSession, null);
         request.getSession().invalidate();
-        return "deconnexion";
+        return "accueil";
     }
     
     @RequestMapping(method=RequestMethod.POST)

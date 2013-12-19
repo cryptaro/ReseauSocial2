@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -75,6 +76,9 @@ public class UtilisateurEntity implements Serializable {
             joinColumns = { @JoinColumn(name = "user_id")}, 
             inverseJoinColumns={@JoinColumn(name="liste_contact_id")})  
     private List<UtilisateurEntity> demandes_contact_unchecked = new ArrayList<UtilisateurEntity>();
+    
+    @OneToMany(mappedBy = "owner")
+    private List<MessageEntity> list_message = new ArrayList<MessageEntity>();
   
     @OneToMany(mappedBy="owner") 
     private List<ConversationEntity> liste_conversations = new ArrayList<ConversationEntity>();    
@@ -108,6 +112,7 @@ public class UtilisateurEntity implements Serializable {
         liste_contact = user.liste_contact;
         liste_conversations = user.liste_conversations;
         demandes_contact_unchecked = user.demandes_contact_unchecked;
+        list_message = user.list_message;
     }
     
     public String getNom() {
@@ -172,6 +177,14 @@ public class UtilisateurEntity implements Serializable {
 
     public void setListeContact(List<UtilisateurEntity> liste_contact) {
         this.liste_contact = liste_contact;
+    }
+
+    public List<MessageEntity> getListMessage() {
+        return list_message;
+    }
+
+    public void setListMessage(List<MessageEntity> list_message) {
+        this.list_message = list_message;
     }
     
     public String getLogin() {

@@ -59,24 +59,29 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
+            <FORM name="formulaire" method="POST" ACTION=""> 
+                
+                <!--   DEBUT DE LA ZONE DE MODIF -->
+                
             <h1> Profil de <%=user_profile.getLogin()%>&nbsp:</h1>
             <% if(user!=null){ %>
                 <% if(user.getLogin().compareTo(user_profile.getLogin())==0){ %>
                     <a href="editerProfil.htm" >Modifier</a></br>
                 <% } %>
-                <FORM name="formulaire" method="POST" ACTION=""> 
+                
                     <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
                     <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
                     <% } %>
-                </FORM> 
             <% } else{ %>
             <p>
                 <a href="inscription.htm">inscription</a>
             </p>
             <% }%>
+            
+            <!--   FIN DE LA ZONE DE MODIF -->
+            
             <div id="mur">
                 <h1> Mur </h1>
-                <FORM name="formulaire"  method="POST" ACTION="" > 
                 <% for(ConversationEntity c:conversations){ %>
                     <% if(c.getListMessage().size()>0) {%>
                 <div class="conversationAffiche">

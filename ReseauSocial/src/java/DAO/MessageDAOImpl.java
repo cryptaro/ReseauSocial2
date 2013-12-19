@@ -35,6 +35,8 @@ public class MessageDAOImpl implements MessageDAO{
                 + " m.owner = '"+ login+"'").getResultList();
     }
     
+    @Transactional
+    @Override
     public MessageEntity getMsgById(Long id){
         return (MessageEntity) em.createQuery("SELECT m FROM MessageEntity m WHERE"
                 + " m.id = "+ id).getResultList().get(0);

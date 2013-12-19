@@ -114,11 +114,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
         }
     }
     
+    @Transactional
     @Override
     public List<UtilisateurEntity> getDemandeursDeContactUser(UtilisateurEntity e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Transactional
     @Override
     public List<UtilisateurEntity> getDemandesContactVersUser(UtilisateurEntity u) {
         return em.createQuery("SELECT util FROM UtilisateurEntity util WHERE"

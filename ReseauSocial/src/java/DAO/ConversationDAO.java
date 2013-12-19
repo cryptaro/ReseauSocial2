@@ -24,4 +24,6 @@ public interface ConversationDAO {
     public List<ConversationEntity> getConversationByVisibility(VisibilityEnum e);
     public List<ConversationEntity> getVisibleConversation(UtilisateurEntity u);
     public boolean isVisibleConversation(UtilisateurEntity u, Long id);
+    
+    public List<ConversationEntity> getChatConversation(UtilisateurEntity u);
 }

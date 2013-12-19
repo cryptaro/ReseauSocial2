@@ -83,4 +83,8 @@ public class ConversationServiceImpl implements ConversationService{
         return c_dao.isVisibleConversation(u,id);
     }
     
+    @Override
+    public List<ConversationEntity> getChatConversation(UtilisateurEntity u){
+        return c_dao.getChatConversation(u);
+    }
 }

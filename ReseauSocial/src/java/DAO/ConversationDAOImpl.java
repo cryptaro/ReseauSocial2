@@ -27,6 +27,8 @@ public class ConversationDAOImpl implements ConversationDAO {
         em.persist(conv);
     }
     
+    @Transactional
+    @Override
     public void update(ConversationEntity conv){
         em.merge(conv);
     }
@@ -82,6 +84,7 @@ public class ConversationDAOImpl implements ConversationDAO {
         ).setParameter("user", u).setParameter("visibilitePublic", VisibilityEnum.Public).setParameter("visibilitePrivate", VisibilityEnum.Private).getResultList();
     }
     
+    @Transactional
     @Override
     public boolean isVisibleConversation(UtilisateurEntity u, Long id) {
         return em.createQuery("SELECT c FROM ConversationEntity c where c.id = :id AND (c.owner = :user OR  c.visibility = :public "
@@ -89,6 +92,17 @@ public class ConversationDAOImpl implements ConversationDAO {
                 .setParameter("public", VisibilityEnum.Public).setParameter("private", VisibilityEnum.Private)
                 .setParameter("id", id).setParameter("user", u).getResultList().size()==1;       
 
+    }
+
+    @Transactional
+    @Override
+    public List<ConversationEntity> getChatConversation(UtilisateurEntity u) {
+        return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c WHERE"
+                + " c.visibility = :visibiliteChat AND ("
+                + " c.owner = :user OR"
+                + " c.participants = :user) "
+                + " ORDER BY c.date DESC"
+        ).setParameter("user", u).setParameter("visibilitePublic", VisibilityEnum.Public).setParameter("visibiliteChat", VisibilityEnum.Chat).getResultList();
     }
     
 }

@@ -48,11 +48,14 @@
         <div class="content" id="accueil">
             <h1> Profil de <%=user_profile.getLogin()%>&nbsp:</h1>
             <% if(user!=null){ %>
-            <FORM name="formulaire" method="POST" ACTION=""> 
-                <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
-                <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
+                <% if(user.getLogin().compareTo(user_profile.getLogin())==0){ %>
+                    <a href="editerProfil.htm" >Modifier</a></br>
                 <% } %>
-            </FORM> 
+                <FORM name="formulaire" method="POST" ACTION=""> 
+                    <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
+                    <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
+                    <% } %>
+                </FORM> 
             <% } else{ %>
             <p>
                 <a href="inscription.htm">inscription</a>
@@ -80,7 +83,8 @@
                     </ul>
                     <% if(c.getListMessage().size()>0) {%>
                 </div>
-                <% }} %>
+                <%     }
+                   }// le for conversation %>
             </div>
             <p>${msg}</p>
         </div>

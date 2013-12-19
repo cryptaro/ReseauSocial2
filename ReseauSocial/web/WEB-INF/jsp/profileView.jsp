@@ -32,6 +32,19 @@
     }
     
  %>
+ 
+ <SCRIPT LANGUAGE="JavaScript">
+    var isShiftdown = 0!=0;
+    
+    function valide(typeEnvoi, valeur){
+            if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+                  document.formulaire.action.value=typeEnvoi+"";
+                  document.formulaire.valeur.value=valeur+"";
+                  //document.formulaire.ajoutNewMsgButton.click() ;
+                  document.formulaire.submit() ;
+            }
+    }
+</SCRIPT>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">	
@@ -46,21 +59,27 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
+            <FORM name="formulaire" method="POST" ACTION=""> 
+                
+                <!--   DEBUT DE LA ZONE DE MODIF -->
+                
             <h1> Profil de <%=user_profile.getLogin()%>&nbsp:</h1>
             <% if(user!=null){ %>
                 <% if(user.getLogin().compareTo(user_profile.getLogin())==0){ %>
                     <a href="editerProfil.htm" >Modifier</a></br>
                 <% } %>
-                <FORM name="formulaire" method="POST" ACTION=""> 
+                
                     <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
                     <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
                     <% } %>
-                </FORM> 
             <% } else{ %>
             <p>
                 <a href="inscription.htm">inscription</a>
             </p>
             <% }%>
+            
+            <!--   FIN DE LA ZONE DE MODIF -->
+            
             <div id="mur">
                 <h1> Mur </h1>
                 <% for(ConversationEntity c:conversations){ %>
@@ -80,11 +99,18 @@
                         </div>
                     <% } 
                     }%>
+                    <TEXTAREA name="valueNewMessage" autofocus="true" onkeypress="" class="newMessagesInConversation" 
+                                       placeholder="votre message" rows="4" ></TEXTAREA>
+                    <INPUT id="ajoutNewMsgButton" class="bouton" name="action2"
+                         onclick="document.formulaire.action.value='ajouter_Message';document.formulaire.submit();" Type=submit VALUE="envoyer">
                     </ul>
                     <% if(c.getListMessage().size()>0) {%>
                 </div>
                 <%     }
                    }// le for conversation %>
+                   
+                 <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
+                 </form>
             </div>
             <p>${msg}</p>
         </div>

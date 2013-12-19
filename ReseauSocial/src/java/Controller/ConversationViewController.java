@@ -93,13 +93,23 @@ public class ConversationViewController {
             String newParticipants = request.getParameter("ajoutParticipants");
             UtilisateurEntity tmpuser = null;
             ConversationEntity conv = serviceConvers.getConversationById(conversSelectedId);
+            boolean testAllreadyIn = false;
             for(String s: newParticipants.split(";")){
                 tmpuser = serviceUser.getUserByLogin(s.replaceAll(" ",""));
-                if(tmpuser!=null){
-                    conv.getParticipants().add(tmpuser);
-                    //msgAjout += tmpuser.getLogin() +"; ";
+                 if(tmpuser!=null){
+                    for(UtilisateurEntity u:conv.getParticipants()){
+                        if(u.getLogin().compareTo(tmpuser.getLogin())==0){
+                            testAllreadyIn = true;
+                            break;
+                        }
+                    }
+                    if(!testAllreadyIn ){
+                        conv.getParticipants().add(tmpuser);
+                        //msgAjout += tmpuser.getLogin() +"; ";
+                    }
                 }
                 tmpuser = null;
+                testAllreadyIn = false;
             }
             serviceConvers.update(conv);
             //mv.addObject("errorConversation", msgAjout +" # " + conv);

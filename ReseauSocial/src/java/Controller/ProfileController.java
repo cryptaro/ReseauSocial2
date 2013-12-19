@@ -7,6 +7,7 @@
 package Controller;
 
 import DAO.UtilisateurEntity;
+import Service.ConversationService;
 import Service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,9 @@ public class ProfileController {
     @Autowired
     UtilisateurService service;
     
+    @Autowired
+    ConversationService serviceC;
+    
     public ProfileController() {
     }
    
@@ -48,12 +52,12 @@ public class ProfileController {
                 UtilisateurEntity user_profil = service.getUserByLogin(user.getLogin());
                 mv.addObject("profile", user_profil);
                 mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
-                mv.addObject("conversationsMur", user_profil.getListeConversations());
+                mv.addObject("conversationsMur", serviceC.getNotChatConversation(user_profil));
             } else {
                 UtilisateurEntity user_profil = service.getUserByLogin(profile);
                 mv.addObject("profile", user_profil);
                 mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
-                mv.addObject("conversationsMur", user_profil.getListeConversations());
+                mv.addObject("conversationsMur", serviceC.getNotChatConversation(user_profil));
             }
         }
         return mv;

@@ -36,6 +36,7 @@ public class ConversationServiceImpl implements ConversationService{
         u_dao.update(conv.getOwner());
         
     }
+    @Override
     public void update(ConversationEntity conv){
         c_dao.update(conv);
     }
@@ -86,5 +87,9 @@ public class ConversationServiceImpl implements ConversationService{
     @Override
     public List<ConversationEntity> getChatConversation(UtilisateurEntity u){
         return c_dao.getChatConversation(u);
+    }
+    @Override
+    public List<ConversationEntity> getNotChatConversation(UtilisateurEntity u){
+        return c_dao.getNotChatConversation(u);
     }
 }

@@ -86,9 +86,9 @@
                         <INPUT name="ajoutParticipants" onkeypress="valide('ajouter_Participants')" id="ajoutParticipants" Type=text VALUE=""
                                placeholder="ajoutez des participants ex: 'user1;user2 ; user3'">
                         <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
-                        <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter_Conversation">
+                        <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter Conversation">
                         <% if(conversations.size()==0){ %>
-                            <input type="text" value="No Conversation here" id="conversationTitle_empty" readonly="readonly" >
+                        <span id="conversationTitle_empty" >No Conversation here</SPAN>
                         <% } else { %>
                         <ul>
                          <%
@@ -96,9 +96,8 @@
                         %>
                                 
                                     <li><a href="conversationView.htm?conversation=<%= c.getId() %>">
-                                            <input type="text" 
-                                                   value="<% for(UtilisateurEntity u: c.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %>"
-                                                   class="conversationTitle<%= c.getId()==selectedConversationId ? "_selected":""  %>" readonly="readonly" >
+                                            <span class="conversationTitle<%= c.getId()==selectedConversationId ? "_selected":""  %>" 
+                                                  ><% for(UtilisateurEntity u: c.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %></span>
 
                                         </a>
                                     </li>
@@ -115,15 +114,14 @@
                             <% if(conversations.size()>0) { %>
                             <ul>
                             <% for(MessageEntity m: messagesSelectedConversation) { %>
-                                <li> 
+                                <li class = "global_messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>"> 
                                     <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
-                                    <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
-                                           readonly="readonly" value="<%= m.getMsg() %>">
-                                </li>
+                                    <span class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>"><%= m.getMsg() %></SPAN></br>
+                                </li></br>
                              <% } %>
                              </ul>
                              <% } else {%>
-                                <input type="text" id="messagesInConversation_empty" readonly="readonly" value="no messages">
+                             <span id="messagesInConversation_empty" > no messages</span>
                              <% } %>
                         </div></br>
                         <div id='basMessage'>

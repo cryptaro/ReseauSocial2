@@ -99,10 +99,10 @@ public class ConversationDAOImpl implements ConversationDAO {
     public List<ConversationEntity> getChatConversation(UtilisateurEntity u) {
         return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c WHERE"
                 + " c.visibility = :visibiliteChat AND ("
-                + " c.owner = :user OR"
+                //+ " c.owner = :user OR"
                 + " c.participants = :user) "
                 + " ORDER BY c.date DESC"
-        ).setParameter("user", u).setParameter("visibilitePublic", VisibilityEnum.Public).setParameter("visibiliteChat", VisibilityEnum.Chat).getResultList();
+        ).setParameter("user", u).setParameter("visibiliteChat", VisibilityEnum.Chat).getResultList();
     }
     
 }

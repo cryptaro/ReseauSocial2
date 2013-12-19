@@ -24,8 +24,8 @@
         </FORM>
         
         <div id="menuLogEntete">
-            <a id="deconnexionEntete" alt="deconnexion" href="deconnexion.htm"></a>
-            <a id="messagesEntete" href="conversationView.htm"></a> 
+            <a id="deconnexionEntete" alt="deconnexion" title="deconnexion" href="deconnexion.htm"></a>
+            <a id="messagesEntete" href="conversationView.htm" title="messages"></a> 
             <a href="profileView.htm" id="login">Bonjour <%=_user.getLogin()%></a>
             
         </div>

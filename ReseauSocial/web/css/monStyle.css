@@ -167,50 +167,63 @@ body {
     display: inline-block;
 }
 #messagesInConversation_empty, #conversationTitle_empty {
-    width : 80%;
+    max-width : 80%;
     text-align: center;
-    border: inherit;
+    border: none;
     display: inline-block;
+    margin-top: 20px;
 }
 #messageInConversationList, #conversationList{ 
     overflow-y: auto;
     border  : 1px solid black;
-    margin: 2px;
     height: 100%;
 }
-#messageInConversationList{
+#messageInConversationList, #newMsg, #ajoutParticipants{
     width : 100%;
-}
-#newMsg, #ajoutParticipants{
-    width: 100%;
 }
 .conversationTitle, .conversationTitle_selected{
     width :90%;
+    display: inline-block;
+    text-align: left;
+    padding-left: 5px;
+}
+.conversationTitle{
+    border : 1px solid black;
 }
 .conversationTitle_selected{
     background-color: rgba(255,255,255,0);
+    border : 2px solid blue;
 }
-.messagesInConversation_owner {
-    text-align: right;
-    float:right;
-    padding-right: 5px;
-    
-    background: rgba(255,255,255,1);
-    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 13%, rgba(199,199,199,1) 87%, rgba(199,199,199,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c7c7c7', GradientType=0 );
-}
+
 .messagesInConversation , .messagesInConversation_owner{
     border  : 1px solid black;
-    width: 90%;
+    max-width: 90%;
     overflow-y: hidden;
     border-radius: 10px;
+    display: inline-block;
+    padding: 2px;
+    max-width: 80%;
+}
+
+.global_messagesInConversation_owner{
+    text-align: right;  
+}
+
+.global_messagesInConversation{
+    text-align: left;  
+}
+
+.messagesInConversation_owner {
+    text-align: right;
+    padding-right: 5px;
+
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 13%, rgba(199,199,199,1) 87%, rgba(199,199,199,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c7c7c7', GradientType=0 );
+    
 }
 .messagesInConversation {
     text-align: left;
-    float:left;
     padding-left: 5px;
-    
-    background: rgba(224,241,252,1);
     background: linear-gradient(to bottom, rgba(224,241,252,1) 0%, rgba(192,227,250,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f1fc', endColorstr='#c0e3fa', GradientType=0 );
 }
@@ -258,6 +271,6 @@ div.messageMsg{
 textarea { 
     resize: none; 
 }
-input{
+input, span{
     margin: 2px;
 }

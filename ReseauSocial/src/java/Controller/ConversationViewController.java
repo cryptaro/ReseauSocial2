@@ -9,6 +9,7 @@ package Controller;
 import DAO.ConversationEntity;
 import DAO.MessageEntity;
 import DAO.UtilisateurEntity;
+import DAO.VisibilityEnum;
 import Service.ConversationService;
 import Service.HtmlUtils;
 import Service.MessageService;
@@ -81,11 +82,11 @@ public class ConversationViewController {
             //mv.addObject("errorConversation", "ajout message done in " + conversSelectedId);
            
         } else if(action.compareToIgnoreCase("Ajouter_Conversation")==0){
-            ConversationEntity convers = new ConversationEntity(user);
+            ConversationEntity convers = new ConversationEntity(user, VisibilityEnum.Chat);
             serviceConvers.create(convers);
             
         } else if(action.compareToIgnoreCase("ajouter_Participants")==0){
-            String msgAjout = "ajout user done of :";
+            //String msgAjout = "ajout user done of :";
             String newParticipants = request.getParameter("ajoutParticipants");
             UtilisateurEntity tmpuser = null;
             ConversationEntity conv = serviceConvers.getConversationById(conversSelectedId);
@@ -93,12 +94,12 @@ public class ConversationViewController {
                 tmpuser = serviceUser.getUserByLogin(s.replaceAll(" ",""));
                 if(tmpuser!=null){
                     conv.getParticipants().add(tmpuser);
-                    msgAjout += tmpuser.getLogin() +"; ";
+                    //msgAjout += tmpuser.getLogin() +"; ";
                 }
                 tmpuser = null;
             }
             serviceConvers.update(conv);
-            mv.addObject("errorConversation", msgAjout +" # " + conv);
+            //mv.addObject("errorConversation", msgAjout +" # " + conv);
             mv.addObject("selectedConversation", conv);
         }
         modifyMv(selectedConvers, mv, request, user);
@@ -137,33 +138,28 @@ public class ConversationViewController {
         try {
             conversSelectedId = new Long(selectedConvers);
         } catch (Exception e){
-            List<ConversationEntity> visibleConvers = serviceConvers.getVisibleConversation(user);
+            //List<ConversationEntity> visibleConvers = serviceConvers.getVisibleConversation(user);
+            List<ConversationEntity> visibleConvers = serviceConvers.getChatConversation(user);
             
             if(visibleConvers.size()>0) {
                 mv.addObject("conversations", visibleConvers);
                 if(visibleConvers.size()>0){
                     mv.addObject("selectedConversation", serviceConvers.getConversationById(visibleConvers.get(0).getId()));
-                    //mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(visibleConvers.get(0)));
                 } else {
                     mv.addObject("selectedConversation", null);
-                    //mv.addObject("messagesSelectedConversation", null);
                 }
             }
             return;
         }
        
-        mv.addObject("conversations", serviceConvers.getVisibleConversation(user));
+        mv.addObject("conversations", serviceConvers.getChatConversation(user));
         /*mv.addObject("errorConversation","taille des conversation trouvée: " + serviceConvers.getVisibleConversation(user).size()+"</br>"
                 + "USER EST:" + user);*/
-         //mv.addObject("errorConversation","id convers in function = " + conversSelectedId);
         try {
             ConversationEntity selectedConversationEntity = serviceConvers.getConversationById(conversSelectedId);
-            //mv.addObject("errorConversation","id convers in function = " + selectedConversationEntity.getId());
             mv.addObject("selectedConversation", selectedConversationEntity);
-            //mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(selectedConversationEntity));
         } catch(Exception e){   // conversation non trouvée
              mv.addObject("selectedConversation", null);
-             //mv.addObject("messagesSelectedConversation", null);
         }
        
     }

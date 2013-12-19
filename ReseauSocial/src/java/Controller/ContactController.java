@@ -52,14 +52,17 @@ public class ContactController {
             ModelAndView mv = new ModelAndView("contactView"); 
             String nom_contact_a_annule;
             String nom_check_box;
+            String msg = "";
             int i;
             for(i = 0; i<=user.getDemandesContact().size(); ++i){
                 nom_check_box = "choix" + i;
                 nom_contact_a_annule = request.getParameter(nom_check_box);
                 if(nom_contact_a_annule != null)
                    service.supprimerContact(user, service.getUserByLogin(nom_contact_a_annule));
+                msg += nom_contact_a_annule;
             }
             mv.addObject("msg", "contact(s) supprimé(s)");
+            mv.addObject("msg2", msg);
             return mv;
         } else {
             session.setAttribute(UtilisateurEntity.nameInSession, null);

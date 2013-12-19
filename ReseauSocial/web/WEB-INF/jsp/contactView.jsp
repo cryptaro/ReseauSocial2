@@ -47,6 +47,7 @@
                   <p>Vous n'avez pas de contacts</p>   
             <%     }%>
             <p> ${msg} </p>
+            <p> ${msg2} </p>
             <%
                }else{ 
             %>

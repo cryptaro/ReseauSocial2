@@ -51,6 +51,7 @@ public class DemandeContactRecuController {
                 service.maj(user)
             );
             service.denotifyDemandesContact(user);
+            session.setAttribute(UtilisateurEntity.nameInSession, user);
             mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
         }
         return mv;

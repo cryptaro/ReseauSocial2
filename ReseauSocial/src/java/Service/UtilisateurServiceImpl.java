@@ -110,6 +110,7 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
         u_dao.update(u1);
     }
     
+    @Override
     public UtilisateurEntity maj(UtilisateurEntity u){
         return u_dao.retrieve(u.getLogin());
     }

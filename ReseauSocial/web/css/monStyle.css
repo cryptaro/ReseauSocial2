@@ -133,6 +133,7 @@ body {
 .content {
     padding: 20px;
     height: 80%;
+    overflow-y: auto;
 }
 
 #connexion label, #inscription label{

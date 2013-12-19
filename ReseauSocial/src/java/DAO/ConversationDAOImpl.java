@@ -109,9 +109,10 @@ public class ConversationDAOImpl implements ConversationDAO {
     @Override
     public List<ConversationEntity> getNotChatConversation(UtilisateurEntity u){
         return (List<ConversationEntity>) em.createQuery("SELECT c FROM ConversationEntity c WHERE"
+                + " c.owner = :user AND( "
                 + " c.visibility = :visibilitePublic OR c.visibility = :visibilityPrivate " 
-                + " OR c.visibility = :visibiliteFriends AND ("
-                + " c.participants = :user) "
+                + " OR c.visibility = :visibiliteFriends )"
+                //+ " c.participants = :user) "
                 + " ORDER BY c.date DESC"
         ).setParameter("user", u).setParameter("visibilitePublic", VisibilityEnum.Public)
                 .setParameter("visibilityPrivate", VisibilityEnum.Private)

@@ -9,6 +9,7 @@ package Controller;
 import DAO.ConversationEntity;
 import DAO.MessageEntity;
 import DAO.UtilisateurEntity;
+import DAO.VisibilityEnum;
 import Service.ConversationService;
 import Service.MessageService;
 import Service.UtilisateurService;
@@ -121,6 +122,26 @@ public class ProfileController {
                 
                 mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
                 mv.addObject("msg", "message : " + comment + " ## convers : "+idConvers);
+                
+                
+            } else if(action.compareToIgnoreCase("nouveauPost")==0){
+                
+                String userWallLogin = request.getParameter("valeur");
+                UtilisateurEntity userProfil= serviceUser.getUserByLogin(userWallLogin);
+                if(userProfil!=null){
+                    String comment = request.getParameter("nouveau_Post");
+                    ConversationEntity conversation = new ConversationEntity(userProfil, VisibilityEnum.Public);
+                    //userProfil car est créé sur son mur a lui !!
+                    serviceConversation.create(conversation);
+                    MessageEntity mesg = new MessageEntity(comment, user, new Date(), conversation);
+                    serviceMsg.ecrire(mesg);
+                    mesg.getConversation().getListMessage().add(mesg);
+                    serviceConversation.update(mesg.getConversation());
+                    
+
+                    mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
+                    mv.addObject("msg", "message : " + comment + " ## convers : "+conversation.getId());
+                }
             }
             return mv;
         } else {

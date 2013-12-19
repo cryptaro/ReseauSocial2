@@ -132,8 +132,7 @@ body {
 
 .content {
     padding: 20px;
-    height: 80%;
-    overflow-y: auto;
+    height: 90%;
 }
 
 #connexion label, #inscription label{
@@ -262,7 +261,7 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f1fc', endColorstr='#c0e3fa', GradientType=0 );
 }
 
-#basMessage {
+#basMessage, #nouveauPost, #nouveau_Post {
     width:100%;
 }
 
@@ -271,7 +270,7 @@ ul, li{
     padding: 0px;
 }
 
-div.comment, .newComment{
+div.comment, .newComment, #nouveauPost{
     display: inline-block;
     margin: 2px;
     position: relative;

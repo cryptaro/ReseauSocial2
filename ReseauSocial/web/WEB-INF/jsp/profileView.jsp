@@ -116,6 +116,17 @@
             
             <div id="mur">
                 <h1> Mur </h1>
+                
+                <div id="nouveauPost">
+                    <TEXTAREA id="nouveau_Post" name="nouveau_Post" placeholder="poster quelque chose sur le mur" rows="3" ></TEXTAREA></br>
+                        <INPUT id="ajoutNewMsgButton" class="bouton" name="postTonMessage" type="button"
+                             onclick="  document.getElementById('action').value='nouveauPost';
+                                        document.getElementById('valeur').value= '<%= user_profile.getLogin() %>';
+                                        this.form.submit();"  VALUE="envoyer">
+                </div>
+                
+                
+                
                 <% for(ConversationEntity c:conversations){ %>
                     <% if(c.getListMessage().size()>0) {%>
                 <div class="conversationAffiche">

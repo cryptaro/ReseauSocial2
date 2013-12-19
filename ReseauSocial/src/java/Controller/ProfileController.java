@@ -48,10 +48,12 @@ public class ProfileController {
                 UtilisateurEntity user_profil = service.getUserByLogin(user.getLogin());
                 mv.addObject("profile", user_profil);
                 mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
+                mv.addObject("conversationsMur", user_profil.getListeConversations());
             } else {
                 UtilisateurEntity user_profil = service.getUserByLogin(profile);
                 mv.addObject("profile", user_profil);
                 mv.addObject("deja_en_contact", service.peutDemanderContact(user, user_profil));
+                mv.addObject("conversationsMur", user_profil.getListeConversations());
             }
         }
         return mv;

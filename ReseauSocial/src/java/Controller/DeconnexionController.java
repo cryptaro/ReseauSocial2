@@ -33,11 +33,8 @@ public class DeconnexionController {
     public String init(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
-        UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
-        if(user!=null)
-            session.setAttribute(UtilisateurEntity.nameInSession, 
-                    service.maj(user)
-            );
+        request.getSession().setAttribute(UtilisateurEntity.nameInSession, null);
+        request.getSession().invalidate();
         return "deconnexion";
     }
     

@@ -6,6 +6,7 @@
 
 
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="DAO.MessageEntity"%>
 <%@page import="java.util.List"%>
 <%@page import="DAO.ConversationEntity"%>
@@ -26,6 +27,9 @@
     }
     
     List<ConversationEntity> conversations = (List<ConversationEntity>)request.getAttribute("conversationsMur");
+    if(conversations==null){
+        conversations = new ArrayList<ConversationEntity>();
+    }
     
  %>
 
@@ -42,7 +46,7 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <h1> Profile de <%=user_profile.getLogin()%>&nbsp:</h1>
+            <h1> Profil de <%=user_profile.getLogin()%>&nbsp:</h1>
             <% if(user!=null){ %>
             <FORM name="formulaire" method="POST" ACTION=""> 
                 <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
@@ -55,22 +59,22 @@
             </p>
             <% }%>
             <div id="mur">
-                <% //for(ConversationEntity c:conversations){ %>
+                <% for(ConversationEntity c:conversations){ %>
                 <div class="conversationAffiche">
-                    <% //for(MessageEntity m: c.get){ %>
-                    <% // if(numMesage==0) {%>
-                    <div class="post">
-                        
-                    </div>
-                    <%  //} else(numMesage>0) { %>
-                    <div class="comment">
-                        
-                    </div>
-                    <%  //}
-                      //}
-                    %>
+                    <% if(c.getListMessage().size()>0) {%>
+                        <div class="post">
+                            <%= c.getListMessage().get(0).getMsg() %>
+                        </div>
+                    <ul>
+                    <% }
+                       for(MessageEntity m: c.getListMessage().subList(1, c.getListMessage().size()-1)){ %>
+                        <div class="comment">
+                            <li><%= c.getListMessage().get(0).getMsg() %></li>
+                        </div>
+                    <% } %>
+                    </ul>
                 </div>
-                <% //} %>
+                <% } %>
             </div>
             <p>${msg}</p>
         </div>

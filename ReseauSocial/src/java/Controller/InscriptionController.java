@@ -14,6 +14,7 @@ package Controller;
  * and open the template in the editor.
  */
 import DAO.UtilisateurEntity;
+import Service.HtmlUtils;
 import Service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,19 +51,17 @@ public class InscriptionController{
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         
-         
         ModelAndView mv;
         String pwd = request.getParameter("pwd");
-        String log = request.getParameter("log");
+        String log = HtmlUtils.toHtml(request.getParameter("log").replaceAll("@", "").replaceAll(";", "").replaceAll(",", "").replaceAll(" ", "_"));
 
         if(s.getUserByLogin(log)!=null || !s.inscrire(log, pwd)){
             mv = new ModelAndView("inscription");
             mv.addObject("errorMsg", "Ce login existe déja");
         } else{
             mv = new ModelAndView("wellcome"); // va chercher page wellcome.jsp 
-            mv.addObject("wellcomeMessage", "Vous avez ete inscrit " + log);
+            mv.addObject("wellcomeMessage", "Vous avez ete inscrit avec ce login : " + log);
         }
-        
         return mv;
     }
 }

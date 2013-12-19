@@ -18,6 +18,7 @@ import java.util.List;
  */
 public interface ConversationService {
     public void create(ConversationEntity conv);
+    public void update(ConversationEntity conv);
     public List<ConversationEntity> getConversationByOwner(String login);
     public ConversationEntity getConversationById(Long id);
     public List<ConversationEntity> getConversationByDate(Date d);

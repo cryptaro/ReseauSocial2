@@ -23,17 +23,21 @@
     }
     
     ConversationEntity selectedConversation = (ConversationEntity)request.getAttribute("selectedConversation");
+    List<MessageEntity> messagesSelectedConversation = null;
+    
+    Long selectedConversationId;
+    
     if(selectedConversation==null && conversations.size()>0){
-        selectedConversation = conversations.get(0);
+        selectedConversation = conversations.get(0); 
     }
-    List<MessageEntity> messagesSelectedConversation = (List<MessageEntity>)request.getAttribute("messagesSelectedConversation");
     if(messagesSelectedConversation==null){
         messagesSelectedConversation = new ArrayList<MessageEntity>();
     }
     
-    Long selectedConversationId;
+    
     if(selectedConversation!=null){
         selectedConversationId = selectedConversation.getId();
+        messagesSelectedConversation = selectedConversation.getListMessage();
     } else {
         selectedConversationId =  new Long(0);
     }
@@ -43,10 +47,11 @@
     var isShiftdown = 0!=0;
     
     function valide(typeEnvoi){
-            if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+            //if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
                   document.formulaire.action.value=typeEnvoi+"";
-                  document.formulaire.ajoutNewMsgButton.click() ;
-            }
+                  //document.formulaire.ajoutNewMsgButton.click() ;
+                  document.formulaire.submit() ;
+            //}
     }
     
     function testkey(){   
@@ -88,8 +93,8 @@
                                 <ul>
                                     <li><a href="conversationView.htm?conversation=<%= c.getId() %>">
                                             <input type="text" 
-                                                   value="<% for(UtilisateurEntity u: selectedConversation.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %>"
-                                                   class="conversationTitle" readonly="readonly" >
+                                                   value="<% for(UtilisateurEntity u: c.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %>"
+                                                   class="conversationTitle<%= c.getId()==selectedConversationId ? "_selected":""  %>" readonly="readonly" >
 
                                         </a>
                                     </li>
@@ -117,8 +122,10 @@
                                 <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
                              <% } %>
                         </div></br>
-                        <TEXTAREA  id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="valide('ajouter_Message');" class="newMessagesInConversation"  placeholder="votre message"></TEXTAREA>
-                        <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" Type=submit VALUE="ajouter_Message">
+                        <div id='basMessage'>
+                            <TEXTAREA  id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="" class="newMessagesInConversation"  placeholder="votre message"></TEXTAREA>
+                            <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" onclick="valide('ajouter_Message');" Type=submit VALUE="envoyer">
+                        </div>
                     </div>
                     <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >
                 </form>

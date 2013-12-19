@@ -36,6 +36,10 @@ public class ConversationServiceImpl implements ConversationService{
         u_dao.update(conv.getOwner());
         
     }
+    public void update(ConversationEntity conv){
+        c_dao.update(conv);
+    }
+    
 
     @Override
     public List<ConversationEntity> getConversationByOwner(String login) {

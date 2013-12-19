@@ -87,36 +87,40 @@ public class ProfileController {
                 ++i;
             }
             UtilisateurEntity u = serviceUser.getUserByLogin(request.getCookies()[i].getValue());;
-            serviceUser.demanderContact(user, u);
-            session.setAttribute(UtilisateurEntity.nameInSession, user);
+            
             if(action.compareToIgnoreCase("Ajouter en contact")==0){
-                
+                serviceUser.demanderContact(user, u);
+                session.setAttribute(UtilisateurEntity.nameInSession, user);
                 
                 mv.addObject("msg", "demande de contact envoyée");
                 mv.addObject("profile", u);
                 mv.addObject("deja_en_contact", serviceUser.peutDemanderContact(user, u));
                 
-            } else if(action.compareToIgnoreCase("envoyer")==0){
+            } else if(action.compareToIgnoreCase("addComment")==0){
+                
                 String idConversString = request.getParameter("valeur");
+                 //mv.addObject("msg", "message : " + " ## convers : "+idConversString);
                 Long idConvers;
                 try{
                     idConvers = new Long(idConversString);
                 }catch(Exception e){
-                    mv.addObject("conversationsMur", u.getListeConversations());
+                    mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
                     return mv;
                 }
-                String comment = request.getParameter("valueComment");
+                String comment = request.getParameter("valueComment"+idConversString);
                 ConversationEntity conversation = serviceConversation.getConversationById(idConvers);
                 if(conversation==null){
-                    mv.addObject("conversationsMur", u.getListeConversations());
+                    mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
                     return mv;
                 }
-                /*
+                
                 MessageEntity mesg = new MessageEntity(comment, user, new Date(), conversation);
                 serviceMsg.ecrire(mesg);
-                conversation.getListMessage().add(mesg);
+                mesg.getConversation().getListMessage().add(mesg);
                 serviceConversation.update(conversation);
-                mv.addObject("conversationsMur", u.getListeConversations());*/
+                
+                mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
+                mv.addObject("msg", "message : " + comment + " ## convers : "+idConvers);
             }
             return mv;
         } else {
@@ -126,4 +130,5 @@ public class ProfileController {
         }
         
     }
+    
 }

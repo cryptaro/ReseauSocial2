@@ -63,7 +63,7 @@
                 
                 <!--   DEBUT DE LA ZONE DE MODIF -->
                 
-           <h1> Profil de <%=user_profile.getLogin()%>&nbsp;:</h1>
+              <h1> Profil de <%=user_profile.getLogin()%>&nbsp;:</h1>
             <% if(user!=null){ %>
                 <% if(user.getLogin().compareTo(user_profile.getLogin())==0){ %>
                     <a href="editerProfil.htm" >Modifier</a></br>
@@ -120,6 +120,7 @@
                     <% if(c.getListMessage().size()>0) {%>
                 <div class="conversationAffiche">
                     <div class="post">
+                        conversation num: <%= c.getId() %> </br>
                         <%= c.getListMessage().get(0).getMsg() %>
                     </div>
                     <ul><br/>
@@ -134,10 +135,10 @@
                     <% } 
                     }%>
                     <% if(c.getListMessage().size()>0) {%>
-                        <li><TEXTAREA name="valueComment" onkeypress="" class="newComment" placeholder="votre commentaire" rows="3" ></TEXTAREA></br>
-                        <INPUT id="ajoutNewMsgButton" class="bouton" name="action" type="button"
-                             onclick="  
-                                        document.getElementById('valeur').value= '<%=c.getId()+"" %>)';
+                        <li><TEXTAREA name="valueComment<%=c.getId()+"" %>" onkeypress="" class="newComment" placeholder="votre commentaire" rows="3" ></TEXTAREA></br>
+                        <INPUT id="ajoutNewMsgButton" class="bouton" name="envoi" type="button"
+                             onclick="  document.getElementById('action').value='addComment';
+                                        document.getElementById('valeur').value= '<%=c.getId()+"" %>';
                                         this.form.submit();"  VALUE="envoyer">
                         </li>
                      <% } %>
@@ -147,7 +148,7 @@
                 <%     }
                    }// le for conversation %>
                    
-                 <!--<INPUT class="text" name="action" id="action" Type=hidden VALUE="ajout_contact">-->
+                 <INPUT class="text" name="action" id="action" Type=hidden VALUE="ajout_contact">
                  <INPUT class="text" name="valeur" id="valeur" Type=hidden VALUE="">
                  <INPUT class="cache" id="soumettre" Type=submit VALUE="">
                  </form>

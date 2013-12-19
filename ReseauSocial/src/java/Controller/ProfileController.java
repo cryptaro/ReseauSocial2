@@ -66,6 +66,9 @@ public class ProfileController {
         HttpSession session = request.getSession(false);
         UtilisateurEntity user;
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
+            session.setAttribute(UtilisateurEntity.nameInSession, 
+                service.maj(user)
+            );
            ModelAndView mv = new ModelAndView("profileView"); // va chercher page wellcome.jsp
            int i = 0;
            while(i<request.getCookies().length && !request.getCookies()[i].getName().equals("user_profile")){
@@ -73,6 +76,7 @@ public class ProfileController {
            }
            UtilisateurEntity u = service.getUserByLogin(request.getCookies()[i].getValue());
            service.demanderContact(user, u);
+           session.setAttribute(UtilisateurEntity.nameInSession, user);
            mv.addObject("msg", "demande de contact envoyée");
            mv.addObject("profile", u);
            mv.addObject("deja_en_contact", service.peutDemanderContact(user, u));

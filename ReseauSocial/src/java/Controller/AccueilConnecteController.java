@@ -33,11 +33,13 @@ public class AccueilConnecteController {
     public String init(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
-        UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
-        if(user!=null)
-            session.setAttribute(UtilisateurEntity.nameInSession, 
-                    service.maj(user)
-            );
+        if(session != null){
+            UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+            if(user!=null)
+                session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
+        }
         return "accueilConnecte";
     }
     
@@ -45,6 +47,14 @@ public class AccueilConnecteController {
     protected String handleRequestInternal(
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+            if(user!=null)
+                session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
+        }
         return "accueilConnecte";
     }
     

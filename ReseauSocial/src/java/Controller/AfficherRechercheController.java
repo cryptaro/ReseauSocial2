@@ -39,11 +39,13 @@ public class AfficherRechercheController {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView("afficherRecherche");
         HttpSession session = request.getSession(false);
-        UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
-        if(user!=null)
-            session.setAttribute(UtilisateurEntity.nameInSession, 
-                    service.maj(user)
-            );
+        if(session != null){
+            UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+            if(user!=null)
+                session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
+        }
         mv.addObject("resultatRecherche", service.search(recherche));
         return mv;
     }
@@ -52,6 +54,14 @@ public class AfficherRechercheController {
     protected String handleRequestInternal(
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+            if(user!=null)
+                session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
+        }
         return "afficherRecherche";
     }
 }

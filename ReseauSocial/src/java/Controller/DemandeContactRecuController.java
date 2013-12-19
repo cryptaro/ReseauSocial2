@@ -51,6 +51,7 @@ public class DemandeContactRecuController {
                 service.maj(user)
             );
             service.denotifyDemandesContact(user);
+            session.setAttribute(UtilisateurEntity.nameInSession, user);
             mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
         }
         return mv;
@@ -64,6 +65,9 @@ public class DemandeContactRecuController {
         UtilisateurEntity user;
         
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
+            session.setAttribute(UtilisateurEntity.nameInSession, 
+                service.maj(user)
+            );
             ModelAndView mv = new ModelAndView("demandeContactRecu"); 
             String choix;
             String nom_radio_button;
@@ -83,6 +87,7 @@ public class DemandeContactRecuController {
                 }
                 ++i;
             }
+            session.setAttribute(UtilisateurEntity.nameInSession, user);
             mv.addObject("contacts_possible", service.getDemandesContactVersUser(user));
             mv.addObject("msg", msg );//"requête traitée");
             return mv;

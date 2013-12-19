@@ -96,6 +96,39 @@ body {
     position: fixed;
 }
 
+#lienAmi1{
+    padding-left: 0px;
+    display: inline-block;
+    position: fixed;
+    left: 0px;
+    text-decoration: none;
+    color: gainsboro;
+}
+
+#lienAmi2{
+    padding-left: 0px;
+    display: inline-block;
+    position: fixed;
+    left: 220px;
+    text-decoration: none;
+    color: gainsboro;
+}
+
+#lienAmi3{
+    padding-left: 0px;
+    display: inline-block;
+    position: fixed;
+    left: 400px;
+    text-decoration: none;
+    color: gainsboro;
+}
+#menuAmiEntete {
+    right: 20px;
+    font-size: 25px;
+    text-align: left;
+    position: fixed;
+}
+
 
 .content {
     padding: 20px;

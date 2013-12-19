@@ -40,6 +40,7 @@ public class ProfileController {
     @Autowired
     MessageService serviceMsg;
     
+    
     public ProfileController() {
     }
    
@@ -57,12 +58,14 @@ public class ProfileController {
                 UtilisateurEntity user_profil = serviceUser.getUserByLogin(user.getLogin());
                 mv.addObject("profile", user_profil);
                 mv.addObject("deja_en_contact", serviceUser.peutDemanderContact(user, user_profil));
-                mv.addObject("conversationsMur", user_profil.getListeConversations());
+                mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(user_profil));
             } else {
                 UtilisateurEntity user_profil = serviceUser.getUserByLogin(profile);
                 mv.addObject("profile", user_profil);
+
                 mv.addObject("deja_en_contact", serviceUser.peutDemanderContact(user, user_profil));
-                mv.addObject("conversationsMur", user_profil.getListeConversations());
+                mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(user_profil));
+
             }
         }
         return mv;

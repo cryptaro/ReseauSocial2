@@ -1,3 +1,5 @@
+<%@page import="java.util.Iterator"%>
+<<<<<<< HEAD
 <%-- 
     Document   : profileView
     Created on : 18 déc. 2013, 19:17:05
@@ -61,15 +63,48 @@
                 
                 <!--   DEBUT DE LA ZONE DE MODIF -->
                 
-            <h1> Profil de <%=user_profile.getLogin()%>&nbsp:</h1>
+           <h1> Profil de <%=user_profile.getLogin()%>&nbsp;:</h1>
             <% if(user!=null){ %>
                 <% if(user.getLogin().compareTo(user_profile.getLogin())==0){ %>
                     <a href="editerProfil.htm" >Modifier</a></br>
                 <% } %>
+                <TABLE>
+                    <TR>
+                        <TD> 
+                             <TABLE style="width: 600px">
+                                <TR><TD style="height: 50px"> <p>Nom : <%= user_profile.getNom() %></p></TD> 
+                                    <TD style="height: 50px"> <p>Prénom : <%= user_profile.getPrenom()%></p></TD>
+                                </TR>
+                                <TR><TD style="height: 50px"> <p>Date de naissance : <%= user_profile.getNaissance()%></p></TD> 
+                                    <TD style="height: 50px"> Sexe : <%if(user_profile.getSexe()){%> homme <%}else{%>femme<%}%></TD>
+                                </TR>
+                                <TR>
+                                    <TD rowspan="2" colspan="2" style="height: 50px"> <p>Description : <%= user_profile.getDescription()%> </p></TD>
+                                </TR><TR></TR>
+                            </TABLE>
+                        </TD>
+                        <TD> 
+                            <TABLE style="padding-left: 200px">
+                                 <TR><TD><h2>sa liste de contact&nbsp;:</h2></TR>
+                            <%if(user_profile.getListeContact().size() == 0){%>
+                                 <TR><TD><p> n'a pas de contact </p></TD> </TR>
+                           <%}else{%>
+                           <%Iterator it = user_profile.getListeContact().iterator();
+                                while(it.hasNext()){  
+                                    UtilisateurEntity u = (UtilisateurEntity) it.next();%>
+                                    <TR><TD><a href="profileView.htm?profile=<%= u.getLogin()%>"><%= u.getLogin()%></a></TD> </TR>
+                                    
+                            <%  }
+                            }%>
+                            </TABLE>
+                            
+                        </TD>
+                    </TR>
+               </TABLE>
+                  
                 
                     <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
-                    <INPUT class="bouton" name= "action" Type=button onclick="
-                                        this.form.submit();" VALUE="Ajouter en contact">
+                    <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
                     <% } %>
             <% } else{ %>
             <p>

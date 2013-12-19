@@ -35,11 +35,13 @@ public class EditerProfilController {
     public String init(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
-        UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
-        if(user!=null)
-            session.setAttribute(UtilisateurEntity.nameInSession, 
-                    service.maj(user)
-            );
+        if(session != null){
+            UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+            if(user!=null)
+                session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
+        }
         return "editerProfil";
     }
     
@@ -50,6 +52,9 @@ public class EditerProfilController {
         HttpSession session = request.getSession(false);
         UtilisateurEntity user;
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
+            session.setAttribute(UtilisateurEntity.nameInSession, 
+                service.maj(user)
+            );
             ModelAndView mv = new ModelAndView("editerProfil"); // va chercher page wellcome.jsp 
             String pwd = request.getParameter("pwd");
             String pwd_new1 = request.getParameter("pwd_new1");

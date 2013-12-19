@@ -53,6 +53,9 @@ public class ConversationViewController {
             session.invalidate();
             return new ModelAndView("accueil");
         }
+        session.setAttribute(UtilisateurEntity.nameInSession, 
+            serviceUser.maj(user)
+        );
         String selectedConvers = request.getParameter("id_convers");
         ModelAndView mv = new ModelAndView("conversationView");
         

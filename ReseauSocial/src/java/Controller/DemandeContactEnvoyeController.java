@@ -34,11 +34,13 @@ public class DemandeContactEnvoyeController {
     public String init(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
-        UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
-        if(user!=null)
-            session.setAttribute(UtilisateurEntity.nameInSession, 
-                    service.maj(user)
-            );
+        if(session != null){
+            UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+            if(user!=null)
+                session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
+        }
         return "demandeContactEnvoye";
     }
     
@@ -49,16 +51,20 @@ public class DemandeContactEnvoyeController {
         HttpSession session = request.getSession(false);
         UtilisateurEntity user;
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
+             session.setAttribute(UtilisateurEntity.nameInSession, 
+                        service.maj(user)
+                );
             ModelAndView mv = new ModelAndView("demandeContactEnvoye"); 
             String nom_contact_a_annule;
             String nom_check_box;
             int i;
-            for(i = 0; i<=user.getDemandesContact().size(); ++i){
+            for(i = 0; i<=user.getDemandesContact().size()+1; ++i){
                 nom_check_box = "choix" + i;
                 nom_contact_a_annule = request.getParameter(nom_check_box);
                 if(nom_contact_a_annule != null)
                    service.annulerDemandesContact(user, service.getUserByLogin(nom_contact_a_annule));
             }
+            session.setAttribute(UtilisateurEntity.nameInSession, user);
             mv.addObject("msg", "demande(s) annulée(s)");
             return mv;
         } else {

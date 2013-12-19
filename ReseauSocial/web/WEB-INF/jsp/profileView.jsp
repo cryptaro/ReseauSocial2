@@ -32,6 +32,19 @@
     }
     
  %>
+ 
+ <SCRIPT LANGUAGE="JavaScript">
+    var isShiftdown = 0!=0;
+    
+    function valide(typeEnvoi, valeur){
+            if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+                  document.formulaire.action.value=typeEnvoi+"";
+                  document.formulaire.valeur.value=valeur+"";
+                  //document.formulaire.ajoutNewMsgButton.click() ;
+                  document.formulaire.submit() ;
+            }
+    }
+</SCRIPT>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">	
@@ -63,6 +76,7 @@
             <% }%>
             <div id="mur">
                 <h1> Mur </h1>
+                <FORM name="formulaire"  method="POST" ACTION="" > 
                 <% for(ConversationEntity c:conversations){ %>
                     <% if(c.getListMessage().size()>0) {%>
                 <div class="conversationAffiche">
@@ -80,11 +94,18 @@
                         </div>
                     <% } 
                     }%>
+                    <TEXTAREA name="valueNewMessage" autofocus="true" onkeypress="" class="newMessagesInConversation" 
+                                       placeholder="votre message" rows="4" ></TEXTAREA>
+                    <INPUT id="ajoutNewMsgButton" class="bouton" name="action2"
+                         onclick="document.formulaire.action.value='ajouter_Message';document.formulaire.submit();" Type=submit VALUE="envoyer">
                     </ul>
                     <% if(c.getListMessage().size()>0) {%>
                 </div>
                 <%     }
                    }// le for conversation %>
+                   
+                 <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
+                 </form>
             </div>
             <p>${msg}</p>
         </div>

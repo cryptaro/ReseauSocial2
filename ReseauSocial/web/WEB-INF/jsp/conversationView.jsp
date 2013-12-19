@@ -80,7 +80,7 @@
         <div class="content">
             <h1>Conversations</h1>
             <div id="conversationView">
-                <FORM name="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
+                <FORM name="formulaire"  method="POST"  > 
                     
                     <div id="conversationList">
                         <INPUT name="ajoutParticipants" onkeypress="valide('ajouter_Participants')" id="ajoutParticipants" Type=text VALUE=""
@@ -97,7 +97,7 @@
                                 
                                     <li><a href="conversationView.htm?conversation=<%= c.getId() %>">
                                             <span class="conversationTitle<%= c.getId()==selectedConversationId ? "_selected":""  %>" 
-                                                  ><% for(UtilisateurEntity u: c.getParticipants()) { %><%= u.getLogin() + " ;" %><% } %></span>
+                                                  ><% for(UtilisateurEntity u: c.getParticipants()) { %><%= u.getLogin() + " ; " %><% } %></span>
 
                                         </a>
                                     </li>
@@ -117,7 +117,7 @@
                                 <li class = "global_messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>"> 
                                     <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
                                     <span class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>"><%= m.getMsg() %></SPAN></br>
-                                </li></br>
+                                </li>
                              <% } %>
                              </ul>
                              <% } else {%>

@@ -24,7 +24,7 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <h1> Vos contacts&nbsp:</h1>
+            <h1> Vos contacts&nbsp:;</h1>
             <% if(user!=null){ 
                   if(user.getListeContact() != null && user.getListeContact().size() != 0) {%>
                    <FORM name="formulaire" method="POST" ACTION=""> 

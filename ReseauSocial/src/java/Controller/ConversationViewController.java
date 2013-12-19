@@ -68,22 +68,31 @@ public class ConversationViewController {
         if(action.compareToIgnoreCase("ajouter_Message")==0){
             String newMsg = request.getParameter("valueNewMessage");
             if(newMsg.replaceAll(" ", "").length()!=0){
-                MessageEntity message = new MessageEntity(newMsg, user, new Date(), serviceConvers.getConversationById(conversSelectedId));
-                serviceMsg.ecrire(message);
-            }            
+                ConversationEntity conv = serviceConvers.getConversationById(conversSelectedId);
+                if(conv!=null) {
+                    MessageEntity message = new MessageEntity(newMsg, user, new Date(), conv);
+                    serviceMsg.ecrire(message);
+                    message.getConversation().getListMessage().add(message);
+                    serviceConvers.update(conv);
+                }
+            }
+            mv.addObject("errorConversation", "ajout message done in " + conversSelectedId);
         } else if(action.compareToIgnoreCase("Ajouter_Conversation")==0){
             ConversationEntity convers = new ConversationEntity(user);
             serviceConvers.create(convers);
         } else if(action.compareToIgnoreCase("ajouter_Participants")==0){
             String newParticipants = request.getParameter("joutParticipants");
             UtilisateurEntity tmpuser = null;
+            ConversationEntity conv = serviceConvers.getConversationById(conversSelectedId);
             for(String s: newParticipants.split(";")){
                 tmpuser = serviceUser.getUserByLogin(s.replaceAll(" ",""));
                 if(tmpuser!=null){
-                    //serviceConvers.
+                    conv.getParticipants().add(tmpuser);
                 }
                 tmpuser = null;
             }
+            serviceConvers.update(conv);
+            mv.addObject("errorConversation", "ajout user done");
         }
         modifyMv(selectedConvers, mv, request, user);
         return mv;
@@ -108,13 +117,16 @@ public class ConversationViewController {
             return mv;
         }
         user = serviceUser.getUserByLogin(user.getLogin());
-        modifyMv(request.getParameter("id_convers"), mv, request, user);
+        modifyMv(selectedConversation, mv, request, user);
+        //mv.addObject("errorConversation","conversion num" + selectedConversation + " has been printed");
+        
         return mv;
     }
     
     
     private void modifyMv(String selectedConvers, ModelAndView mv, HttpServletRequest request, UtilisateurEntity user){
         Long conversSelectedId;
+       
         try {
             conversSelectedId = new Long(selectedConvers);
         } catch (Exception e){
@@ -124,10 +136,10 @@ public class ConversationViewController {
                 mv.addObject("conversations", visibleConvers);
                 if(visibleConvers.size()>0){
                     mv.addObject("selectedConversation", serviceConvers.getConversationById(visibleConvers.get(0).getId()));
-                    mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(visibleConvers.get(0)));
+                    //mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(visibleConvers.get(0)));
                 } else {
                     mv.addObject("selectedConversation", null);
-                    mv.addObject("messagesSelectedConversation", null);
+                    //mv.addObject("messagesSelectedConversation", null);
                 }
             }
             return;
@@ -136,13 +148,15 @@ public class ConversationViewController {
         mv.addObject("conversations", serviceConvers.getVisibleConversation(user));
         /*mv.addObject("errorConversation","taille des conversation trouvée: " + serviceConvers.getVisibleConversation(user).size()+"</br>"
                 + "USER EST:" + user);*/
+         //mv.addObject("errorConversation","id convers in function = " + conversSelectedId);
         try {
             ConversationEntity selectedConversationEntity = serviceConvers.getConversationById(conversSelectedId);
+            //mv.addObject("errorConversation","id convers in function = " + selectedConversationEntity.getId());
             mv.addObject("selectedConversation", selectedConversationEntity);
-            mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(selectedConversationEntity));
+            //mv.addObject("messagesSelectedConversation", serviceMsg.getMsgByConversation(selectedConversationEntity));
         } catch(Exception e){   // conversation non trouvée
              mv.addObject("selectedConversation", null);
-             mv.addObject("messagesSelectedConversation", null);
+             //mv.addObject("messagesSelectedConversation", null);
         }
        
     }

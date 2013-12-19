@@ -26,6 +26,10 @@ public class ConversationDAOImpl implements ConversationDAO {
     public void create(ConversationEntity conv) {
         em.persist(conv);
     }
+    
+    public void update(ConversationEntity conv){
+        em.merge(conv);
+    }
 
     @Transactional
     @Override

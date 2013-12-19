@@ -140,6 +140,7 @@ body {
     width:20%;
     height: 500px;
 }
+
 #messageInConversationListGlobal{
     width: 60%;
 }
@@ -161,8 +162,11 @@ body {
 #newMsg, #ajoutParticipants{
     width: 100%;
 }
-.conversationTitle{
+.conversationTitle, .conversationTitle_selected{
     width :90%;
+}
+.conversationTitle_selected{
+    background-color: rgba(255,255,255,0);
 }
 .messagesInConversation_owner {
     border-color: black;
@@ -202,8 +206,8 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3232', endColorstr='#ff8a7f',GradientType=0 );
 }
 
-#ajoutNewMsgButton {
-    visibility: hidden;
+#basMessage {
+    width:100%;
 }
 #conversationView ul, #conversationView li{
     list-style-type: none; 

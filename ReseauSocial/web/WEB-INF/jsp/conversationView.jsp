@@ -47,11 +47,11 @@
     var isShiftdown = 0!=0;
     
     function valide(typeEnvoi){
-            //if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+            if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
                   document.formulaire.action.value=typeEnvoi+"";
                   //document.formulaire.ajoutNewMsgButton.click() ;
                   document.formulaire.submit() ;
-            //}
+            }
     }
     
     function testkey(){   
@@ -83,10 +83,12 @@
                 <FORM name="formulaire" modelAttribute="ajoutConvers" method="POST" ACTION="" > 
                     
                     <div id="conversationList">
+                        <INPUT name="ajoutParticipants" onkeypress="valide('ajouter_Participants')" id="ajoutParticipants" Type=text VALUE=""
+                               placeholder="ajoutez des participants ex: 'user1;user2 ; user3'">
                         <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
                         <INPUT class="bouton" name="action2" Type=submit VALUE="Ajouter_Conversation">
                         <% if(conversations.size()==0){ %>
-                            <input type="text" value="No Conversation here" class="conversationTitle" readonly="readonly" >
+                            <input type="text" value="No Conversation here" id="conversationTitle_empty" readonly="readonly" >
                         <% } else { 
                                 for(ConversationEntity c: conversations) {
                         %>
@@ -105,8 +107,7 @@
                                
                     </div>
                     <div id="messageInConversationListGlobal">
-                        <INPUT name="joutParticipants" onkeypress="valide('ajouter_Participants')" id="ajoutParticipants" Type=text VALUE=""
-                               placeholder="ajoutez des participants ex: 'user1;user2 ; user3'">
+                        
                         <div id="messageInConversationList">
                             <% if(conversations.size()>0) { %>
                             <ul>
@@ -119,12 +120,14 @@
                              <% } %>
                              </ul>
                              <% } else {%>
-                                <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
+                                <input type="text" id="messagesInConversation_empty" readonly="readonly" value="no messages">
                              <% } %>
                         </div></br>
                         <div id='basMessage'>
-                            <TEXTAREA  id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="" class="newMessagesInConversation"  placeholder="votre message"></TEXTAREA>
-                            <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" onclick="valide('ajouter_Message');" Type=submit VALUE="envoyer">
+                            <TEXTAREA  id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="" class="newMessagesInConversation" 
+                                       placeholder="votre message" rows="4" ></TEXTAREA>
+                            <INPUT id="ajoutNewMsgButton" class="bouton" name="action2"
+                                 onclick="document.formulaire.action.value='ajouter_Message';document.formulaire.submit();" Type=submit VALUE="envoyer">
                         </div>
                     </div>
                     <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >

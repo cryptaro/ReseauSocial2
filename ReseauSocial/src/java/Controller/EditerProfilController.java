@@ -7,6 +7,7 @@
 package Controller;
 
 import DAO.UtilisateurEntity;
+import Service.HtmlUtils;
 import Service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,7 +82,7 @@ public class EditerProfilController {
             mv.addObject("default_description", description);
             
             
-            if(service.setUser(user.getLogin(), pwd, pwd_new1, nom, prenom, naissance, sexe, description)){
+            if(service.setUser(user.getLogin(), pwd, pwd_new1, HtmlUtils.toHtml(nom), HtmlUtils.toHtml(prenom), naissance, sexe, HtmlUtils.toHtml(description))){
                 UtilisateurEntity u = service.getUser(user.getLogin(), pwd_new1);
                 session.setAttribute(UtilisateurEntity.nameInSession, new UtilisateurEntity(u));
                 mv.addObject("msgEdition", "Profil updated");

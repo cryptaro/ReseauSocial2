@@ -18,9 +18,9 @@
         
         <div class="content" id="connexion">
             <h1>Please connect</h1>
-            <FORM method="POST" ACTION="">            
-                <label for="log"> login :</label> 
-                <INPUT Type=text Name=log placeholder="login" ></br>
+            <FORM method="POST" ACTION="">     
+                <label for="log"> login :</label>
+                <INPUT Type=text Name=log placeholder="login" autofocus="true"></br>
                 
                 <label for="pwd">mot de passe : </label>
                 <INPUT Type=password Name=pwd placeholder="password"></br>

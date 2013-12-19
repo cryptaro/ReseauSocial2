@@ -59,22 +59,28 @@
             </p>
             <% }%>
             <div id="mur">
+                <h1> Mur </h1>
                 <% for(ConversationEntity c:conversations){ %>
-                <div class="conversationAffiche">
                     <% if(c.getListMessage().size()>0) {%>
-                        <div class="post">
-                            <%= c.getListMessage().get(0).getMsg() %>
-                        </div>
+                <div class="conversationAffiche">
+                    <div class="post">
+                        <%= c.getListMessage().get(0).getMsg() %>
+                    </div>
                     <ul>
                     <% }
+                    if(c.getListMessage().size()>1){
                        for(MessageEntity m: c.getListMessage().subList(1, c.getListMessage().size()-1)){ %>
                         <div class="comment">
-                            <li><%= c.getListMessage().get(0).getMsg() %></li>
+                            <li><div class='messageOwner'><%= m.getOwner().getLogin() %> :</div>
+                                <div class='messageMsg'><%= m.getMsg() %></div>
+                            </li>
                         </div>
-                    <% } %>
+                    <% } 
+                    }%>
                     </ul>
+                    <% if(c.getListMessage().size()>0) {%>
                 </div>
-                <% } %>
+                <% }} %>
             </div>
             <p>${msg}</p>
         </div>

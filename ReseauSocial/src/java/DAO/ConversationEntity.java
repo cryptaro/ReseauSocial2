@@ -51,7 +51,7 @@ public class ConversationEntity implements Serializable {
     List<UtilisateurEntity> participants = new ArrayList<UtilisateurEntity>();
     
     @OneToMany(mappedBy = "conversation")
-    private List<MessageEntity> list_message;  
+    private List<MessageEntity> list_message = new ArrayList<MessageEntity>();  
     
     public ConversationEntity() {
         date = new Date();
@@ -61,6 +61,12 @@ public class ConversationEntity implements Serializable {
     public ConversationEntity(UtilisateurEntity user) {
         date = new Date();
         visibility = VisibilityEnum.Public;
+        owner = user;
+    }
+    
+    public ConversationEntity(UtilisateurEntity user, VisibilityEnum _visibility) {
+        date = new Date();
+        visibility = _visibility;
         owner = user;
     }
     
@@ -136,7 +142,7 @@ public class ConversationEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "DAO.Conversation[ id=" + id + " ]";
+        return "DAO.Conversation[ id=" + id + "listUser"+ participants +" ]";
     }
     
 }

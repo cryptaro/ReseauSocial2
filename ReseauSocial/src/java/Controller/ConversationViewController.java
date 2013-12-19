@@ -10,6 +10,7 @@ import DAO.ConversationEntity;
 import DAO.MessageEntity;
 import DAO.UtilisateurEntity;
 import Service.ConversationService;
+import Service.HtmlUtils;
 import Service.MessageService;
 import Service.UtilisateurService;
 import java.util.Date;
@@ -66,7 +67,7 @@ public class ConversationViewController {
         
         String action = request.getParameter("action");
         if(action.compareToIgnoreCase("ajouter_Message")==0){
-            String newMsg = request.getParameter("valueNewMessage");
+            String newMsg = HtmlUtils.toHtml(request.getParameter("valueNewMessage"));
             if(newMsg.replaceAll(" ", "").length()!=0){
                 ConversationEntity conv = serviceConvers.getConversationById(conversSelectedId);
                 if(conv!=null) {
@@ -75,24 +76,30 @@ public class ConversationViewController {
                     message.getConversation().getListMessage().add(message);
                     serviceConvers.update(conv);
                 }
+                 mv.addObject("selectedConversation", conv);
             }
-            mv.addObject("errorConversation", "ajout message done in " + conversSelectedId);
+            //mv.addObject("errorConversation", "ajout message done in " + conversSelectedId);
+           
         } else if(action.compareToIgnoreCase("Ajouter_Conversation")==0){
             ConversationEntity convers = new ConversationEntity(user);
             serviceConvers.create(convers);
+            
         } else if(action.compareToIgnoreCase("ajouter_Participants")==0){
-            String newParticipants = request.getParameter("joutParticipants");
+            String msgAjout = "ajout user done of :";
+            String newParticipants = request.getParameter("ajoutParticipants");
             UtilisateurEntity tmpuser = null;
             ConversationEntity conv = serviceConvers.getConversationById(conversSelectedId);
             for(String s: newParticipants.split(";")){
                 tmpuser = serviceUser.getUserByLogin(s.replaceAll(" ",""));
                 if(tmpuser!=null){
                     conv.getParticipants().add(tmpuser);
+                    msgAjout += tmpuser.getLogin() +"; ";
                 }
                 tmpuser = null;
             }
             serviceConvers.update(conv);
-            mv.addObject("errorConversation", "ajout user done");
+            mv.addObject("errorConversation", msgAjout +" # " + conv);
+            mv.addObject("selectedConversation", conv);
         }
         modifyMv(selectedConvers, mv, request, user);
         return mv;

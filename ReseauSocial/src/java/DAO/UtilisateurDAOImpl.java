@@ -41,11 +41,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
     @Override
     public UtilisateurEntity retrieve(String log) {
         UtilisateurEntity u;
-        try {
             u = (UtilisateurEntity)em.find(UtilisateurEntity.class, log);
-        }catch(Exception e){
-            return null;
-        }
         return u;
     }
 

@@ -25,7 +25,7 @@
         
         <div id="menuLogEntete">
             <a id="messagesEntete" href="conversationView.htm"></a> 
-            <a href="accueil.htm" id="login">Bonjour <%=_user.getLogin()%></a>        
+            <a href="profileView.htm" id="login">Bonjour <%=_user.getLogin()%></a>
         </div>
     </div>
     

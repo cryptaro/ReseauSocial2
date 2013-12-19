@@ -48,6 +48,22 @@ public class HtmlUtils {
                     sb.append("&lt;");
                 else if (c == '>')
                     sb.append("&gt;");
+                else if (c == 'é')
+                    sb.append("&eacute;");
+                else if (c == 'ê')
+                    sb.append("&ecirc;");
+                else if (c == 'â')
+                    sb.append("&acirc;");
+                else if (c == 'ô')
+                    sb.append("&ocirc;");
+                else if (c == 'ù')
+                    sb.append("&ugrave;");
+                else if (c == 'û')
+                    sb.append("&ucirc;");
+                else if (c == 'ï')
+                    sb.append("&iuml;");
+                else if (c == 'î')
+                    sb.append("&icirc;");
                 else if (c == '\n')
                     // Handle Newline
                     sb.append("&lt;br/&gt;");

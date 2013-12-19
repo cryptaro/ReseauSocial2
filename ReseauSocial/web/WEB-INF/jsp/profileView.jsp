@@ -132,7 +132,7 @@
                 <div class="conversationAffiche">
                     <div class="post">
                         conversation num: <%= c.getId() %> </br>
-                        <%= c.getListMessage().get(0).getMsg() %>
+                        <div class='messageOwner'><%= c.getListMessage().get(0).getOwner().getLogin() %> :</div><%= c.getListMessage().get(0).getMsg() %>
                     </div>
                     <ul><br/>
                     <% }

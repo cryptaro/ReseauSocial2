@@ -118,7 +118,7 @@ public class ProfileController {
                 MessageEntity mesg = new MessageEntity(comment, user, new Date(), conversation);
                 serviceMsg.ecrire(mesg);
                 mesg.getConversation().getListMessage().add(mesg);
-                serviceConversation.update(conversation);
+                serviceConversation.update(mesg.getConversation());
                 
                 mv.addObject("conversationsMur", serviceConversation.getNotChatConversation(u));
                 mv.addObject("msg", "message : " + comment + " ## convers : "+idConvers);

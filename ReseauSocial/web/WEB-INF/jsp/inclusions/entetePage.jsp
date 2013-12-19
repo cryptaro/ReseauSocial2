@@ -13,9 +13,9 @@
 %>
     <div id="entete" class="container">
         <div id="menuAmiEntete" class="container">
-             <a  href="demandeContactEnvoye.htm" id="lienAmi1" >mes demandes ami</a>
-             <a  href="demandeContactRecu.htm" id="lienAmi2" >demande ami</a>
-             <a  href="contactView.htm" id="lienAmi3">amis</a>
+             <a  href="demandeContactEnvoye.htm" id="lienAmi1" >Mes demandes ami</a>
+             <a  href="demandeContactRecu.htm" id="lienAmi2" >Demande ami</a>
+             <a  href="contactView.htm" id="lienAmi3">Amis</a>
         </div>
         
         <FORM method="GET" ACTION="afficherRecherche.htm">

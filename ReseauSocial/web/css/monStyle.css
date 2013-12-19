@@ -123,7 +123,7 @@ body {
     color: gainsboro;
 }
 #menuAmiEntete {
-    right: 20px;
+    left: 20px;
     font-size: 25px;
     text-align: left;
     position: fixed;
@@ -279,7 +279,7 @@ div.comment, .newComment, #nouveauPost{
     
 }
 .comment{
-    background-color	: rgba(200,200,230,0.4);
+    background-color	: rgba(200,200,230,0.3);
     border		: 1px solid #000;
     overflow		: hidden;
 }
@@ -287,7 +287,8 @@ div.messageOwner{
     display: inline-block;
     margin:2px;
     width: 200 px;
-    position:relative
+    position:relative;
+    font-weight: bold;
 }
 div.messageMsg{
     display: inline-block;

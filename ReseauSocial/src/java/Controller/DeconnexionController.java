@@ -26,8 +26,11 @@ public class DeconnexionController {
     }
     
     @RequestMapping(method=RequestMethod.GET)
-    public String init(){
-        return "deconnexion";
+    public String init(HttpServletRequest request,
+            HttpServletResponse response){
+        request.getSession().setAttribute(UtilisateurEntity.nameInSession, null);
+        request.getSession().invalidate();
+        return "accueil";
     }
     
     @RequestMapping(method=RequestMethod.POST)

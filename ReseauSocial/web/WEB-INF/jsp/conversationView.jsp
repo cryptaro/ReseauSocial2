@@ -37,14 +37,27 @@
     } else {
         selectedConversationId =  new Long(0);
     }
-    
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
-    function valideMessage(){   
-            if(window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+    var isShiftdown = 0!=0;
+    
+    function valideMessage(){
+            if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
                   document.formulaire.action.value="ajouter_Message";
                   document.formulaire.ajoutNewMsgButton.click() ;
+            }
+    }
+    
+    function testkey(){   
+            if(window.event.type=="keydown" && window.event.keyCode==16){// && document.ajoutMsg.newMsg.value !=""){
+                  isShitDown = 1;
+                  //document.formulaire.newMsg.value+=" downn";
+            }
+            
+            if(window.event.type=="keyup" && window.event.keyCode==16){// && document.ajoutMsg.newMsg.value !=""){
+                 isShiftdown = 0;
+                 //document.formulaire.newMsg.value+=" up";
             }
     }
 </SCRIPT>
@@ -56,7 +69,7 @@
         <title>Conversations</title>
         <link rel="stylesheet" href="css/monStyle.css">
     </head>
-    <body>
+    <body onkeydown="testkey();" onkeyup="testkey();">
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content">
@@ -87,26 +100,26 @@
                                 
                                
                     </div>
-
-                    <div id="messageInConversationList">
-                        <% if(conversations.size()>0) { %>
-                        <ul>
-                        <% for(MessageEntity m: messagesSelectedConversation) { %>
-                            <li> 
-                                <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
-                                <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
-                                       readonly="readonly" value="<%= m.getMsg() %>">
-                            </li>
-                         <% } %>
-                         </ul>
-                         <% } else {%>
-                            <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
-                         <% } %>
-                         <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >
-                         <input type="text" id="newMsg" name="valueNewMessage" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message">
-                         <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" Type=submit VALUE="ajouter_Message">
+                    <div id="messageInConversationListGlobal">
+                        <div id="messageInConversationList">
+                            <% if(conversations.size()>0) { %>
+                            <ul>
+                            <% for(MessageEntity m: messagesSelectedConversation) { %>
+                                <li> 
+                                    <!-- si c'est un message de l'utilisateur qui est connecté, la classe est : messagesInConversation_owner  -->
+                                    <input type="text" class="messagesInConversation<%= user.getLogin().compareTo(m.getOwner().getLogin())==0 ? "_owner" :"" %>" 
+                                           readonly="readonly" value="<%= m.getMsg() %>">
+                                </li>
+                             <% } %>
+                             </ul>
+                             <% } else {%>
+                                <input type="text" class="messagesInConversation" readonly="readonly" value="no messages">
+                             <% } %>
+                        </div></br>
+                        <TEXTAREA type="text" id="newMsg" name="valueNewMessage" autofocus="true" onkeypress="valideMessage();"class="newMessagesInConversation"  placeholder="votre message"></TEXTAREA>
+                        <INPUT id="ajoutNewMsgButton" class="bouton" name="action2" Type=submit VALUE="ajouter_Message">
                     </div>
-                         
+                    <input type="hidden" id="id_convers" value="<%=selectedConversationId %>" name="id_convers" >
                 </form>
             </div>
             <div class="error">${errorConversation}</div>

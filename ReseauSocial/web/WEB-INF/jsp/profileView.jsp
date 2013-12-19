@@ -6,6 +6,7 @@
 
 
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="DAO.MessageEntity"%>
 <%@page import="java.util.List"%>
 <%@page import="DAO.ConversationEntity"%>
@@ -26,6 +27,9 @@
     }
     
     List<ConversationEntity> conversations = (List<ConversationEntity>)request.getAttribute("conversationsMur");
+    if(conversations==null){
+        conversations = new ArrayList<ConversationEntity>();
+    }
     
  %>
 
@@ -42,7 +46,7 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <h1> Profile de <%=user_profile.getLogin()%>&nbsp:</h1>
+            <h1> Profil de <%=user_profile.getLogin()%>&nbsp:</h1>
             <% if(user!=null){ %>
             <FORM name="formulaire" method="POST" ACTION=""> 
                 <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>

@@ -24,43 +24,27 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/accueil.htm")
 public class AccueilController {
+    @Autowired
+    UtilisateurService service;
     public AccueilController() {
     }
     
     @RequestMapping(method=RequestMethod.GET)
-    public String init(){
+    public String init(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(false);
+        UtilisateurEntity user = (UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession);
+        if(user!=null)
+            session.setAttribute(UtilisateurEntity.nameInSession, 
+                    service.maj(user)
+            );
         return "accueil";
     }
     
-    /*
     @RequestMapping(method=RequestMethod.POST)
     protected String handleRequestInternal(
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         return "accueil";
-    }
-*/    
-    // TEST 
-    @Autowired
-    UtilisateurService service;
-    
-    @RequestMapping(method=RequestMethod.POST)
-    protected ModelAndView handleRequestInternal(
-            HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession(false);
-        UtilisateurEntity user;
-        if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
-           ModelAndView mv = new ModelAndView("accueil"); // va chercher page wellcome.jsp 
-           String login_new_demande = request.getParameter("login_new_demande");
-           UtilisateurEntity u = service.getUserByLogin(login_new_demande);
-           service.demanderContact(user, u);
-           return mv;
-        } else {
-            session.setAttribute(UtilisateurEntity.nameInSession, null);
-            session.invalidate();
-            return new ModelAndView("login_new_demande");
-        }
-        
     }
 }

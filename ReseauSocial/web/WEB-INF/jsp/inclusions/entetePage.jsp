@@ -15,6 +15,9 @@
         
         <FORM method="GET" ACTION="afficherRecherche.htm">
             <div class="ensembleRecherche">
+                <%if(_user.getDemandesContactUnchecked().size() != 0){%>
+                <a id="login" href="demandeContactRecu.htm">NEW!</a> 
+                <%}%>
                 <INPUT id="enteteRechercheChamp" Type=text Name=search placeholder="Rechercher">
                 <INPUT id="enteteRechercheButton" Type=submit VALUE="" >
             </div>

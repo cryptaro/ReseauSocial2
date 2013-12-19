@@ -30,4 +30,5 @@ public interface UtilisateurService {
     public boolean peutDemanderContact(UtilisateurEntity u1, UtilisateurEntity u2);
     public void supprimerContact(UtilisateurEntity u1, UtilisateurEntity u2);
     public void denotifyDemandesContact(UtilisateurEntity u1);
+    public UtilisateurEntity maj(UtilisateurEntity u);
 }

@@ -23,7 +23,7 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <h1> Bienvenue sur nôtre réseau social</h1>
+            <h1> Bienvenue sur notre réseau social</h1>
             <% if(user==null) {%>
             <p>
                 <a href="inscription.htm">inscription</a></br>

@@ -98,6 +98,10 @@ public class ConversationViewController {
             session.invalidate();
             return new ModelAndView("accueil");
         }
+        if(user!=null)
+            session.setAttribute(UtilisateurEntity.nameInSession, 
+                    serviceUser.maj(user)
+            );
         ModelAndView mv = new ModelAndView("conversationView");
         if(selectedConversation==null || selectedConversation == ""){
             modifyMv("", mv, request, user);

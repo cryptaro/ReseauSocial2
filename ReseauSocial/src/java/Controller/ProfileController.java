@@ -32,7 +32,6 @@ public class ProfileController {
     public ProfileController() {
     }
    
-    
     @RequestMapping(method=RequestMethod.GET)
     protected ModelAndView init(
             @RequestParam(value="profile", required = false) String profile,
@@ -42,6 +41,9 @@ public class ProfileController {
         ModelAndView mv = new ModelAndView("profileView");
         UtilisateurEntity user = null;
         if(session!=null && (user=(UtilisateurEntity)session.getAttribute(UtilisateurEntity.nameInSession))!=null){
+            session.setAttribute(UtilisateurEntity.nameInSession, 
+                service.maj(user)
+            );
             if(profile==null || profile.length()==0){
                 UtilisateurEntity user_profil = service.getUserByLogin(user.getLogin());
                 mv.addObject("profile", user_profil);

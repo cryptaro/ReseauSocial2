@@ -109,4 +109,8 @@ public class UtilisateurServiceImpl  implements UtilisateurService {
         u1.setDemandesContactUnchecked(new ArrayList<UtilisateurEntity>());
         u_dao.update(u1);
     }
+    
+    public UtilisateurEntity maj(UtilisateurEntity u){
+        return u_dao.retrieve(u.getLogin());
+    }
 }

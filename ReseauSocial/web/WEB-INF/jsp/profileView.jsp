@@ -34,15 +34,13 @@
  %>
  
  <SCRIPT LANGUAGE="JavaScript">
-    var isShiftdown = 0!=0;
-    
     function valide(typeEnvoi, valeur){
-            if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
-                  document.formulaire.action.value=typeEnvoi+"";
-                  document.formulaire.valeur.value=valeur+"";
+           // if(isShiftdown==0 && window.event.type=="keypress" && window.event.keyCode==13){// && document.ajoutMsg.newMsg.value !=""){
+                  document.action.value=typeEnvoi+"";
+                  document.valeur.value=valeur+"";
                   //document.formulaire.ajoutNewMsgButton.click() ;
-                  document.formulaire.submit() ;
-            }
+                  document.getElementById("formulaire").submit() ;
+           // }
     }
 </SCRIPT>
 
@@ -59,7 +57,7 @@
         <%@ include file="inclusions/entetePage.jsp" %>
         
         <div class="content" id="accueil">
-            <FORM name="formulaire" method="POST" ACTION=""> 
+            <FORM name="formulaire" id="formulaire" method="POST" ACTION=""> 
                 
                 <!--   DEBUT DE LA ZONE DE MODIF -->
                 
@@ -70,7 +68,8 @@
                 <% } %>
                 
                     <% if(user.getLogin().compareTo(user_profile.getLogin())!=0 && !deja_en_contact) { %>
-                    <INPUT class="bouton" Type=submit VALUE="Ajouter en contact">
+                    <INPUT class="bouton" name= "action" Type=button onclick="
+                                        this.form.submit();" VALUE="Ajouter en contact">
                     <% } %>
             <% } else{ %>
             <p>
@@ -88,7 +87,7 @@
                     <div class="post">
                         <%= c.getListMessage().get(0).getMsg() %>
                     </div>
-                    <ul>
+                    <ul><br/>
                     <% }
                     if(c.getListMessage().size()>1){
                        for(MessageEntity m: c.getListMessage().subList(1, c.getListMessage().size()-1)){ %>
@@ -96,20 +95,26 @@
                             <li><div class='messageOwner'><%= m.getOwner().getLogin() %> :</div>
                                 <div class='messageMsg'><%= m.getMsg() %></div>
                             </li>
-                        </div>
+                        </div><br/>
                     <% } 
                     }%>
-                    <TEXTAREA name="valueNewMessage" autofocus="true" onkeypress="" class="newMessagesInConversation" 
-                                       placeholder="votre message" rows="4" ></TEXTAREA>
-                    <INPUT id="ajoutNewMsgButton" class="bouton" name="action2"
-                         onclick="document.formulaire.action.value='ajouter_Message';document.formulaire.submit();" Type=submit VALUE="envoyer">
+                    <% if(c.getListMessage().size()>0) {%>
+                        <li><TEXTAREA name="valueComment" onkeypress="" class="newComment" placeholder="votre commentaire" rows="3" ></TEXTAREA></br>
+                        <INPUT id="ajoutNewMsgButton" class="bouton" name="action" type="button"
+                             onclick="  
+                                        document.getElementById('valeur').value= '<%=c.getId()+"" %>)';
+                                        this.form.submit();"  VALUE="envoyer">
+                        </li>
+                     <% } %>
                     </ul>
                     <% if(c.getListMessage().size()>0) {%>
                 </div>
                 <%     }
                    }// le for conversation %>
                    
-                 <INPUT class="bouton" name="action" id="action"Type=hidden VALUE="Ajouter_Conversation">
+                 <!--<INPUT class="text" name="action" id="action" Type=hidden VALUE="ajout_contact">-->
+                 <INPUT class="text" name="valeur" id="valeur" Type=hidden VALUE="">
+                 <INPUT class="cache" id="soumettre" Type=submit VALUE="">
                  </form>
             </div>
             <p>${msg}</p>

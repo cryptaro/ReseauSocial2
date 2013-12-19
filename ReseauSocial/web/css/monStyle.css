@@ -237,14 +237,15 @@ ul, li{
     padding: 0px;
 }
 
-
-
-div.comment{
+div.comment, .newComment{
     display: inline-block;
     margin: 2px;
     position: relative;
     width: 600px;    
-    padding             : 0;
+    padding : 0;
+    
+}
+.comment{
     background-color	: rgba(200,200,230,0.4);
     border		: 1px solid #000;
     overflow		: hidden;
@@ -267,10 +268,18 @@ div.messageMsg{
     margin-bottom: 5px;
 }
 
+#mur{
+    width: 100%;
+
+}
+
 
 textarea { 
     resize: none; 
 }
 input, span{
     margin: 2px;
+}
+.cache{
+    visibility: hidden;
 }
